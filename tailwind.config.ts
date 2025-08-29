@@ -52,6 +52,13 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				pottery: {
+					terracotta: 'hsl(var(--pottery-terracotta))',
+					cream: 'hsl(var(--pottery-cream))',
+					gold: 'hsl(var(--pottery-gold))',
+					bronze: 'hsl(var(--pottery-bronze))',
+					sage: 'hsl(var(--pottery-sage))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -62,6 +69,16 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				}
+			},
+			backgroundImage: {
+				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-gold': 'var(--gradient-gold)',
+				'gradient-card': 'var(--gradient-card)'
+			},
+			boxShadow: {
+				'pottery': 'var(--shadow-pottery)',
+				'gold': 'var(--shadow-gold)',
+				'elegant': 'var(--shadow-elegant)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
