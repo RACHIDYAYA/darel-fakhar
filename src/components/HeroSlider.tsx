@@ -1,24 +1,23 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage1 from "@/assets/hero-pottery-1.jpg";
 
 const slides = [
   {
     id: 1,
-    image: heroImage1,
-    titleAr: "كوب من فخار منقوش بماء الذهب",
-    titleEn: "Gold engraved earthenware cup",
-    descriptionAr: "اكتشف هنا...",
-    descriptionEn: "Find out here...",
+    image: "/lovable-uploads/2b978a57-b4a7-4615-9a36-249f4c3025d4.png",
+    titleAr: "مجموعة أطباق سيراميك بنقوش تقليدية",
+    titleEn: "Traditional Ceramic Plates Collection",
+    descriptionAr: "اكتشف أجود أنواع الفخار المغربي الأصيل",
+    descriptionEn: "Discover the finest authentic Moroccan pottery",
   },
   {
     id: 2,
-    image: heroImage1,
-    titleAr: "مجموعة أواني السيراميك الملكية",
-    titleEn: "Royal Ceramic Collection",
-    descriptionAr: "تصاميم أصيلة بلمسة عصرية",
-    descriptionEn: "Authentic designs with modern touch",
+    image: "/lovable-uploads/04547d10-8399-43ea-a3b9-ad8250873915.png",
+    titleAr: "أطباق سيراميك بنقوش هندسية ذهبية",
+    titleEn: "Ceramic Plates with Golden Geometric Patterns",
+    descriptionAr: "تصاميم أصيلة بلمسة عصرية من التعاونية الحسنية",
+    descriptionEn: "Authentic designs with modern touch from Hassaniya Cooperative",
   },
 ];
 

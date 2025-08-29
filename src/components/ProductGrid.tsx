@@ -1,43 +1,39 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProductCard from "./ProductCard";
-import product1 from "@/assets/product-1.jpg";
-import product2 from "@/assets/product-2.jpg";
-import product3 from "@/assets/product-3.jpg";
-import product4 from "@/assets/product-4.jpg";
 
 const products = [
   {
     id: 1,
-    image: product1,
-    titleAr: "إبريق شاي سيراميك بنقوش ذهبية",
-    titleEn: "Ceramic Teapot with Gold Patterns",
-    originalPrice: 250,
-    salePrice: 180,
+    image: "/lovable-uploads/cf5dc12d-0ea8-437f-9528-9a769ef50c7c.png",
+    titleAr: "مجموعة أطقم شاي سيراميك ملونة",
+    titleEn: "Colorful Ceramic Tea Sets Collection",
+    originalPrice: 350,
+    salePrice: 280,
   },
   {
     id: 2,
-    image: product2,
-    titleAr: "مجموعة أطباق سيراميك بحافة ذهبية",
-    titleEn: "Ceramic Bowl Set with Gold Rim",
-    originalPrice: 220,
-    salePrice: 170,
+    image: "/lovable-uploads/07d084e1-0d0a-40b6-a3df-8c0f3f506742.png",
+    titleAr: "طاجين مغربي أصيل بنقوش تقليدية",
+    titleEn: "Authentic Moroccan Tagine with Traditional Patterns",
+    originalPrice: 420,
+    salePrice: 350,
   },
   {
     id: 3,
-    image: product3,
-    titleAr: "طاجين مغربي تقليدي منقوش",
-    titleEn: "Traditional Moroccan Engraved Tagine",
-    originalPrice: 300,
-    salePrice: 240,
+    image: "/lovable-uploads/d061038e-6ee9-4908-8585-96e1e304dccc.png",
+    titleAr: "مزهرية فخار مُخرمة بنقوش هندسية",
+    titleEn: "Perforated Ceramic Vase with Geometric Patterns",
+    originalPrice: 280,
+    salePrice: 220,
   },
   {
     id: 4,
-    image: product4,
-    titleAr: "مجموعة أكواب بخيوط ذهبية",
-    titleEn: "Mug Collection with Gold Thread",
-    originalPrice: 180,
-    salePrice: 140,
+    image: "/lovable-uploads/a5c483cd-09bd-41ae-ba2f-fbe266fd0ad1.png",
+    titleAr: "مجموعة جرار سيراميك ملونة",
+    titleEn: "Colorful Ceramic Jars Collection",
+    originalPrice: 200,
+    salePrice: 160,
   },
 ];
 
