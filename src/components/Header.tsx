@@ -25,19 +25,19 @@ const Header = () => {
 
             {/* Navigation - Desktop */}
             <nav className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
-              <a href="#" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+              <a href="/" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 الصفحة الرئيسية
               </a>
-              <a href="#" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+              <a href="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 المنتجات
               </a>
-              <a href="#" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+              <a href="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 التصنيفات
               </a>
-              <a href="#" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+              <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 معرض الصور
               </a>
-              <a href="#" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+              <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 اتصل بنا
               </a>
             </nav>
@@ -48,10 +48,12 @@ const Header = () => {
                 <Search className="h-5 w-5" />
               </Button>
               <Button variant="ghost" size="icon" className="hover:text-pottery-gold relative">
-                <ShoppingCart className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 bg-pottery-gold text-pottery-gold-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  0
-                </span>
+                <a href="/cart">
+                  <ShoppingCart className="h-5 w-5" />
+                  <span className="absolute -top-1 -right-1 bg-pottery-gold text-pottery-gold-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    0
+                  </span>
+                </a>
               </Button>
               
               {/* Mobile menu button */}
@@ -70,19 +72,19 @@ const Header = () => {
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t border-border">
               <nav className="flex flex-col space-y-3">
-                <a href="#" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                <a href="/" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   الصفحة الرئيسية
                 </a>
-                <a href="#" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                <a href="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   المنتجات
                 </a>
-                <a href="#" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                <a href="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   التصنيفات
                 </a>
-                <a href="#" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   معرض الصور
                 </a>
-                <a href="#" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   اتصل بنا
                 </a>
               </nav>

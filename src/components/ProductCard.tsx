@@ -13,6 +13,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({
+  id,
   image,
   titleAr,
   titleEn,
@@ -22,30 +23,33 @@ const ProductCard = ({
 }: ProductCardProps) => {
   return (
     <Card className="group overflow-hidden bg-gradient-card border-pottery-cream/20 shadow-elegant hover:shadow-pottery transition-all duration-300 hover:scale-105">
-      <div className="relative aspect-square overflow-hidden">
-        <img
-          src={image}
-          alt={titleEn}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-pottery-bronze/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
-        {/* Wishlist button */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-3 right-3 bg-pottery-cream/90 hover:bg-pottery-cream text-pottery-bronze opacity-0 group-hover:opacity-100 transition-all duration-300"
-        >
-          <Heart className="h-4 w-4" />
-        </Button>
+      <a href={`/product/${id}`}>
+        <div className="relative aspect-square overflow-hidden">
+          <img
+            src={image}
+            alt={titleEn}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-pottery-bronze/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          {/* Wishlist button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute top-3 right-3 bg-pottery-cream/90 hover:bg-pottery-cream text-pottery-bronze opacity-0 group-hover:opacity-100 transition-all duration-300"
+            onClick={(e) => e.preventDefault()}
+          >
+            <Heart className="h-4 w-4" />
+          </Button>
 
-        {/* Sale badge */}
-        {originalPrice && originalPrice > salePrice && (
-          <div className="absolute top-3 left-3 bg-pottery-gold text-pottery-bronze px-2 py-1 rounded-md text-sm font-semibold">
-            خصم
-          </div>
-        )}
-      </div>
+          {/* Sale badge */}
+          {originalPrice && originalPrice > salePrice && (
+            <div className="absolute top-3 left-3 bg-pottery-gold text-pottery-bronze px-2 py-1 rounded-md text-sm font-semibold">
+              خصم
+            </div>
+          )}
+        </div>
+      </a>
       
       <CardContent className="p-4">
         <div className="text-center">
