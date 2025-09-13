@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { ShoppingCart, Search, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
+import { useCart } from "@/contexts/CartContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useTranslation();
+  const { getTotalItems } = useCart();
 
   return (
     <>
       {/* Top banner */}
       <div className="bg-pottery-bronze text-pottery-cream py-2 text-center text-sm">
-        <p>هل تحتاج إلى عرض أسعار أو مساعدة؟ اتصل بنا 0616242996 - التوصيل مجاني</p>
+        <p>{t('common.freeShipping')} - هل تحتاج إلى عرض أسعار أو مساعدة؟ اتصل بنا 0616242996</p>
       </div>
       
       {/* Main header */}
@@ -19,40 +24,46 @@ const Header = () => {
             {/* Logo */}
             <div className="flex items-center space-x-4">
               <h1 className="text-xl md:text-2xl font-bold bg-gradient-gold bg-clip-text text-transparent">
-                التعاونية الحسنية للفخار
+                {t('hero.title')}
               </h1>
             </div>
 
             {/* Navigation - Desktop */}
             <nav className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
               <a href="/" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
-                الصفحة الرئيسية
+                {t('nav.home')}
               </a>
               <a href="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
-                المنتجات
+                {t('nav.shop')}
               </a>
               <a href="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
-                التصنيفات
+                {t('nav.categories')}
               </a>
               <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
-                معرض الصور
+                {t('nav.gallery')}
               </a>
               <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
-                اتصل بنا
+                {t('nav.contact')}
+              </a>
+              <a href="/admin" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+                {t('nav.admin')}
               </a>
             </nav>
 
             {/* Right side actions */}
             <div className="flex items-center space-x-4 rtl:space-x-reverse">
+              <LanguageSwitcher />
               <Button variant="ghost" size="icon" className="hover:text-pottery-gold">
                 <Search className="h-5 w-5" />
               </Button>
               <Button variant="ghost" size="icon" className="hover:text-pottery-gold relative">
                 <a href="/cart">
                   <ShoppingCart className="h-5 w-5" />
-                  <span className="absolute -top-1 -right-1 bg-pottery-gold text-pottery-gold-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    0
-                  </span>
+                  {getTotalItems() > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-pottery-gold text-pottery-gold-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {getTotalItems()}
+                    </span>
+                  )}
                 </a>
               </Button>
               
@@ -73,19 +84,22 @@ const Header = () => {
             <div className="md:hidden py-4 border-t border-border">
               <nav className="flex flex-col space-y-3">
                 <a href="/" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
-                  الصفحة الرئيسية
+                  {t('nav.home')}
                 </a>
                 <a href="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
-                  المنتجات
+                  {t('nav.shop')}
                 </a>
                 <a href="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
-                  التصنيفات
+                  {t('nav.categories')}
                 </a>
                 <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
-                  معرض الصور
+                  {t('nav.gallery')}
                 </a>
                 <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
-                  اتصل بنا
+                  {t('nav.contact')}
+                </a>
+                <a href="/admin" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                  {t('nav.admin')}
                 </a>
               </nav>
             </div>
