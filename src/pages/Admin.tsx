@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Header from '@/components/Header';
+import AddProductForm from '@/components/AddProductForm';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -180,6 +181,13 @@ const Admin = () => {
           </TabsContent>
 
           <TabsContent value="products" className="space-y-4">
+            <AddProductForm onSuccess={() => {
+              toast({
+                title: t('common.success'),
+                description: 'Product added successfully',
+              });
+            }} />
+            
             <Card>
               <CardHeader>
                 <CardTitle>{t('admin.products')}</CardTitle>
@@ -188,13 +196,37 @@ const Admin = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {products.map((product) => (
                     <div key={product.id} className="border rounded-lg p-4">
-                      <div className="aspect-square bg-muted rounded-lg mb-2"></div>
+                      <div className="aspect-square bg-muted rounded-lg mb-2">
+                        {product.images && product.images.length > 0 ? (
+                          <img 
+                            src={product.images[0]} 
+                            alt={product.name_ar}
+                            className="w-full h-full object-cover rounded-lg"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                            No Image
+                          </div>
+                        )}
+                      </div>
                       <h3 className="font-semibold">{product.name_ar}</h3>
                       <p className="text-sm text-muted-foreground">{product.category}</p>
                       <p className="font-semibold">{formatPrice(product.price)}</p>
+                      {product.sale_price && (
+                        <p className="text-sm text-muted-foreground line-through">{formatPrice(product.sale_price)}</p>
+                      )}
                       <p className="text-sm">Stock: {product.stock}</p>
+                      {product.is_featured && (
+                        <Badge variant="secondary" className="mt-1">Featured</Badge>
+                      )}
                     </div>
                   ))}
+                  
+                  {products.length === 0 && (
+                    <div className="col-span-full text-center py-8 text-muted-foreground">
+                      No products found. Add your first product above!
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>

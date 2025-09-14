@@ -1,43 +1,37 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProductCard from "./ProductCard";
-
-const products = [
-  {
-    id: 1,
-    image: "/lovable-uploads/cf5dc12d-0ea8-437f-9528-9a769ef50c7c.png",
-    titleAr: "مجموعة أطقم شاي سيراميك ملونة",
-    titleEn: "Colorful Ceramic Tea Sets Collection",
-    originalPrice: 350,
-    salePrice: 280,
-  },
-  {
-    id: 2,
-    image: "/lovable-uploads/07d084e1-0d0a-40b6-a3df-8c0f3f506742.png",
-    titleAr: "طاجين مغربي أصيل بنقوش تقليدية",
-    titleEn: "Authentic Moroccan Tagine with Traditional Patterns",
-    originalPrice: 420,
-    salePrice: 350,
-  },
-  {
-    id: 3,
-    image: "/lovable-uploads/d061038e-6ee9-4908-8585-96e1e304dccc.png",
-    titleAr: "مزهرية فخار مُخرمة بنقوش هندسية",
-    titleEn: "Perforated Ceramic Vase with Geometric Patterns",
-    originalPrice: 280,
-    salePrice: 220,
-  },
-  {
-    id: 4,
-    image: "/lovable-uploads/a5c483cd-09bd-41ae-ba2f-fbe266fd0ad1.png",
-    titleAr: "مجموعة جرار سيراميك ملونة",
-    titleEn: "Colorful Ceramic Jars Collection",
-    originalPrice: 200,
-    salePrice: 160,
-  },
-];
+import { useProducts } from "@/hooks/useProducts";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ProductGrid = () => {
+  const { products, getFeaturedProducts, loading } = useProducts();
+  const { language } = useLanguage();
+  
+  const featuredProducts = getFeaturedProducts().slice(0, 4); // Show only 4 featured products
+
+  // Transform Supabase products to ProductCard format
+  const transformedProducts = featuredProducts.map((product) => ({
+    id: product.id,
+    image: product.images && product.images.length > 0 ? product.images[0] : "/lovable-uploads/cf5dc12d-0ea8-437f-9528-9a769ef50c7c.png",
+    titleAr: product.name_ar,
+    titleEn: product.name_en,
+    originalPrice: product.price,
+    salePrice: product.sale_price || product.price,
+  }));
+
+  if (loading) {
+    return (
+      <section className="py-16 bg-pottery-cream/30">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-center min-h-[300px]">
+            <div className="text-pottery-bronze">Loading products...</div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="py-16 bg-pottery-cream/30">
       <div className="container mx-auto px-4">
@@ -45,10 +39,10 @@ const ProductGrid = () => {
         <div className="flex items-center justify-between mb-12">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-pottery-bronze mb-2">
-              NOUVEAUTÉS
+              {language === 'ar' ? 'المنتجات المميزة' : language === 'fr' ? 'NOUVEAUTÉS' : 'FEATURED PRODUCTS'}
             </h2>
-            <h3 className="text-xl text-pottery-bronze/80" dir="rtl">
-              أحدث المنتجات
+            <h3 className="text-xl text-pottery-bronze/80" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 'أحدث المنتجات' : language === 'fr' ? 'Nos derniers produits' : 'Our latest products'}
             </h3>
           </div>
           
@@ -64,9 +58,17 @@ const ProductGrid = () => {
 
         {/* Products grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
+          {transformedProducts.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
+          
+          {transformedProducts.length === 0 && (
+            <div className="col-span-full text-center py-12">
+              <p className="text-pottery-bronze/60">
+                {language === 'ar' ? 'لا توجد منتجات مميزة حاليا' : language === 'fr' ? 'Aucun produit en vedette pour le moment' : 'No featured products available at the moment'}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* View all button */}
@@ -76,7 +78,7 @@ const ProductGrid = () => {
             size="lg"
             className="border-pottery-gold text-pottery-gold hover:bg-pottery-gold hover:text-pottery-bronze px-8"
           >
-            عرض جميع المنتجات
+            {language === 'ar' ? 'عرض جميع المنتجات' : language === 'fr' ? 'Voir tous les produits' : 'View all products'}
           </Button>
         </div>
       </div>

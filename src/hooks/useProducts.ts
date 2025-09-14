@@ -72,6 +72,27 @@ export const useProducts = () => {
     fetchCategories();
   }, []);
 
+  const addProduct = async (productData: any) => {
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .insert([productData])
+        .select()
+        .single();
+
+      if (error) throw error;
+      
+      // Refresh products list
+      await fetchProducts();
+      
+      return { data, error: null };
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+      console.error('Error adding product:', err);
+      return { data: null, error: errorMessage };
+    }
+  };
+
   return {
     products,
     categories,
@@ -81,5 +102,6 @@ export const useProducts = () => {
     getProductById,
     getFeaturedProducts,
     getProductsByCategory,
+    addProduct,
   };
 };
