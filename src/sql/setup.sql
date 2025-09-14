@@ -77,6 +77,14 @@ ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Enable read access for all users" ON categories FOR SELECT USING (true);
 CREATE POLICY "Enable read access for all users" ON products FOR SELECT USING (true);
 
+-- Create policies for products (allow insert and update)
+CREATE POLICY "Enable insert access for all users" ON products FOR INSERT WITH CHECK (true);
+CREATE POLICY "Enable update access for all users" ON products FOR UPDATE USING (true);
+
+-- Create policies for categories (allow insert and update)
+CREATE POLICY "Enable insert access for all users" ON categories FOR INSERT WITH CHECK (true);
+CREATE POLICY "Enable update access for all users" ON categories FOR UPDATE USING (true);
+
 -- Create policies for orders (admin can read all, public can insert)
 CREATE POLICY "Enable insert access for all users" ON orders FOR INSERT WITH CHECK (true);
 CREATE POLICY "Enable read access for admin users" ON orders FOR SELECT USING (true);
