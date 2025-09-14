@@ -79,9 +79,8 @@ export const useOrders = () => {
       const { data, error } = await supabase
         .from('orders')
         .update({ 
-          status, 
-          updated_at: new Date().toISOString() 
-        } as any)
+          status
+        })
         .eq('id', orderId)
         .select()
         .single();
