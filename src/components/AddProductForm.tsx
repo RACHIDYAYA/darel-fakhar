@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useProducts } from '@/hooks/useProducts';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Upload, X } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 interface AddProductFormProps {
   onSuccess?: () => void;
@@ -53,6 +54,23 @@ const AddProductForm = ({ onSuccess }: AddProductFormProps) => {
     setImages(prev => prev.filter((_, i) => i !== index));
   };
 
+  const uploadImageToStorage = async (file: File, index: number): Promise<string> => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}-${index}.${fileExt}`;
+    
+    const { data, error } = await supabase.storage
+      .from('product-images')
+      .upload(fileName, file);
+
+    if (error) throw error;
+
+    const { data: publicData } = supabase.storage
+      .from('product-images')
+      .getPublicUrl(fileName);
+
+    return publicData.publicUrl;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -68,13 +86,21 @@ const AddProductForm = ({ onSuccess }: AddProductFormProps) => {
     setLoading(true);
     
     try {
-      // Upload images first (simplified - in real app you'd upload to Supabase storage)
+      // Upload images to Supabase storage
       const imageUrls: string[] = [];
       
-      // For now, we'll use placeholder URLs since we don't have storage setup
-      // In production, you'd upload to Supabase Storage here
       for (let i = 0; i < images.length; i++) {
-        imageUrls.push(`/placeholder-product-${Date.now()}-${i}.jpg`);
+        try {
+          const url = await uploadImageToStorage(images[i], i);
+          imageUrls.push(url);
+        } catch (uploadError) {
+          console.error('Error uploading image:', uploadError);
+          toast({
+            title: t('common.error'),
+            description: `Failed to upload image ${i + 1}`,
+            variant: 'destructive',
+          });
+        }
       }
 
       const productData = {
