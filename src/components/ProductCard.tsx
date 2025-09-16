@@ -1,6 +1,9 @@
 import { ShoppingCart, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useCart } from "@/contexts/CartContext";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 interface ProductCardProps {
   id: number;
@@ -21,6 +24,45 @@ const ProductCard = ({
   salePrice,
   currency = "درهم مغربي"
 }: ProductCardProps) => {
+  const { addItem } = useCart();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const product = {
+      id,
+      name_ar: titleAr,
+      name_en: titleEn,
+      name_fr: titleEn, // Using English as fallback for French
+      description_ar: titleAr,
+      description_en: titleEn,
+      description_fr: titleEn,
+      price: salePrice,
+      sale_price: originalPrice,
+      category: "pottery", // Default category
+      images: [image],
+      stock: 10, // Default stock
+      is_active: true,
+      is_featured: false,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+    
+    addItem(product, 1);
+    
+    toast({
+      title: "تمت الإضافة للسلة",
+      description: `تم إضافة ${titleAr} إلى سلة التسوق`,
+    });
+    
+    // Navigate to cart after a short delay
+    setTimeout(() => {
+      navigate('/cart');
+    }, 1000);
+  };
   return (
     <Card className="group overflow-hidden bg-gradient-card border-pottery-cream/20 shadow-elegant hover:shadow-pottery transition-all duration-300 hover:scale-105">
       <a href={`/product/${id}`}>
@@ -74,6 +116,7 @@ const ProductCard = ({
           <Button 
             className="w-full bg-pottery-gold hover:bg-pottery-gold/90 text-pottery-bronze font-semibold shadow-gold"
             size="sm"
+            onClick={handleAddToCart}
           >
             <ShoppingCart className="h-4 w-4 mr-2" />
             اشتري الآن
