@@ -7,28 +7,17 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-const initialCartItems = [
-  {
-    id: 1,
-    image: "/lovable-uploads/cf5dc12d-0ea8-437f-9528-9a769ef50c7c.png",
-    titleAr: "مجموعة أطقم شاي سيراميك ملونة",
-    titleEn: "Colorful Ceramic Tea Sets Collection",
-    price: 280,
-    quantity: 1,
-  },
-  {
-    id: 2,
-    image: "/lovable-uploads/07d084e1-0d0a-40b6-a3df-8c0f3f506742.png",
-    titleAr: "طاجين مغربي أصيل بنقوش تقليدية",
-    titleEn: "Authentic Moroccan Tagine with Traditional Patterns",
-    price: 350,
-    quantity: 2,
-  },
-];
+import { useCart } from "@/contexts/CartContext";
+import { useOrders } from "@/hooks/useOrders";
+import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState(initialCartItems);
+  const { items: cartItems, updateQuantity, removeItem, clearCart, getTotalPrice } = useCart();
+  const { createOrder } = useOrders();
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  
   const [customerInfo, setCustomerInfo] = useState({
     name: "",
     phone: "",
@@ -37,28 +26,72 @@ const Cart = () => {
     city: "",
     notes: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const updateQuantity = (id: number, newQuantity: number) => {
+  const updateCartQuantity = (productId: number, newQuantity: number) => {
     if (newQuantity < 1) return;
-    setCartItems(items =>
-      items.map(item =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
+    updateQuantity(productId, newQuantity);
   };
 
-  const removeItem = (id: number) => {
-    setCartItems(items => items.filter(item => item.id !== id));
+  const removeCartItem = (productId: number) => {
+    removeItem(productId);
   };
 
-  const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const subtotal = getTotalPrice();
   const shipping = subtotal > 500 ? 0 : 30; // Free shipping over 500 DH
   const total = subtotal + shipping;
 
-  const handleSubmitOrder = (e: React.FormEvent) => {
+  const handleSubmitOrder = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the order to your backend
-    alert("تم إرسال طلبكم بنجاح! سنتواصل معكم قريباً.");
+    
+    if (!customerInfo.name || !customerInfo.phone || !customerInfo.address || !customerInfo.city) {
+      toast({
+        title: "خطأ",
+        description: "يرجى ملء جميع الحقول المطلوبة",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      const orderItems = cartItems.map(item => ({
+        product_id: item.product.id,
+        quantity: item.quantity,
+        price: item.product.sale_price || item.product.price,
+        name: item.product.name_ar
+      }));
+
+      await createOrder({
+        customer_name: customerInfo.name,
+        customer_phone: customerInfo.phone,
+        customer_email: customerInfo.email,
+        customer_address: customerInfo.address,
+        customer_city: customerInfo.city,
+        items: orderItems,
+        total_amount: total,
+        notes: customerInfo.notes
+      });
+
+      clearCart();
+      
+      toast({
+        title: "تم إرسال الطلب بنجاح!",
+        description: "سنتواصل معكم قريباً لتأكيد الطلب",
+      });
+
+      navigate('/');
+    } catch (error) {
+      console.error('Error creating order:', error);
+      toast({
+        title: "خطأ في إرسال الطلب",
+        description: "حاول مرة أخرى لاحقاً",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -98,19 +131,19 @@ const Cart = () => {
                 <CardContent>
                   <div className="space-y-6">
                     {cartItems.map((item) => (
-                      <div key={item.id} className="flex gap-4 p-4 border border-pottery-cream rounded-lg">
+                      <div key={item.product.id} className="flex gap-4 p-4 border border-pottery-cream rounded-lg">
                         <img
-                          src={item.image}
-                          alt={item.titleEn}
+                          src={item.product.images[0] || "/placeholder.svg"}
+                          alt={item.product.name_en}
                           className="w-20 h-20 object-cover rounded-lg"
                         />
                         
                         <div className="flex-1">
                           <h3 className="font-medium text-pottery-bronze mb-1">
-                            {item.titleEn}
+                            {item.product.name_en}
                           </h3>
                           <p className="text-sm text-pottery-bronze/60 mb-2" dir="rtl">
-                            {item.titleAr}
+                            {item.product.name_ar}
                           </p>
                           
                           <div className="flex items-center justify-between">
@@ -118,7 +151,7 @@ const Cart = () => {
                               <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                onClick={() => updateCartQuantity(item.product.id, item.quantity - 1)}
                                 className="h-8 w-8 p-0"
                               >
                                 <Minus className="w-3 h-3" />
@@ -129,7 +162,7 @@ const Cart = () => {
                               <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                onClick={() => updateCartQuantity(item.product.id, item.quantity + 1)}
                                 className="h-8 w-8 p-0"
                               >
                                 <Plus className="w-3 h-3" />
@@ -138,12 +171,12 @@ const Cart = () => {
                             
                             <div className="flex items-center gap-4">
                               <span className="font-bold text-pottery-gold">
-                                {item.price * item.quantity} درهم
+                                {(item.product.sale_price || item.product.price) * item.quantity} درهم
                               </span>
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                onClick={() => removeItem(item.id)}
+                                onClick={() => removeCartItem(item.product.id)}
                                 className="text-red-500 hover:text-red-700"
                               >
                                 <Trash2 className="w-4 h-4" />
@@ -270,8 +303,9 @@ const Cart = () => {
                       type="submit" 
                       className="w-full bg-pottery-gold text-pottery-bronze hover:bg-pottery-gold/90"
                       size="lg"
+                      disabled={isSubmitting}
                     >
-                      تأكيد الطلب
+                      {isSubmitting ? "جار إرسال الطلب..." : "تأكيد الطلب"}
                       <ArrowRight className="w-5 h-5 mr-2" />
                     </Button>
                   </form>
