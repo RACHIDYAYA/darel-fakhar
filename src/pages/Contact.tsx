@@ -56,8 +56,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-pottery-bronze mb-1">الهاتف</h3>
-                    <p className="text-pottery-bronze/80" dir="ltr">+212 5XX-XXXXXX</p>
-                    <p className="text-pottery-bronze/80" dir="ltr">+212 6XX-XXXXXX</p>
+                    <p className="text-pottery-bronze/80" dir="ltr">+212 656-861536</p>
+                    <p className="text-pottery-bronze/80" dir="ltr">+212 616-242996</p>
                   </div>
                 </div>
 
@@ -79,9 +79,9 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold text-pottery-bronze mb-1">العنوان</h3>
                     <p className="text-pottery-bronze/80" dir="rtl">
-                      التعاونية الحسنية للفخار<br />
-                      حي الصناعات التقليدية<br />
-                      سلا - المغرب
+                      تعاونية الفخار<br />
+                      آسفي - المغرب<br />
+                      9V43+7Q Safi, Morocco
                     </p>
                   </div>
                 </div>
@@ -109,9 +109,9 @@ const Contact = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-pottery-bronze/80 leading-relaxed" dir="rtl">
-                  التعاونية الحسنية للفخار هي تعاونية مغربية متخصصة في صناعة الفخار التقليدي 
-                  بأيادي حرفية ماهرة. نحن نفخر بتقديم منتجات عالية الجودة تحافظ على التراث 
-                  المغربي الأصيل وتلبي احتياجات العصر الحديث.
+                  خزف وقرمود مغربي أصيل من يد الصانع مباشرة 🧱✨
+                  نحن متخصصون في صناعة الفخار التقليدي المغربي بأيادي حرفية ماهرة. 
+                  التوصيل مجاني - هل تحتاج إلى عرض أسعار أو مساعدة؟ اتصل بنا.
                 </p>
               </CardContent>
             </Card>
@@ -206,10 +206,10 @@ const Contact = () => {
               <div className="bg-pottery-cream/30 rounded-lg p-8 text-center">
                 <MapPin className="w-16 h-16 mx-auto text-pottery-gold mb-4" />
                 <h3 className="text-xl font-bold text-pottery-bronze mb-2">
-                  التعاونية الحسنية للفخار
+                  تعاونية الفخار
                 </h3>
                 <p className="text-pottery-bronze/80" dir="rtl">
-                  حي الصناعات التقليدية، سلا - المغرب
+                  آسفي - المغرب
                 </p>
                 <p className="text-sm text-pottery-bronze/60 mt-2">
                   يمكنكم زيارتنا لمشاهدة المنتجات عن قرب والتعرف على عملية الصناعة
