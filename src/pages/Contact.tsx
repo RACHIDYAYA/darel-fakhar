@@ -214,6 +214,19 @@ const Contact = () => {
                 <p className="text-sm text-pottery-bronze/60 mt-2">
                   يمكنكم زيارتنا لمشاهدة المنتجات عن قرب والتعرف على عملية الصناعة
                 </p>
+                <Button 
+                  asChild
+                  className="mt-4 bg-pottery-gold text-pottery-bronze hover:bg-pottery-gold/90"
+                >
+                  <a 
+                    href="https://maps.app.goo.gl/NrdWAoxFxP3aWLqJ8" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    <MapPin className="w-4 h-4 mr-2" />
+                    عرض الموقع على الخريطة
+                  </a>
+                </Button>
               </div>
             </CardContent>
           </Card>
