@@ -203,30 +203,40 @@ const Contact = () => {
               <CardTitle className="text-pottery-bronze">موقعنا</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="bg-pottery-cream/30 rounded-lg p-8 text-center">
-                <MapPin className="w-16 h-16 mx-auto text-pottery-gold mb-4" />
-                <h3 className="text-xl font-bold text-pottery-bronze mb-2">
-                  تعاونية الفخار
-                </h3>
-                <p className="text-pottery-bronze/80" dir="rtl">
-                  آسفي - المغرب
-                </p>
-                <p className="text-sm text-pottery-bronze/60 mt-2">
-                  يمكنكم زيارتنا لمشاهدة المنتجات عن قرب والتعرف على عملية الصناعة
-                </p>
-                <Button 
-                  asChild
-                  className="mt-4 bg-pottery-gold text-pottery-bronze hover:bg-pottery-gold/90"
-                >
-                  <a 
-                    href="https://maps.app.goo.gl/NrdWAoxFxP3aWLqJ8" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
+              <div 
+                className="relative rounded-lg p-8 text-center text-white min-h-[300px] flex flex-col justify-center"
+                style={{
+                  backgroundImage: "url('/src/assets/cooperative-building.jpg')",
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              >
+                <div className="absolute inset-0 bg-black/50 rounded-lg"></div>
+                <div className="relative z-10">
+                  <MapPin className="w-16 h-16 mx-auto text-pottery-gold mb-4" />
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    تعاونية الفخار
+                  </h3>
+                  <p className="text-white/90" dir="rtl">
+                    آسفي - المغرب
+                  </p>
+                  <p className="text-sm text-white/80 mt-2">
+                    يمكنكم زيارتنا لمشاهدة المنتجات عن قرب والتعرف على عملية الصناعة
+                  </p>
+                  <Button 
+                    asChild
+                    className="mt-4 bg-pottery-gold text-pottery-bronze hover:bg-pottery-gold/90"
                   >
-                    <MapPin className="w-4 h-4 mr-2" />
-                    عرض الموقع على الخريطة
-                  </a>
-                </Button>
+                    <a 
+                      href="https://maps.app.goo.gl/NrdWAoxFxP3aWLqJ8" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      <MapPin className="w-4 h-4 mr-2" />
+                      عرض الموقع على الخريطة
+                    </a>
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>
