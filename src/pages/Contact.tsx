@@ -211,7 +211,7 @@ const Contact = () => {
                   backgroundPosition: 'center',
                 }}
               >
-                <div className="absolute inset-0 bg-black/50 rounded-lg"></div>
+                <div className="absolute inset-0 bg-black/20 rounded-lg"></div>
                 <div className="relative z-10">
                   <MapPin className="w-16 h-16 mx-auto text-pottery-gold mb-4" />
                   <h3 className="text-xl font-bold text-white mb-2">
