@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 const slides = [
   {
     id: 1,
-    image: "/lovable-uploads/2b978a57-b4a7-4615-9a36-249f4c3025d4.png",
+    image: "/Rachid-uploads/2b978a57-b4a7-4615-9a36-249f4c3025d4.png",
     titleAr: "مجموعة أطباق سيراميك بنقوش تقليدية",
     titleEn: "Traditional Ceramic Plates Collection",
     descriptionAr: "اكتشف أجود أنواع الفخار المغربي الأصيل",
@@ -13,7 +13,7 @@ const slides = [
   },
   {
     id: 2,
-    image: "/lovable-uploads/04547d10-8399-43ea-a3b9-ad8250873915.png",
+    image: "/Rachid-uploads/04547d10-8399-43ea-a3b9-ad8250873915.png",
     titleAr: "أطباق سيراميك بنقوش هندسية ذهبية",
     titleEn: "Ceramic Plates with Golden Geometric Patterns",
     descriptionAr: "تصاميم أصيلة بلمسة عصرية من التعاونية الحسنية",

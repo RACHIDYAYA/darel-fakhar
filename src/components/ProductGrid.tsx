@@ -13,7 +13,7 @@ const ProductGrid = () => {
   // Transform Supabase products to ProductCard format
   const transformedProducts = featuredProducts.map((product) => ({
     id: product.id,
-    image: product.images && product.images.length > 0 ? product.images[0] : "/lovable-uploads/cf5dc12d-0ea8-437f-9528-9a769ef50c7c.png",
+    image: product.images && product.images.length > 0 ? product.images[0] : "/Rachid-uploads/cf5dc12d-0ea8-437f-9528-9a769ef50c7c.png",
     titleAr: product.name_ar,
     titleEn: product.name_en,
     originalPrice: product.price,

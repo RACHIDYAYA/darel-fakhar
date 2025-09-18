@@ -9,7 +9,7 @@ import { Slider } from "@/components/ui/slider";
 const allProducts = [
   {
     id: 1,
-    image: "/lovable-uploads/cf5dc12d-0ea8-437f-9528-9a769ef50c7c.png",
+    image: "/Rachid-uploads/cf5dc12d-0ea8-437f-9528-9a769ef50c7c.png",
     titleAr: "مجموعة أطقم شاي سيراميك ملونة",
     titleEn: "Colorful Ceramic Tea Sets Collection",
     originalPrice: 350,
@@ -19,7 +19,7 @@ const allProducts = [
   },
   {
     id: 2,
-    image: "/lovable-uploads/07d084e1-0d0a-40b6-a3df-8c0f3f506742.png",
+    image: "/Rachid-uploads/07d084e1-0d0a-40b6-a3df-8c0f3f506742.png",
     titleAr: "طاجين مغربي أصيل بنقوش تقليدية",
     titleEn: "Authentic Moroccan Tagine with Traditional Patterns",
     originalPrice: 420,
@@ -29,7 +29,7 @@ const allProducts = [
   },
   {
     id: 3,
-    image: "/lovable-uploads/d061038e-6ee9-4908-8585-96e1e304dccc.png",
+    image: "/Rachid-uploads/d061038e-6ee9-4908-8585-96e1e304dccc.png",
     titleAr: "مزهرية فخار مُخرمة بنقوش هندسية",
     titleEn: "Perforated Ceramic Vase with Geometric Patterns",
     originalPrice: 280,
@@ -39,7 +39,7 @@ const allProducts = [
   },
   {
     id: 4,
-    image: "/lovable-uploads/a5c483cd-09bd-41ae-ba2f-fbe266fd0ad1.png",
+    image: "/Rachid-uploads/a5c483cd-09bd-41ae-ba2f-fbe266fd0ad1.png",
     titleAr: "مجموعة جرار سيراميك ملونة",
     titleEn: "Colorful Ceramic Jars Collection",
     originalPrice: 200,
@@ -49,7 +49,7 @@ const allProducts = [
   },
   {
     id: 5,
-    image: "/lovable-uploads/2b978a57-b4a7-4615-9a36-249f4c3025d4.png",
+    image: "/Rachid-uploads/2b978a57-b4a7-4615-9a36-249f4c3025d4.png",
     titleAr: "أطباق سيراميك بنقوش تقليدية",
     titleEn: "Traditional Ceramic Plates",
     originalPrice: 180,
@@ -59,7 +59,7 @@ const allProducts = [
   },
   {
     id: 6,
-    image: "/lovable-uploads/04547d10-8399-43ea-a3b9-ad8250873915.png",
+    image: "/Rachid-uploads/04547d10-8399-43ea-a3b9-ad8250873915.png",
     titleAr: "أطباق سيراميك بنقوش ذهبية",
     titleEn: "Ceramic Plates with Golden Patterns",
     originalPrice: 320,

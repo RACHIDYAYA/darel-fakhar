@@ -10,9 +10,9 @@ const productData = {
   1: {
     id: 1,
     images: [
-      "/lovable-uploads/cf5dc12d-0ea8-437f-9528-9a769ef50c7c.png",
-      "/lovable-uploads/2b978a57-b4a7-4615-9a36-249f4c3025d4.png",
-      "/lovable-uploads/04547d10-8399-43ea-a3b9-ad8250873915.png",
+      "/Rachid-uploads/cf5dc12d-0ea8-437f-9528-9a769ef50c7c.png",
+      "/Rachid-uploads/2b978a57-b4a7-4615-9a36-249f4c3025d4.png",
+      "/Rachid-uploads/04547d10-8399-43ea-a3b9-ad8250873915.png",
     ],
     titleAr: "مجموعة أطقم شاي سيراميك ملونة",
     titleEn: "Colorful Ceramic Tea Sets Collection",
