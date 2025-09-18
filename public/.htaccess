@@ -1,0 +1,11 @@
+# Force HTTPS and WWW -> non-www (اختياري)
+RewriteEngine On
+
+# إذا بغيت تجبر HTTPS:
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Serve existing files, otherwise serve index.html (React SPA)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L,QSA]
