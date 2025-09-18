@@ -6,7 +6,10 @@
     "gallery": "Galerie",
     "contact": "Contact",
     "cart": "Panier",
-    "admin": "Panneau Admin"
+    "admin": "Panneau Admin",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "register": "Créer un compte"
   },
   "hero": {
     "title": "Coopérative de Poterie Al-Hassania",
