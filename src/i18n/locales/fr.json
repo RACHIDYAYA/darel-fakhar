@@ -10,8 +10,9 @@
   },
   "hero": {
     "title": "Coopérative de Poterie Al-Hassania",
-    "subtitle": "Poterie Artisanale Traditionnelle du Cœur du Maroc",
-    "cta": "Acheter Maintenant"
+    "subtitle": "Poterie Traditionnelle Artisanale du Cœur du Maroc",
+    "cta": "Acheter Maintenant",
+    "cooperativeName": "Coopérative Al-Hassania"
   },
   "product": {
     "price": "Prix",
@@ -99,6 +100,7 @@
     "priceLow": "Prix Croissant",
     "popular": "Plus Populaire",
     "featured": "En Vedette",
-    "freeShipping": "Livraison Gratuite"
+    "freeShipping": "Livraison Gratuite",
+    "bannerText": "Céramiques et carreaux authentiques de la Coopérative Al-Hassania 🏺✨ La qualité entre vos mains... Contactez-nous: 0656861536"
   }
 }

@@ -14,7 +14,7 @@ const Header = () => {
     <>
       {/* Top banner */}
       <div className="bg-pottery-bronze text-pottery-cream py-2 text-center text-sm">
-        <p>الخزف والقرمود الأصيل من التعاونية الحسنية 🏺✨ الجودة بين يديك… اتصل بنا: 0656861536</p>
+        <p>{t('common.bannerText')}</p>
       </div>
       
       {/* Main header */}
@@ -24,7 +24,7 @@ const Header = () => {
             {/* Logo */}
             <div className="flex items-center space-x-4">
               <h1 className="text-xl md:text-2xl font-bold bg-gradient-gold bg-clip-text text-transparent tracking-wide">
-                التعاونية الحسنية
+                {t('hero.cooperativeName')}
               </h1>
             </div>
 

@@ -11,7 +11,8 @@
   "hero": {
     "title": "Al-Hassania Pottery Cooperative",
     "subtitle": "Traditional Handcrafted Pottery from the Heart of Morocco",
-    "cta": "Shop Now"
+    "cta": "Shop Now",
+    "cooperativeName": "Al-Hassania Cooperative"
   },
   "product": {
     "price": "Price",
@@ -99,6 +100,7 @@
     "priceLow": "Price Low to High",
     "popular": "Most Popular",
     "featured": "Featured",
-    "freeShipping": "Free Shipping"
+    "freeShipping": "Free Shipping",
+    "bannerText": "Authentic ceramics and tiles from Al-Hassania Cooperative 🏺✨ Quality in your hands... Contact us: 0656861536"
   }
 }
