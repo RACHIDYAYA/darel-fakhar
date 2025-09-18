@@ -57,11 +57,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return {};
   }, []);
 
-  const signUp: AuthContextType['signUp'] = useCallback(async ({ email, password, role }) => {
+  const signUp: AuthContextType['signUp'] = useCallback(async ({ email, password }) => {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: role ? { role } : undefined },
+      options: { data: { role: 'user' } },
     });
     if (error) return { error: error.message };
     return {};
