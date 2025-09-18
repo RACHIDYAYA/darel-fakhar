@@ -15,6 +15,7 @@ import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Logout from "./pages/Logout";
 import NotFound from "./pages/NotFound";
 import './i18n';
 
