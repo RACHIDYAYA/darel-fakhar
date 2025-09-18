@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { useCart } from "@/contexts/CartContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useTranslation();
   const { getTotalItems } = useCart();
+  const { user } = useAuth();
 
   return (
     <>
@@ -66,7 +68,23 @@ const Header = () => {
                   )}
                 </a>
               </Button>
-              
+
+              {/* Auth buttons (desktop) */}
+              {!user ? (
+                <>
+                  <Button asChild className="hidden md:inline-flex">
+                    <a href="/login">{t('nav.login', { defaultValue: 'Login' })}</a>
+                  </Button>
+                  <Button asChild variant="outline" className="hidden md:inline-flex">
+                    <a href="/register">{t('nav.register', { defaultValue: 'Register' })}</a>
+                  </Button>
+                </>
+              ) : (
+                <Button asChild variant="secondary" className="hidden md:inline-flex">
+                  <a href="/logout">{t('nav.logout', { defaultValue: 'Logout' })}</a>
+                </Button>
+              )}
+
               {/* Mobile menu button */}
               <Button
                 variant="ghost"
@@ -101,6 +119,21 @@ const Header = () => {
                 <a href="/admin" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   {t('nav.admin')}
                 </a>
+
+                {!user ? (
+                  <>
+                    <a href="/login" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                      {t('nav.login', { defaultValue: 'Login' })}
+                    </a>
+                    <a href="/register" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                      {t('nav.register', { defaultValue: 'Register' })}
+                    </a>
+                  </>
+                ) : (
+                  <a href="/logout" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                    {t('nav.logout', { defaultValue: 'Logout' })}
+                  </a>
+                )}
               </nav>
             </div>
           )}
