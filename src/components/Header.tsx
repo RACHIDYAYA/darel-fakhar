@@ -23,8 +23,8 @@ const Header = () => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center space-x-4">
-              <h1 className="text-xl md:text-2xl font-bold bg-gradient-gold bg-clip-text text-transparent">
-                {t('hero.title')}
+              <h1 className="text-xl md:text-2xl font-bold bg-gradient-gold bg-clip-text text-transparent tracking-wide">
+                التعاونية الحسنية
               </h1>
             </div>
 
