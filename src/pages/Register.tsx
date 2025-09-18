@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import Header from '@/components/Header';
 import { useAuth } from '@/contexts/AuthContext';
@@ -14,7 +13,6 @@ const schema = z.object({
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
   confirmPassword: z.string().min(6, 'Confirm your password'),
-  role: z.enum(['user', 'admin', 'editor', 'manager']).optional(),
 }).refine((data) => data.password === data.confirmPassword, {
   message: 'Passwords do not match',
   path: ['confirmPassword'],
@@ -27,10 +25,10 @@ const Register = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  const form = useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: { email: '', password: '', confirmPassword: '', role: 'user' } });
+  const form = useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: { email: '', password: '', confirmPassword: '' } });
 
   const onSubmit = async (values: FormValues) => {
-    const { error } = await signUp({ email: values.email, password: values.password, role: values.role });
+    const { error } = await signUp({ email: values.email, password: values.password });
     if (error) {
       toast({ title: 'Registration failed', description: error, variant: 'destructive' });
     } else {
@@ -69,25 +67,6 @@ const Register = () => {
                 <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
                   <Input type="password" placeholder="••••••••" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )} />
-            <FormField name="role" control={form.control} render={({ field }) => (
-              <FormItem>
-                <FormLabel>Role</FormLabel>
-                <FormControl>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="user">User</SelectItem>
-                      <SelectItem value="admin">Admin</SelectItem>
-                      <SelectItem value="editor">Editor</SelectItem>
-                      <SelectItem value="manager">Manager</SelectItem>
-                    </SelectContent>
-                  </Select>
                 </FormControl>
                 <FormMessage />
               </FormItem>
