@@ -6,7 +6,10 @@
     "gallery": "Gallery",
     "contact": "Contact",
     "cart": "Cart",
-    "admin": "Admin Panel"
+    "admin": "Admin Panel",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register"
   },
   "hero": {
     "title": "Al-Hassania Pottery Cooperative",
