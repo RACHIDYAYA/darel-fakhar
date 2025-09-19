@@ -7,9 +7,14 @@
     "contact": "Contact",
     "cart": "Cart",
     "admin": "Admin Panel",
+    "blog": "Blog",
     "login": "Login",
     "logout": "Logout",
     "register": "Register"
+  },
+  "blog": {
+    "title": "Blog",
+    "empty": "No posts yet."
   },
   "hero": {
     "title": "Al-Hassania Pottery Cooperative",

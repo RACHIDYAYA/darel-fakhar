@@ -41,6 +41,9 @@ const Header = () => {
               <a href="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 {t('nav.categories')}
               </a>
+              <a href="/blog" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+                {t('nav.blog', { defaultValue: 'Blog' })}
+              </a>
               <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 {t('nav.gallery')}
               </a>
@@ -109,6 +112,9 @@ const Header = () => {
                 </a>
                 <a href="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   {t('nav.categories')}
+                </a>
+                <a href="/blog" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                  {t('nav.blog', { defaultValue: 'Blog' })}
                 </a>
                 <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   {t('nav.gallery')}
