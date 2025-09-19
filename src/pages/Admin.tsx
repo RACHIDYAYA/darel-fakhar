@@ -14,6 +14,7 @@ import { useToast } from '@/hooks/use-toast';
 import { SidebarProvider, Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarSeparator, SidebarInset, SidebarTrigger } from '@/components/ui/sidebar';
 import { useCategories } from '@/hooks/useCategories';
 import AdminAddCategoryForm from '@/components/AdminAddCategoryForm';
+import { Switch } from '@/components/ui/switch';
 
 const Admin = () => {
   const { t } = useTranslation();
