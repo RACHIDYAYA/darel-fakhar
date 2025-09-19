@@ -19,6 +19,7 @@ const Admin = () => {
   const { orders, loading: ordersLoading, updateOrderStatus } = useOrders();
   const { products } = useProducts();
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [tabValue, setTabValue] = useState<'orders' | 'products'>('orders');
 
   const handleStatusUpdate = async (orderId: number, newStatus: Order['status']) => {
     const { error } = await updateOrderStatus(orderId, newStatus);
@@ -83,13 +84,13 @@ const Admin = () => {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <a href="#orders"><ClipboardList /> <span>{t('admin.orders')}</span></a>
+                  <SidebarMenuButton onClick={() => setTabValue('orders')}>
+                    <ClipboardList /> <span>{t('admin.orders')}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <a href="#products"><Package /> <span>{t('admin.products')}</span></a>
+                  <SidebarMenuButton onClick={() => setTabValue('products')}>
+                    <Package /> <span>{t('admin.products')}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>
@@ -142,7 +143,7 @@ const Admin = () => {
             </section>
 
             <section id="orders" className="scroll-mt-24">
-              <Tabs defaultValue="orders" className="space-y-4">
+              <Tabs value={tabValue} onValueChange={(v) => setTabValue(v as 'orders' | 'products')} className="space-y-4">
                 <TabsList>
                   <TabsTrigger value="orders">{t('admin.orders')}</TabsTrigger>
                   <TabsTrigger value="products">{t('admin.products')}</TabsTrigger>
