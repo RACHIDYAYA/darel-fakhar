@@ -151,10 +151,11 @@ const Admin = () => {
             </section>
 
             <section id="orders" className="scroll-mt-24">
-              <Tabs value={tabValue} onValueChange={(v) => setTabValue(v as 'orders' | 'products')} className="space-y-4">
+              <Tabs value={tabValue} onValueChange={(v) => setTabValue(v as 'orders' | 'products' | 'categories')} className="space-y-4">
                 <TabsList>
                   <TabsTrigger value="orders">{t('admin.orders')}</TabsTrigger>
                   <TabsTrigger value="products">{t('admin.products')}</TabsTrigger>
+                  <TabsTrigger value="categories">{t('admin.categories')}</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="orders" className="space-y-4">
