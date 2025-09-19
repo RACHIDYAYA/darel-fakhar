@@ -276,6 +276,71 @@ const Admin = () => {
                     </CardContent>
                   </Card>
                 </TabsContent>
+
+                <TabsContent value="categories" className="space-y-4">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Add Category</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminAddCategoryForm onCreated={fetchCategories} />
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>{t('admin.categories')}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead>
+                            <tr className="text-left border-b">
+                              <th className="p-2">ID</th>
+                              <th className="p-2">Name (AR)</th>
+                              <th className="p-2">Slug</th>
+                              <th className="p-2">Active</th>
+                              <th className="p-2">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {categories.map((cat) => (
+                              <tr key={cat.id} className="border-b last:border-0">
+                                <td className="p-2">{cat.id}</td>
+                                <td className="p-2">{cat.name_ar}</td>
+                                <td className="p-2">{cat.slug}</td>
+                                <td className="p-2">
+                                  <Switch
+                                    checked={cat.is_active}
+                                    onCheckedChange={async (checked) => {
+                                      const { error } = await updateCategory(cat.id, { is_active: checked });
+                                      if (error) {
+                                        toast({ title: t('common.error'), description: error, variant: 'destructive' });
+                                      }
+                                    }}
+                                  />
+                                </td>
+                                <td className="p-2 space-x-2 rtl:space-x-reverse">
+                                  <Button variant="destructive" size="sm" onClick={async () => {
+                                    const { error } = await deleteCategory(cat.id);
+                                    if (error) {
+                                      toast({ title: t('common.error'), description: error, variant: 'destructive' });
+                                    }
+                                  }}>Delete</Button>
+                                </td>
+                              </tr>
+                            ))}
+                            {categories.length === 0 && (
+                              <tr>
+                                <td colSpan={5} className="p-6 text-center text-muted-foreground">No categories found</td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
               </Tabs>
             </section>
 
