@@ -12,6 +12,8 @@ import { useProducts } from '@/hooks/useProducts';
 import { Loader2, Package, Users, TrendingUp, Eye, LayoutDashboard, ClipboardList, Settings } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { SidebarProvider, Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarSeparator, SidebarInset, SidebarTrigger } from '@/components/ui/sidebar';
+import { useCategories } from '@/hooks/useCategories';
+import AdminAddCategoryForm from '@/components/AdminAddCategoryForm';
 
 const Admin = () => {
   const { t } = useTranslation();
