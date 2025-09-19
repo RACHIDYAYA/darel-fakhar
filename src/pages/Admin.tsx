@@ -20,8 +20,9 @@ const Admin = () => {
   const { toast } = useToast();
   const { orders, loading: ordersLoading, updateOrderStatus } = useOrders();
   const { products } = useProducts();
+  const { categories, updateCategory, deleteCategory, fetchCategories } = useCategories();
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
-  const [tabValue, setTabValue] = useState<'orders' | 'products'>('orders');
+  const [tabValue, setTabValue] = useState<'orders' | 'products' | 'categories'>('orders');
 
   const handleStatusUpdate = async (orderId: number, newStatus: Order['status']) => {
     const { error } = await updateOrderStatus(orderId, newStatus);
