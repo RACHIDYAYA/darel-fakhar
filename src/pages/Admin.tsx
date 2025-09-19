@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useOrders, Order } from '@/hooks/useOrders';
 import { useProducts } from '@/hooks/useProducts';
-import { Loader2, Package, Users, TrendingUp, Eye, LayoutDashboard, ClipboardList } from 'lucide-react';
+import { Loader2, Package, Users, TrendingUp, Eye, LayoutDashboard, ClipboardList, Settings } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { SidebarProvider, Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarSeparator, SidebarInset, SidebarTrigger } from '@/components/ui/sidebar';
 
