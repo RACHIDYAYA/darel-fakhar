@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useOrders, Order } from '@/hooks/useOrders';
 import { useProducts } from '@/hooks/useProducts';
-import { Loader2, Package, Users, TrendingUp, Eye, LayoutDashboard, ClipboardList, Settings } from 'lucide-react';
+import { Loader2, Package, Eye, ClipboardList, Settings } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { SidebarProvider, Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarSeparator, SidebarInset, SidebarTrigger } from '@/components/ui/sidebar';
 import { useCategories } from '@/hooks/useCategories';
@@ -56,12 +56,6 @@ const Admin = () => {
     return `${price.toFixed(2)} MAD`;
   };
 
-  const totalRevenue = orders
-    .filter(order => order.status === 'delivered')
-    .reduce((sum, order) => sum + order.total_amount, 0);
-
-  const pendingOrders = orders.filter(order => order.status === 'pending').length;
-  const totalProducts = products.length;
 
   if (ordersLoading) {
     return (
@@ -82,11 +76,6 @@ const Admin = () => {
             <SidebarGroupLabel>Admin</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <a href="#overview"><LayoutDashboard /> <span>Overview</span></a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton onClick={() => setTabValue('orders')}>
                     <ClipboardList /> <span>{t('admin.orders')}</span>
@@ -116,40 +105,6 @@ const Admin = () => {
               <SidebarTrigger />
               <h1 className="text-3xl font-bold">{t('admin.title')}</h1>
             </div>
-
-            <section id="overview" className="scroll-mt-24">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-                    <TrendingUp className="h-4 w-4 text-muted-foreground" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">{formatPrice(totalRevenue)}</div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Pending Orders</CardTitle>
-                    <Users className="h-4 w-4 text-muted-foreground" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">{pendingOrders}</div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Total Products</CardTitle>
-                    <Package className="h-4 w-4 text-muted-foreground" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">{totalProducts}</div>
-                  </CardContent>
-                </Card>
-              </div>
-            </section>
 
             <section id="orders" className="scroll-mt-24">
               <Tabs value={tabValue} onValueChange={(v) => setTabValue(v as 'orders' | 'products' | 'categories')} className="space-y-4">
