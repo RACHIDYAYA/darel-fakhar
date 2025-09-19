@@ -96,6 +96,11 @@ const Admin = () => {
                     <Package /> <span>{t('admin.products')}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton onClick={() => setTabValue('categories')}>
+                    <Settings /> <span>{t('admin.categories')}</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
