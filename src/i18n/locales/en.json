@@ -64,6 +64,7 @@
     "orders": "Orders",
     "products": "Products",
     "categories": "Categories",
+    "blog": "Blog",
     "orderDetails": "Order Details",
     "orderStatus": "Order Status",
     "pending": "Pending",
