@@ -10,7 +10,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useTranslation();
   const { getTotalItems } = useCart();
-  const { user } = useAuth();
+  const { user, hasRole } = useAuth();
 
   return (
     <>
@@ -50,9 +50,11 @@ const Header = () => {
               <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 {t('nav.contact')}
               </a>
-              <a href="/admin" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
-                {t('nav.admin')}
-              </a>
+              {hasRole('admin') && (
+                <a href="/admin" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+                  {t('nav.admin')}
+                </a>
+              )}
             </nav>
 
             {/* Right side actions */}
@@ -122,9 +124,11 @@ const Header = () => {
                 <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   {t('nav.contact')}
                 </a>
-                <a href="/admin" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
-                  {t('nav.admin')}
-                </a>
+                {hasRole('admin') && (
+                  <a href="/admin" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                    {t('nav.admin')}
+                  </a>
+                )}
 
                 {!user ? (
                   <>
