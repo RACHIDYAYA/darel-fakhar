@@ -14,6 +14,8 @@ import { useToast } from '@/hooks/use-toast';
 import { useCategories } from '@/hooks/useCategories';
 import AdminAddCategoryForm from '@/components/AdminAddCategoryForm';
 import { Switch } from '@/components/ui/switch';
+import { useAdminPosts } from '@/hooks/useAdminPosts';
+import AdminAddPostForm from '@/components/AdminAddPostForm';
 
 const Admin = () => {
   const { t } = useTranslation();
@@ -21,8 +23,9 @@ const Admin = () => {
   const { orders, loading: ordersLoading, updateOrderStatus } = useOrders();
   const { products } = useProducts();
   const { categories, updateCategory, deleteCategory, fetchCategories } = useCategories();
+  const { posts, updatePost, deletePost, fetchAll: fetchAllPosts } = useAdminPosts();
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
-  const [tabValue, setTabValue] = useState<'orders' | 'products' | 'categories'>('orders');
+  const [tabValue, setTabValue] = useState<'orders' | 'products' | 'categories' | 'blog'>('orders');
 
   const handleStatusUpdate = async (orderId: number, newStatus: Order['status']) => {
     const { error } = await updateOrderStatus(orderId, newStatus);
@@ -72,11 +75,12 @@ const Admin = () => {
       <Header />
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">{t('admin.title')}</h1>
-        <Tabs value={tabValue} onValueChange={(v) => setTabValue(v as 'orders' | 'products' | 'categories')} className="space-y-4">
+        <Tabs value={tabValue} onValueChange={(v) => setTabValue(v as 'orders' | 'products' | 'categories' | 'blog')} className="space-y-4">
           <TabsList>
             <TabsTrigger value="orders">{t('admin.orders')}</TabsTrigger>
             <TabsTrigger value="products">{t('admin.products')}</TabsTrigger>
             <TabsTrigger value="categories">{t('admin.categories')}</TabsTrigger>
+            <TabsTrigger value="blog">{t('admin.blog', { defaultValue: 'Blog' })}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="orders" className="space-y-4">
@@ -254,6 +258,71 @@ const Admin = () => {
                       {categories.length === 0 && (
                         <tr>
                           <td colSpan={5} className="p-6 text-center text-muted-foreground">No categories found</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="blog" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Create Post</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <AdminAddPostForm />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>All Posts</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-left border-b">
+                        <th className="p-2">ID</th>
+                        <th className="p-2">Slug</th>
+                        <th className="p-2">Published</th>
+                        <th className="p-2">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {posts.map((p) => (
+                        <tr key={p.id} className="border-b last:border-0">
+                          <td className="p-2">{p.id}</td>
+                          <td className="p-2">{p.slug}</td>
+                          <td className="p-2">
+                            <Switch
+                              checked={p.is_published}
+                              onCheckedChange={async (checked) => {
+                                const { error } = await updatePost(p.id, { is_published: checked });
+                                if (error) {
+                                  toast({ title: t('common.error'), description: error, variant: 'destructive' });
+                                } else if (checked) {
+                                  await fetchAllPosts();
+                                }
+                              }}
+                            />
+                          </td>
+                          <td className="p-2 space-x-2 rtl:space-x-reverse">
+                            <Button variant="destructive" size="sm" onClick={async () => {
+                              const { error } = await deletePost(p.id);
+                              if (error) {
+                                toast({ title: t('common.error'), description: error, variant: 'destructive' });
+                              }
+                            }}>Delete</Button>
+                          </td>
+                        </tr>
+                      ))}
+                      {posts.length === 0 && (
+                        <tr>
+                          <td colSpan={4} className="p-6 text-center text-muted-foreground">No posts found</td>
                         </tr>
                       )}
                     </tbody>
