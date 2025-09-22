@@ -6,7 +6,20 @@
     "gallery": "Gallery",
     "contact": "Contact",
     "cart": "Cart",
-    "admin": "Admin Panel"
+    "admin": "Admin Panel",
+    "blog": "Blog",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register"
+  },
+  "blog": {
+    "title": "Blog",
+    "empty": "No posts yet.",
+    "cta": {
+      "title": "Interested in our pottery?",
+      "description": "Explore our handcrafted collection of traditional Moroccan pottery.",
+      "button": "View Collection"
+    }
   },
   "hero": {
     "title": "Al-Hassania Pottery Cooperative",
@@ -56,6 +69,7 @@
     "orders": "Orders",
     "products": "Products",
     "categories": "Categories",
+    "blog": "Blog",
     "orderDetails": "Order Details",
     "orderStatus": "Order Status",
     "pending": "Pending",

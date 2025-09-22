@@ -6,7 +6,20 @@
     "gallery": "Galerie",
     "contact": "Contact",
     "cart": "Panier",
-    "admin": "Panneau Admin"
+    "admin": "Panneau Admin",
+    "blog": "Blog",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "register": "Créer un compte"
+  },
+  "blog": {
+    "title": "Blog",
+    "empty": "Aucun article pour le moment.",
+    "cta": {
+      "title": "Intéressé par notre poterie ?",
+      "description": "Découvrez notre collection artisanale de poterie marocaine traditionnelle.",
+      "button": "Voir la collection"
+    }
   },
   "hero": {
     "title": "Coopérative de Poterie Al-Hassania",
@@ -56,6 +69,7 @@
     "orders": "Commandes",
     "products": "Produits",
     "categories": "Catégories",
+    "blog": "Blog",
     "orderDetails": "Détails de la Commande",
     "orderStatus": "Statut de la Commande",
     "pending": "En Attente",

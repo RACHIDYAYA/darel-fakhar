@@ -9,15 +9,23 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useOrders, Order } from '@/hooks/useOrders';
 import { useProducts } from '@/hooks/useProducts';
-import { Loader2, Package, Users, TrendingUp, Eye } from 'lucide-react';
+import { Loader2, Eye } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useCategories } from '@/hooks/useCategories';
+import AdminAddCategoryForm from '@/components/AdminAddCategoryForm';
+import { Switch } from '@/components/ui/switch';
+import { useAdminPosts } from '@/hooks/useAdminPosts';
+import AdminAddPostForm from '@/components/AdminAddPostForm';
 
 const Admin = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const { orders, loading: ordersLoading, updateOrderStatus } = useOrders();
   const { products } = useProducts();
+  const { categories, updateCategory, deleteCategory, fetchCategories } = useCategories();
+  const { posts, updatePost, deletePost, fetchAll: fetchAllPosts } = useAdminPosts();
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [tabValue, setTabValue] = useState<'orders' | 'products' | 'categories' | 'blog'>('orders');
 
   const handleStatusUpdate = async (orderId: number, newStatus: Order['status']) => {
     const { error } = await updateOrderStatus(orderId, newStatus);
@@ -50,12 +58,6 @@ const Admin = () => {
     return `${price.toFixed(2)} MAD`;
   };
 
-  const totalRevenue = orders
-    .filter(order => order.status === 'delivered')
-    .reduce((sum, order) => sum + order.total_amount, 0);
-
-  const pendingOrders = orders.filter(order => order.status === 'pending').length;
-  const totalProducts = products.length;
 
   if (ordersLoading) {
     return (
@@ -72,45 +74,13 @@ const Admin = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8">{t('admin.title')}</h1>
-
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{formatPrice(totalRevenue)}</div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Pending Orders</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{pendingOrders}</div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Products</CardTitle>
-              <Package className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{totalProducts}</div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <Tabs defaultValue="orders" className="space-y-4">
+        <h1 className="text-3xl font-bold mb-4">{t('admin.title')}</h1>
+        <Tabs value={tabValue} onValueChange={(v) => setTabValue(v as 'orders' | 'products' | 'categories' | 'blog')} className="space-y-4">
           <TabsList>
             <TabsTrigger value="orders">{t('admin.orders')}</TabsTrigger>
             <TabsTrigger value="products">{t('admin.products')}</TabsTrigger>
+            <TabsTrigger value="categories">{t('admin.categories')}</TabsTrigger>
+            <TabsTrigger value="blog">{t('admin.blog', { defaultValue: 'Blog' })}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="orders" className="space-y-4">
@@ -146,12 +116,12 @@ const Admin = () => {
                           </Button>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center justify-between">
                         <p className="font-semibold">{formatPrice(order.total_amount)}</p>
                         <Select
                           value={order.status}
-                          onValueChange={(value: Order['status']) => 
+                          onValueChange={(value: Order['status']) =>
                             handleStatusUpdate(order.id, value)
                           }
                         >
@@ -187,8 +157,8 @@ const Admin = () => {
                 description: 'Product added successfully',
               });
             }} />
-            
-            <Card>
+
+            <Card id="products">
               <CardHeader>
                 <CardTitle>{t('admin.products')}</CardTitle>
               </CardHeader>
@@ -198,8 +168,8 @@ const Admin = () => {
                     <div key={product.id} className="border rounded-lg p-4">
                       <div className="aspect-square bg-muted rounded-lg mb-2">
                         {product.images && product.images.length > 0 ? (
-                          <img 
-                            src={product.images[0]} 
+                          <img
+                            src={product.images[0]}
                             alt={product.name_ar}
                             className="w-full h-full object-cover rounded-lg"
                           />
@@ -221,7 +191,7 @@ const Admin = () => {
                       )}
                     </div>
                   ))}
-                  
+
                   {products.length === 0 && (
                     <div className="col-span-full text-center py-8 text-muted-foreground">
                       No products found. Add your first product above!
@@ -231,9 +201,138 @@ const Admin = () => {
               </CardContent>
             </Card>
           </TabsContent>
+
+          <TabsContent value="categories" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Add Category</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <AdminAddCategoryForm onCreated={fetchCategories} />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>{t('admin.categories')}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-left border-b">
+                        <th className="p-2">ID</th>
+                        <th className="p-2">Name (AR)</th>
+                        <th className="p-2">Slug</th>
+                        <th className="p-2">Active</th>
+                        <th className="p-2">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {categories.map((cat) => (
+                        <tr key={cat.id} className="border-b last:border-0">
+                          <td className="p-2">{cat.id}</td>
+                          <td className="p-2">{cat.name_ar}</td>
+                          <td className="p-2">{cat.slug}</td>
+                          <td className="p-2">
+                            <Switch
+                              checked={cat.is_active}
+                              onCheckedChange={async (checked) => {
+                                const { error } = await updateCategory(cat.id, { is_active: checked });
+                                if (error) {
+                                  toast({ title: t('common.error'), description: error, variant: 'destructive' });
+                                }
+                              }}
+                            />
+                          </td>
+                          <td className="p-2 space-x-2 rtl:space-x-reverse">
+                            <Button variant="destructive" size="sm" onClick={async () => {
+                              const { error } = await deleteCategory(cat.id);
+                              if (error) {
+                                toast({ title: t('common.error'), description: error, variant: 'destructive' });
+                              }
+                            }}>Delete</Button>
+                          </td>
+                        </tr>
+                      ))}
+                      {categories.length === 0 && (
+                        <tr>
+                          <td colSpan={5} className="p-6 text-center text-muted-foreground">No categories found</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="blog" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Create Post</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <AdminAddPostForm />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>All Posts</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-left border-b">
+                        <th className="p-2">ID</th>
+                        <th className="p-2">Slug</th>
+                        <th className="p-2">Published</th>
+                        <th className="p-2">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {posts.map((p) => (
+                        <tr key={p.id} className="border-b last:border-0">
+                          <td className="p-2">{p.id}</td>
+                          <td className="p-2">{p.slug}</td>
+                          <td className="p-2">
+                            <Switch
+                              checked={p.is_published}
+                              onCheckedChange={async (checked) => {
+                                const { error } = await updatePost(p.id, { is_published: checked });
+                                if (error) {
+                                  toast({ title: t('common.error'), description: error, variant: 'destructive' });
+                                } else if (checked) {
+                                  await fetchAllPosts();
+                                }
+                              }}
+                            />
+                          </td>
+                          <td className="p-2 space-x-2 rtl:space-x-reverse">
+                            <Button variant="destructive" size="sm" onClick={async () => {
+                              const { error } = await deletePost(p.id);
+                              if (error) {
+                                toast({ title: t('common.error'), description: error, variant: 'destructive' });
+                              }
+                            }}>Delete</Button>
+                          </td>
+                        </tr>
+                      ))}
+                      {posts.length === 0 && (
+                        <tr>
+                          <td colSpan={4} className="p-6 text-center text-muted-foreground">No posts found</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
 
-        {/* Order Details Modal */}
         {selectedOrder && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
             <Card className="max-w-2xl w-full max-h-[80vh] overflow-y-auto">
