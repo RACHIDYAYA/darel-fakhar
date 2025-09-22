@@ -84,38 +84,16 @@ export default function BlogPost() {
     <div className="min-h-screen bg-background">
       <Header />
 
-      {post.cover_image && (
-        <div className="relative w-full overflow-hidden rounded-none sm:rounded-2xl shadow-elegant mb-6">
-          <div className="aspect-[16/9] w-full">
-            <img
-              src={post.cover_image}
-              alt={tField(post, 'title')}
-              className="h-full w-full object-cover"
-              loading="eager"
-            />
-          </div>
-          <button
-            onClick={() => window.history.back()}
-            className="absolute top-4 left-4 p-2 bg-black/30 text-white backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors"
-            aria-label={t('common.back')}
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-        </div>
-      )}
-
       <article className="container mx-auto px-4 py-10">
         <div className="max-w-3xl mx-auto">
           <div className="mb-8">
-            {!post.cover_image && (
-              <button
-                onClick={() => window.history.back()}
-                className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                {t('common.back', { defaultValue: 'Back' })}
-              </button>
-            )}
+            <button
+              onClick={() => window.history.back()}
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              {t('common.back', { defaultValue: 'Back' })}
+            </button>
 
             <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
               {post.published_at && (
@@ -146,6 +124,19 @@ export default function BlogPost() {
               <p className="text-xl text-muted-foreground leading-relaxed mb-8">
                 {tField(post, 'excerpt')}
               </p>
+            )}
+
+            {post.cover_image && (
+              <div className="relative w-full max-w-2xl mx-auto overflow-hidden rounded-2xl shadow-elegant mb-8">
+                <div className="aspect-[4/3] w-full">
+                  <img
+                    src={post.cover_image}
+                    alt={tField(post, 'title')}
+                    className="h-full w-full object-cover"
+                    loading="eager"
+                  />
+                </div>
+              </div>
             )}
 
             <div className="flex items-center gap-4 pb-8 border-b">
