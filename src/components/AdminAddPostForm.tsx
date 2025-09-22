@@ -43,7 +43,6 @@ export default function AdminAddPostForm() {
   const onSubmit = async (v: Values) => {
     const tagsArr = v.tags ? v.tags.split(',').map(s => s.trim()).filter(Boolean) : [];
     const { error } = await createPost({
-      id: 0 as any,
       slug: v.slug,
       cover_image: v.cover_image || null,
       tags: tagsArr,

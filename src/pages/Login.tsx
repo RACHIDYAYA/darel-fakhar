@@ -27,7 +27,7 @@ const Login = () => {
   const form = useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: { email: '', password: '' } });
 
   const onSubmit = async (values: FormValues) => {
-    const { error } = await signIn(values);
+    const { error } = await signIn({ email: values.email, password: values.password });
     if (error) {
       toast({ title: 'Login failed', description: error, variant: 'destructive' });
     } else {
