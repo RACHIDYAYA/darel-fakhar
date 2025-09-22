@@ -51,8 +51,17 @@ export default function BlogPost() {
           <p className="text-sm text-muted-foreground">{new Date(post.published_at).toLocaleDateString()}</p>
         )}
         {post.cover_image && (
-          <img src={post.cover_image} alt={tField(post, 'title')} className="w-full rounded-lg" />)
-        }
+          <div className="relative w-full overflow-hidden rounded-2xl shadow-elegant mb-6">
+            <div className="aspect-[16/9] w-full">
+              <img
+                src={post.cover_image}
+                alt={tField(post, 'title')}
+                className="h-full w-full object-cover"
+                loading="eager"
+              />
+            </div>
+          </div>
+        )}
         <p className="lead">{tField(post, 'excerpt')}</p>
         <div dangerouslySetInnerHTML={{ __html: tField(post, 'content') }} />
       </article>
