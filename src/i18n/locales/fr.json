@@ -14,7 +14,12 @@
   },
   "blog": {
     "title": "Blog",
-    "empty": "Aucun article pour le moment."
+    "empty": "Aucun article pour le moment.",
+    "cta": {
+      "title": "Intéressé par notre poterie ?",
+      "description": "Découvrez notre collection artisanale de poterie marocaine traditionnelle.",
+      "button": "Voir la collection"
+    }
   },
   "hero": {
     "title": "Coopérative de Poterie Al-Hassania",
