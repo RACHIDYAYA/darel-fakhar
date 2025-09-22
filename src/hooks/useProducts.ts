@@ -74,13 +74,19 @@ export const useProducts = () => {
 
   const addProduct = async (productData: any) => {
     try {
+      // Remove any id field that might cause conflicts
+      const { id, created_at, updated_at, ...cleanData } = productData;
+      
       const { data, error } = await supabase
         .from('products')
-        .insert([productData])
+        .insert([cleanData])
         .select()
         .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
       
       // Refresh products list
       await fetchProducts();
