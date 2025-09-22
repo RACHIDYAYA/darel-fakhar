@@ -11,6 +11,7 @@ export type Post = {
   is_published: boolean;
   created_at?: string;
   updated_at?: string;
+  author?: string | null;
   // localized fields
   title_ar?: string; title_en?: string; title_fr?: string;
   excerpt_ar?: string; excerpt_en?: string; excerpt_fr?: string;
