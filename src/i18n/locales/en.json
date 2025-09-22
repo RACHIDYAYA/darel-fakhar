@@ -14,7 +14,12 @@
   },
   "blog": {
     "title": "Blog",
-    "empty": "No posts yet."
+    "empty": "No posts yet.",
+    "cta": {
+      "title": "Interested in our pottery?",
+      "description": "Explore our handcrafted collection of traditional Moroccan pottery.",
+      "button": "View Collection"
+    }
   },
   "hero": {
     "title": "Al-Hassania Pottery Cooperative",
