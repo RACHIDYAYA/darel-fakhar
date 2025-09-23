@@ -136,5 +136,20 @@
       "contact": "Contact"
     },
     "copyright": "© 2025 Al Hassaniya - جميع الحقوق محفوظة"
+  },
+  "aboutPage": {
+    "title": "À propos de nous",
+    "lead1": "La Coopérative Al Hassaniya de poterie et de tuiles traditionnelles est une institution artisanale de premier plan à Safi, alliant authenticité marocaine et créativité moderne. Grâce au savoir-faire de nos artisans et à la qualité de notre production, nous avons évolué d’un atelier traditionnel vers une usine intégrée capable de répondre aux besoins des marchés locaux et internationaux.",
+    "lead2": "Nous ne proposons pas seulement des pièces artistiques et décoratives ; nous assurons également une production à grande échelle de poterie et de tuiles sous toutes leurs formes, faisant de nous un partenaire fiable pour les grands commerçants et distributeurs en quête de qualité et de continuité.",
+    "features": {
+      "quality": {"title": "Qualité & Authenticité", "desc": "Produits traditionnels marocains authentiques, finition soignée garantissant durabilité et beauté."},
+      "wholesale": {"title": "Vente en Gros", "desc": "Achat en gros pour détaillants et grandes enseignes avec capacité de production régulière."},
+      "range": {"title": "Large Gamme", "desc": "Assiettes, décorations, carrelage et tuiles en terre cuite – tailles et motifs variés."},
+      "experience": {"title": "Expérience Visiteur", "desc": "Une expérience riche pour découvrir les secrets de l’artisanat traditionnel à Safi."}
+    },
+    "mission": {
+      "title": "Notre Vision & Mission",
+      "desc": "Chaque pièce porte l’empreinte du patrimoine de Safi. Nous visons à relier l’artisanat marocain traditionnel aux marchés mondiaux tout en préservant l’identité et la qualité."
+    }
   }
 }
