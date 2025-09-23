@@ -116,5 +116,25 @@
     "featured": "En Vedette",
     "freeShipping": "Livraison Gratuite",
     "bannerText": "Céramiques et carreaux authentiques de la Coopérative Al-Hassania 🏺✨ La qualité entre vos mains... Contactez-nous: 0656861536"
+  },
+  "footer": {
+    "title": "Poterie Traditionnelle à Safi",
+    "description": "La ville marocaine de Safi est l’un des plus anciens centres de poterie d’Afrique du Nord. Les artisans transmettent les savoir-faire du modelage de l’argile, de l’émaillage décoratif et de la cuisson dans des fours traditionnels. Les pièces se distinguent par des couleurs naturelles et des motifs andalous et amazighs, alliant beauté et fonctionnalité pour l’usage quotidien et la décoration.",
+    "relatedLinks": "Liens utiles",
+    "quickLinks": "Liens rapides",
+    "followUs": "Suivez-nous",
+    "keywords": {
+      "craft": "Art de la poterie",
+      "sell": "Vente de poterie",
+      "safi": "Poterie de Safi",
+      "online": "Acheter de la poterie en ligne"
+    },
+    "links": {
+      "home": "Accueil",
+      "about": "À propos",
+      "products": "Produits",
+      "contact": "Contact"
+    },
+    "copyright": "© 2025 Al Hassaniya - جميع الحقوق محفوظة"
   }
 }

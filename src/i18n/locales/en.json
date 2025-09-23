@@ -116,5 +116,25 @@
     "featured": "Featured",
     "freeShipping": "Free Shipping",
     "bannerText": "Authentic ceramics and tiles from Al-Hassania Cooperative 🏺✨ Quality in your hands... Contact us: 0656861536"
+  },
+  "footer": {
+    "title": "Traditional Pottery in Safi",
+    "description": "The Moroccan city of Safi is one of North Africa’s oldest pottery centers. Artisans pass down skills of clay shaping, decorative glazing, and firing in traditional kilns. Pieces feature natural colors and Andalusian and Amazigh motifs, combining beauty and function for daily use and décor.",
+    "relatedLinks": "Related Links",
+    "quickLinks": "Quick Links",
+    "followUs": "Follow Us",
+    "keywords": {
+      "craft": "Pottery Craft",
+      "sell": "Pottery for Sale",
+      "safi": "Safi Pottery",
+      "online": "Buy Pottery Online"
+    },
+    "links": {
+      "home": "Home",
+      "about": "About Us",
+      "products": "Products",
+      "contact": "Contact"
+    },
+    "copyright": "© 2025 Al Hassaniya - جميع الحقوق محفوظة"
   }
 }
