@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useCart } from "@/contexts/CartContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useAuth } from "@/contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,28 +33,28 @@ const Header = () => {
 
             {/* Navigation - Desktop */}
             <nav className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
-              <a href="/" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+              <Link to="/" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 {t('nav.home')}
-              </a>
-              <a href="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+              </Link>
+              <Link to="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 {t('nav.shop')}
-              </a>
-              <a href="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+              </Link>
+              <Link to="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 {t('nav.categories')}
-              </a>
-              <a href="/blog" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+              </Link>
+              <Link to="/blog" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 {t('nav.blog', { defaultValue: 'Blog' })}
-              </a>
-              <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+              </Link>
+              <Link to="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 {t('nav.gallery')}
-              </a>
-              <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+              </Link>
+              <Link to="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 {t('nav.contact')}
-              </a>
+              </Link>
               {hasRole('admin') && (
-                <a href="/admin" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+                <Link to="/admin" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                   {t('nav.admin')}
-                </a>
+                </Link>
               )}
             </nav>
 
@@ -64,29 +65,29 @@ const Header = () => {
                 <Search className="h-5 w-5" />
               </Button>
               <Button variant="ghost" size="icon" className="hover:text-pottery-gold relative">
-                <a href="/cart">
+                <Link to="/cart">
                   <ShoppingCart className="h-5 w-5" />
                   {getTotalItems() > 0 && (
                     <span className="absolute -top-1 -right-1 bg-pottery-gold text-pottery-gold-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
                       {getTotalItems()}
                     </span>
                   )}
-                </a>
+                </Link>
               </Button>
 
               {/* Auth buttons (desktop) */}
               {!user ? (
                 <>
                   <Button asChild className="hidden md:inline-flex">
-                    <a href="/login">{t('nav.login', { defaultValue: 'Login' })}</a>
+                    <Link to="/login">{t('nav.login', { defaultValue: 'Login' })}</Link>
                   </Button>
                   <Button asChild variant="outline" className="hidden md:inline-flex">
-                    <a href="/register">{t('nav.register', { defaultValue: 'Register' })}</a>
+                    <Link to="/register">{t('nav.register', { defaultValue: 'Register' })}</Link>
                   </Button>
                 </>
               ) : (
                 <Button asChild variant="secondary" className="hidden md:inline-flex">
-                  <a href="/logout">{t('nav.logout', { defaultValue: 'Logout' })}</a>
+                  <Link to="/logout">{t('nav.logout', { defaultValue: 'Logout' })}</Link>
                 </Button>
               )}
 
@@ -106,43 +107,43 @@ const Header = () => {
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t border-border">
               <nav className="flex flex-col space-y-3">
-                <a href="/" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                <Link to="/" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   {t('nav.home')}
-                </a>
-                <a href="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                </Link>
+                <Link to="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   {t('nav.shop')}
-                </a>
-                <a href="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                </Link>
+                <Link to="/shop" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   {t('nav.categories')}
-                </a>
-                <a href="/blog" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                </Link>
+                <Link to="/blog" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   {t('nav.blog', { defaultValue: 'Blog' })}
-                </a>
-                <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                </Link>
+                <Link to="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   {t('nav.gallery')}
-                </a>
-                <a href="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                </Link>
+                <Link to="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   {t('nav.contact')}
-                </a>
+                </Link>
                 {hasRole('admin') && (
-                  <a href="/admin" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                  <Link to="/admin" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                     {t('nav.admin')}
-                  </a>
+                  </Link>
                 )}
 
                 {!user ? (
                   <>
-                    <a href="/login" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                    <Link to="/login" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                       {t('nav.login', { defaultValue: 'Login' })}
-                    </a>
-                    <a href="/register" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                    </Link>
+                    <Link to="/register" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                       {t('nav.register', { defaultValue: 'Register' })}
-                    </a>
+                    </Link>
                   </>
                 ) : (
-                  <a href="/logout" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                  <Link to="/logout" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                     {t('nav.logout', { defaultValue: 'Logout' })}
-                  </a>
+                  </Link>
                 )}
               </nav>
             </div>

@@ -32,10 +32,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     let isMounted = true;
     const init = async () => {
       setLoading(true);
-      const { data } = await supabase.auth.getSession();
-      if (!isMounted) return;
-      setSession(data.session);
-      setUser(data.session?.user ?? null);
+      try {
+        const { data } = await supabase.auth.getSession();
+        if (!isMounted) return;
+        setSession(data.session);
+        setUser(data.session?.user ?? null);
+      } catch (error) {
+        console.warn('Auth session error:', error);
+        // Clear any invalid tokens
+        await supabase.auth.signOut();
+        if (!isMounted) return;
+        setSession(null);
+        setUser(null);
+      }
       setLoading(false);
     };
     init();
