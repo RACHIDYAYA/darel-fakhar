@@ -89,3 +89,20 @@ CREATE POLICY "Enable update access for all users" ON categories FOR UPDATE USIN
 CREATE POLICY "Enable insert access for all users" ON orders FOR INSERT WITH CHECK (true);
 CREATE POLICY "Enable read access for admin users" ON orders FOR SELECT USING (true);
 CREATE POLICY "Enable update access for admin users" ON orders FOR UPDATE USING (true);
+
+-- Create storage bucket for product images
+INSERT INTO storage.buckets (id, name, public) VALUES ('product-images', 'product-images', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- Storage policies for product-images bucket
+-- Allow public to view/download images
+CREATE POLICY "Public can view product images" ON storage.objects FOR SELECT USING (bucket_id = 'product-images');
+
+-- Allow public to upload images
+CREATE POLICY "Public can upload product images" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'product-images');
+
+-- Allow public to update images (for overwriting)
+CREATE POLICY "Public can update product images" ON storage.objects FOR UPDATE USING (bucket_id = 'product-images');
+
+-- Allow public to delete images
+CREATE POLICY "Public can delete product images" ON storage.objects FOR DELETE USING (bucket_id = 'product-images');
