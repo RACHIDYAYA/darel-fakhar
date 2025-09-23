@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { Product } from '@/types/supabase';
-import { useAuth } from '@/contexts/AuthContext';
 
 export interface CartItem {
   product: Product;
@@ -77,19 +76,10 @@ interface CartProviderProps {
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [items, dispatch] = useReducer(cartReducer, []);
-  const { user } = useAuth();
 
-  // Get user-specific cart key
-  const getCartKey = () => {
-    return user ? `pottery-cart-${user.id}` : 'pottery-cart-guest';
-  };
-
-  // Load cart from localStorage when user changes
+  // Load cart from localStorage on mount
   useEffect(() => {
-    dispatch({ type: 'CLEAR_CART' }); // Clear current cart first
-    
-    const cartKey = getCartKey();
-    const savedCart = localStorage.getItem(cartKey);
+    const savedCart = localStorage.getItem('pottery-cart');
     if (savedCart) {
       try {
         const parsedCart = JSON.parse(savedCart);
@@ -98,13 +88,12 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         console.error('Error loading cart from localStorage:', error);
       }
     }
-  }, [user?.id]); // Reload cart when user changes
+  }, []);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
-    const cartKey = getCartKey();
-    localStorage.setItem(cartKey, JSON.stringify(items));
-  }, [items, user?.id]);
+    localStorage.setItem('pottery-cart', JSON.stringify(items));
+  }, [items]);
 
   const addItem = (product: Product, quantity = 1) => {
     dispatch({ type: 'ADD_ITEM', product, quantity });
