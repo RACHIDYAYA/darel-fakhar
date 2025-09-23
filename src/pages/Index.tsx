@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
 import ProductGrid from "@/components/ProductGrid";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -10,6 +11,7 @@ const Index = () => {
         <HeroSlider />
         <ProductGrid />
       </main>
+      <Footer />
     </div>
   );
 };
