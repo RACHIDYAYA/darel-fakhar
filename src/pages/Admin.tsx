@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
 import Header from '@/components/Header';
 import AddProductForm from '@/components/AddProductForm';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
