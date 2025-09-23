@@ -26,7 +26,6 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
           <h3 className="text-lg font-semibold">{t('footer.title')}</h3>
-          {/* description removed per request for a cleaner footer */}
         </div>
 
         <div>
