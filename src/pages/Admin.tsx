@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 import Header from '@/components/Header';
 import AddProductForm from '@/components/AddProductForm';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,7 +9,6 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useOrders, Order } from '@/hooks/useOrders';
-import { useProducts } from '@/hooks/useProducts';
 import { Loader2, Eye, Plus, Edit, Trash2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useCategories } from '@/hooks/useCategories';
@@ -19,14 +19,13 @@ import AdminAddPostForm from '@/components/AdminAddPostForm';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { SelectItem } from '@/components/ui/select';
 import { useProducts } from '@/hooks/useProducts';
 
 const Admin = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const { orders, loading: ordersLoading, updateOrderStatus } = useOrders();
-  const { products, categories, updateProduct, deleteProduct, refetch } = useProducts();
+  const { products, updateProduct, deleteProduct, refetch } = useProducts();
   const { categories, updateCategory, deleteCategory, fetchCategories } = useCategories();
   const { posts, updatePost, deletePost, fetchAll: fetchAllPosts } = useAdminPosts();
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
