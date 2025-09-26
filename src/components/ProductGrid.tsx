@@ -34,7 +34,7 @@ const ProductGrid = () => {
 
   return (
     <section className="py-16 bg-pottery-cream/30">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-3">
         {/* Section header */}
         <div className="flex items-center justify-between mb-12">
           <div>
@@ -57,7 +57,7 @@ const ProductGrid = () => {
         </div>
 
         {/* Products grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {transformedProducts.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}

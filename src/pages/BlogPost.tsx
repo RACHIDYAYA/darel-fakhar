@@ -60,7 +60,7 @@ export default function BlogPost() {
   if (!post) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
+    
         <div className="container mx-auto px-4 py-10">
           <div className="max-w-3xl mx-auto">
             <div className="animate-pulse space-y-6">
@@ -82,7 +82,7 @@ export default function BlogPost() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+  
 
       <article className="container mx-auto px-4 py-10">
         <div className="max-w-3xl mx-auto">

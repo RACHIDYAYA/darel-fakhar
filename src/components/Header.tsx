@@ -45,8 +45,8 @@ const Header = () => {
               <Link to="/blog" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 {t('nav.blog', { defaultValue: 'Blog' })}
               </Link>
-              <Link to="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
-                {t('nav.gallery')}
+              <Link to="/ABOUT" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
+                {t('nav.about')}
               </Link>
               <Link to="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium">
                 {t('nav.contact')}
@@ -119,8 +119,8 @@ const Header = () => {
                 <Link to="/blog" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   {t('nav.blog', { defaultValue: 'Blog' })}
                 </Link>
-                <Link to="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
-                  {t('nav.gallery')}
+                <Link to="/about" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
+                  {t('nav.about')}
                 </Link>
                 <Link to="/contact" className="text-foreground hover:text-pottery-gold transition-colors font-medium py-2">
                   {t('nav.contact')}

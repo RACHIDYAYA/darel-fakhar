@@ -39,7 +39,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      
       <div className="container mx-auto px-4 py-10 max-w-md">
         <h1 className="text-2xl font-bold mb-6">Create Account</h1>
         <Form {...form}>

@@ -122,8 +122,7 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-      
+  
       <main className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="text-center mb-8">
@@ -225,7 +224,7 @@ const Shop = () => {
         {/* Products Grid */}
         <div className={`grid gap-6 ${
           viewMode === "grid" 
-            ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" 
+            ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3" 
             : "grid-cols-1"
         }`}>
           {filteredProducts.map((product) => (
@@ -234,9 +233,13 @@ const Shop = () => {
         </div>
 
         {/* Empty State */}
+
+
+
+
         {filteredProducts.length === 0 && (
-          <div className="text-center py-16">
-            <p className="text-pottery-bronze/60 text-lg mb-4">
+          <div className="text-center py-16  ">
+            <p className="text-pottery-bronze/60 text-lg grid gap-6 grid-cols-1 md:grid-cols-3">
               لا توجد منتجات تطابق المعايير المحددة
             </p>
             <Button onClick={() => {

@@ -1,131 +1,134 @@
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Hammer, ShoppingBag, MapPin, ShoppingCart, Home, Info, Boxes, Phone, Facebook, Instagram, MessageCircle, Mail } from "lucide-react";
-
-const RAW_PHONE = "0656861536";
-const EMAIL = "rachidyaya790@gmail.com";
-const MAPS_URL = "https://maps.app.goo.gl/KuWzHPoGTSRmFpyY8";
-
-function normalizeMA(phone: string) {
-  const digits = phone.replace(/\D/g, "");
-  if (digits.startsWith("0")) return `212${digits.slice(1)}`;
-  return digits;
-}
+import { Link } from "react-router-dom";
+import { Facebook, Instagram, Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
   const { t } = useTranslation();
 
-  const facebookUrl = import.meta.env.VITE_FACEBOOK_URL as string | undefined;
-  const instagramUrl = import.meta.env.VITE_INSTAGRAM_URL as string | undefined;
+  const PHONE = "0656861536";
+  const EMAIL = "rachidyaya790@gmail.com";
+  const MAPS_URL = "https://maps.app.goo.gl/KuWzHPoGTSRmFpyY8";
+  const FACEBOOK_URL = "https://facebook.com/YourPage";
+  const INSTAGRAM_URL = "https://instagram.com/YourPage";
 
-  const whatsappNumber = normalizeMA(RAW_PHONE);
-  const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "تعاونية الحسنية",
+    "url": window.location.origin,
+    "logo": `${window.location.origin}/logo.png`,
+    "sameAs": [FACEBOOK_URL, INSTAGRAM_URL],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": PHONE,
+      "contactType": "customer service",
+      "email": EMAIL,
+      "areaServed": "MA"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Safi",
+      "addressCountry": "Morocco"
+    }
+  };
 
   return (
-    <footer className="bg-card border-t border-border mt-12">
-      <div className="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-          <h3 className="text-lg font-semibold">{t('footer.title')}</h3>
-        </div>
+    <>
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
 
-        <div>
-          <h4 className="text-lg font-semibold">{t('footer.relatedLinks')}</h4>
-          <ul className="mt-3 space-y-2">
-            <li>
-              <Link to="/blog" className="flex items-center gap-2 text-foreground hover:text-pottery-gold transition-colors">
-                <Hammer className="h-4 w-4" />
-                <span>{t('footer.keywords.craft')}</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/shop" className="flex items-center gap-2 text-foreground hover:text-pottery-gold transition-colors">
-                <ShoppingBag className="h-4 w-4" />
-                <span>{t('footer.keywords.sell')}</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/shop" className="flex items-center gap-2 text-foreground hover:text-pottery-gold transition-colors">
-                <MapPin className="h-4 w-4" />
-                <span>{t('footer.keywords.safi')}</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/shop" className="flex items-center gap-2 text-foreground hover:text-pottery-gold transition-colors">
-                <ShoppingCart className="h-4 w-4" />
-                <span>{t('footer.keywords.online')}</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
+      <footer className="bg-muted border-t border-border mt-auto">
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Logo and description */}
+            <div className="col-span-1 md:col-span-2">
+              <h3 className="text-xl font-bold bg-gradient-gold bg-clip-text text-transparent mb-4">
+                {t('hero.cooperativeName', { defaultValue: "تعاونية الحسنية" })}
+              </h3>
+              <p className="text-muted-foreground mb-4 leading-relaxed">
+                {t('footer.description', { 
+                  defaultValue: "Authentic handcrafted pottery made by skilled artisans in Safi, Morocco." 
+                })}
+              </p>
+              <div className="flex space-x-4">
+                <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" aria-label="Facebook Page" className="text-muted-foreground hover:text-pottery-gold transition-colors">
+                  <Facebook className="h-5 w-5" />
+                </a>
+                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagram Page" className="text-muted-foreground hover:text-pottery-gold transition-colors">
+                  <Instagram className="h-5 w-5" />
+                </a>
+              </div>
+            </div>
 
-        <div>
-          <h4 className="text-lg font-semibold">{t('footer.quickLinks')}</h4>
-          <ul className="mt-3 space-y-2">
-            <li>
-              <Link to="/" className="flex items-center gap-2 text-foreground hover:text-pottery-gold transition-colors">
-                <Home className="h-4 w-4" />
-                <span>{t('footer.links.home')}</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/about" className="flex items-center gap-2 text-foreground hover:text-pottery-gold transition-colors">
-                <Info className="h-4 w-4" />
-                <span>{t('footer.links.about')}</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/shop" className="flex items-center gap-2 text-foreground hover:text-pottery-gold transition-colors">
-                <Boxes className="h-4 w-4" />
-                <span>{t('footer.links.products')}</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" className="flex items-center gap-2 text-foreground hover:text-pottery-gold transition-colors">
-                <Phone className="h-4 w-4" />
-                <span>{t('footer.links.contact')}</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
+            {/* Quick Links */}
+            <div>
+              <h4 className="font-semibold text-foreground mb-4">
+                {t('footer.quickLinks', { defaultValue: 'روابط سريعة' })}
+              </h4>
+              <nav className="flex flex-col space-y-2" aria-label="Quick links">
+                <Link to="/" className="text-muted-foreground hover:text-pottery-gold transition-colors">
+                  {t('nav.home', { defaultValue: "الرئيسية" })}
+                </Link>
+                <Link to="/shop" className="text-muted-foreground hover:text-pottery-gold transition-colors">
+                  {t('nav.shop', { defaultValue: "المتجر" })}
+                </Link>
+                <Link to="/blog" className="text-muted-foreground hover:text-pottery-gold transition-colors">
+                  {t('nav.blog', { defaultValue: "المدونة" })}
+                </Link>
+                <Link to="/contact" className="text-muted-foreground hover:text-pottery-gold transition-colors">
+                  {t('nav.contact', { defaultValue: "اتصل بنا" })}
+                </Link>
+              </nav>
+            </div>
 
-        <div>
-          <h4 className="text-lg font-semibold">{t('footer.contactUs')}</h4>
-          <div className="mt-3 flex flex-wrap items-center gap-3">
-            {facebookUrl && (
-              <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border hover:text-pottery-gold">
-                <Facebook className="h-5 w-5" />
-              </a>
-            )}
-            {instagramUrl && (
-              <a href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border hover:text-pottery-gold">
-                <Instagram className="h-5 w-5" />
-              </a>
-            )}
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border hover:text-pottery-gold">
-              <MessageCircle className="h-5 w-5" />
-            </a>
-            <a href={`tel:${RAW_PHONE}`} className="inline-flex h-9 px-3 items-center gap-2 rounded-full border border-border hover:text-pottery-gold">
-              <Phone className="h-4 w-4" />
-              <span className="text-sm">{RAW_PHONE}</span>
-            </a>
-            <a href={`mailto:${EMAIL}`} className="inline-flex h-9 px-3 items-center gap-2 rounded-full border border-border hover:text-pottery-gold">
-              <Mail className="h-4 w-4" />
-              <span className="text-sm">{EMAIL}</span>
-            </a>
-            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex h-9 px-3 items-center gap-2 rounded-full border border-border hover:text-pottery-gold">
-              <MapPin className="h-4 w-4" />
-              <span className="text-sm">Google Maps</span>
-            </a>
+            {/* Contact Info */}
+            <div>
+              <h4 className="font-semibold text-foreground mb-4">
+                {t('footer.contact', { defaultValue: 'تواصل معنا' })}
+              </h4>
+              <div className="flex flex-col space-y-3">
+                <div className="flex items-center space-x-2 text-muted-foreground">
+                  <MapPin className="h-4 w-4" />
+                  <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" aria-label="Location on Google Maps" className="text-sm hover:text-pottery-gold">
+                    Safi, Morocco
+                  </a>
+                </div>
+                <div className="flex items-center space-x-2 text-muted-foreground">
+                  <Phone className="h-4 w-4" />
+                  <a href={`tel:${PHONE}`} aria-label={`Call ${PHONE}`} className="text-sm hover:text-pottery-gold">
+                    {PHONE}
+                  </a>
+                </div>
+                <div className="flex items-center space-x-2 text-muted-foreground">
+                  <Mail className="h-4 w-4" />
+                  <a href={`mailto:${EMAIL}`} aria-label={`Email ${EMAIL}`} className="text-sm hover:text-pottery-gold">
+                    {EMAIL}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom bar */}
+          <div className="border-t border-border mt-8 pt-6">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <p className="text-muted-foreground text-sm">
+                © {new Date().getFullYear()} تعاونية الحسنية. جميع الحقوق محفوظة.
+              </p>
+              <div className="flex space-x-6 mt-4 md:mt-0">
+                <Link to="#" className="text-muted-foreground hover:text-pottery-gold transition-colors text-sm">
+                  سياسة الخصوصية
+                </Link>
+                <Link to="#" className="text-muted-foreground hover:text-pottery-gold transition-colors text-sm">
+                  شروط الخدمة
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className="border-t border-border">
-        <div className="container mx-auto px-4 py-4 text-center text-sm text-muted-foreground">
-          {t('footer.copyright')}
-        </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   );
 };
 

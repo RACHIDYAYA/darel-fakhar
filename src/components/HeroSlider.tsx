@@ -1,4 +1,7 @@
+"use client";
+
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -33,79 +36,95 @@ const HeroSlider = () => {
   };
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 5000);
+    const timer = setInterval(nextSlide, 7000);
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="relative h-[500px] md:h-[600px] overflow-hidden bg-gradient-hero">
-      {slides.map((slide, index) => (
-        <div
-          key={slide.id}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <div className="relative h-full">
-            <img
-              src={slide.image}
-              alt={slide.titleEn}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-pottery-bronze/80 via-pottery-bronze/50 to-transparent" />
-            
-            {/* Content */}
-            <div className="absolute inset-0 flex items-center">
-              <div className="container mx-auto px-4">
-                <div className="max-w-2xl text-pottery-cream">
-                  <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
-                    {slide.titleEn}
-                  </h1>
-                  <h2 className="text-2xl md:text-3xl mb-6 font-medium" dir="rtl">
-                    {slide.titleAr}
-                  </h2>
-                  <p className="text-lg md:text-xl mb-8 opacity-90">
-                    {slide.descriptionEn}
-                  </p>
-                  <Button variant="default" size="lg" className="bg-pottery-gold hover:bg-pottery-gold/90 text-pottery-bronze font-semibold px-8 py-3 shadow-gold">
-                    اكتشف المجموعة
-                  </Button>
+    <div className="relative w-full max-w-none h-[95vh] overflow-hidden">
+      <AnimatePresence>
+        {slides.map(
+          (slide, index) =>
+            index === currentSlide && (
+              <motion.div
+                key={slide.id}
+                className="absolute inset-0"
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 1 }}
+              >
+                {/* Background */}
+                <img
+                  src={slide.image}
+                  alt={slide.titleEn}
+                  className="w-full h-full object-cover"
+                />
+
+                {/* Dark gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
+
+                {/* Content */}
+                <div className="absolute inset-0 flex items-center">
+                  <div className="px-6 md:px-12 w-full max-w-5xl">
+                    <motion.div
+                      className="max-w-2xl text-white"
+                      initial={{ x: -50, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ duration: 0.8, delay: 0.3 }}
+                    >
+                      <h1 className="text-5xl md:text-7xl font-extrabold mb-4 leading-tight drop-shadow-lg tracking-tight">
+                        {slide.titleEn}
+                      </h1>
+                      <h2
+                        className="text-3xl md:text-4xl mb-6 font-semibold text-pottery-gold drop-shadow"
+                        dir="rtl"
+                      >
+                        {slide.titleAr}
+                      </h2>
+                      <p className="text-lg md:text-xl mb-8 text-white/90 leading-relaxed">
+                        {slide.descriptionEn}
+                      </p>
+                      <Button className="bg-pottery-gold hover:bg-pottery-gold/90 text-pottery-bronze font-bold px-10 py-4 text-lg shadow-lg rounded-full transition-transform hover:scale-105">
+                        ✨ اكتشف المجموعة
+                      </Button>
+                    </motion.div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
+              </motion.div>
+            )
+        )}
+      </AnimatePresence>
 
       {/* Navigation arrows */}
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-pottery-cream/20 hover:bg-pottery-cream/40 text-pottery-cream backdrop-blur-sm"
+        className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white rounded-full shadow-lg backdrop-blur-sm"
         onClick={prevSlide}
       >
-        <ChevronLeft className="h-6 w-6" />
+        <ChevronLeft className="h-7 w-7" />
       </Button>
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-pottery-cream/20 hover:bg-pottery-cream/40 text-pottery-cream backdrop-blur-sm"
+        className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white rounded-full shadow-lg backdrop-blur-sm"
         onClick={nextSlide}
       >
-        <ChevronRight className="h-6 w-6" />
+        <ChevronRight className="h-7 w-7" />
       </Button>
 
-      {/* Dots indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">
+      {/* Progress indicators */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 w-40">
         {slides.map((_, index) => (
-          <button
+          <motion.div
             key={index}
-            className={`w-3 h-3 rounded-full transition-colors ${
-              index === currentSlide
-                ? "bg-pottery-gold"
-                : "bg-pottery-cream/50 hover:bg-pottery-cream/75"
+            className={`h-1 flex-1 rounded-full ${
+              index === currentSlide ? "bg-pottery-gold" : "bg-white/40"
             }`}
-            onClick={() => setCurrentSlide(index)}
+            initial={{ width: 0 }}
+            animate={{ width: index === currentSlide ? "100%" : "100%" }}
+            transition={{ duration: 6 }}
           />
         ))}
       </div>

@@ -31,7 +31,7 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+ 
       <main className="container mx-auto px-4 py-12">
         <section className="mx-auto max-w-4xl">
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-gold bg-clip-text text-transparent">
@@ -68,7 +68,7 @@ const About = () => {
           </p>
         </section>
       </main>
-      <Footer />
+    
     </div>
   );
 };

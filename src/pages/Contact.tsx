@@ -31,8 +31,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-      
+    
       <main className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="text-center mb-12">
