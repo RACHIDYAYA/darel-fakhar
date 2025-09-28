@@ -1,101 +1,57 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Filter, Grid, List } from "lucide-react";
 import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
-
-const allProducts = [
-  {
-    id: 1,
-    image: "/Rachid-uploads/cf5dc12d-0ea8-437f-9528-9a769ef50c7c.png",
-    titleAr: "مجموعة أطقم شاي سيراميك ملونة",
-    titleEn: "Colorful Ceramic Tea Sets Collection",
-    originalPrice: 350,
-    salePrice: 280,
-    category: "tea-sets",
-    isNew: true,
-  },
-  {
-    id: 2,
-    image: "/Rachid-uploads/07d084e1-0d0a-40b6-a3df-8c0f3f506742.png",
-    titleAr: "طاجين مغربي أصيل بنقوش تقليدية",
-    titleEn: "Authentic Moroccan Tagine with Traditional Patterns",
-    originalPrice: 420,
-    salePrice: 350,
-    category: "tagines",
-    isNew: false,
-  },
-  {
-    id: 3,
-    image: "/Rachid-uploads/d061038e-6ee9-4908-8585-96e1e304dccc.png",
-    titleAr: "مزهرية فخار مُخرمة بنقوش هندسية",
-    titleEn: "Perforated Ceramic Vase with Geometric Patterns",
-    originalPrice: 280,
-    salePrice: 220,
-    category: "vases",
-    isNew: true,
-  },
-  {
-    id: 4,
-    image: "/Rachid-uploads/a5c483cd-09bd-41ae-ba2f-fbe266fd0ad1.png",
-    titleAr: "مجموعة جرار سيراميك ملونة",
-    titleEn: "Colorful Ceramic Jars Collection",
-    originalPrice: 200,
-    salePrice: 160,
-    category: "jars",
-    isNew: false,
-  },
-  {
-    id: 5,
-    image: "/Rachid-uploads/2b978a57-b4a7-4615-9a36-249f4c3025d4.png",
-    titleAr: "أطباق سيراميك بنقوش تقليدية",
-    titleEn: "Traditional Ceramic Plates",
-    originalPrice: 180,
-    salePrice: 150,
-    category: "plates",
-    isNew: true,
-  },
-  {
-    id: 6,
-    image: "/Rachid-uploads/04547d10-8399-43ea-a3b9-ad8250873915.png",
-    titleAr: "أطباق سيراميك بنقوش ذهبية",
-    titleEn: "Ceramic Plates with Golden Patterns",
-    originalPrice: 320,
-    salePrice: 280,
-    category: "plates",
-    isNew: false,
-  },
-];
+import { useProducts } from "@/hooks/useProducts";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Shop = () => {
-  const [filteredProducts, setFilteredProducts] = useState(allProducts);
+  const { products, categories, loading } = useProducts();
+  const { language } = useLanguage();
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
   const [priceRange, setPriceRange] = useState([100, 500]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("newest");
   const [viewMode, setViewMode] = useState("grid");
 
-  const categories = [
+  const categoryOptions = [
     { value: "all", labelAr: "جميع المنتجات", labelEn: "All Products" },
-    { value: "tea-sets", labelAr: "أطقم الشاي", labelEn: "Tea Sets" },
-    { value: "tagines", labelAr: "طواجن", labelEn: "Tagines" },
-    { value: "vases", labelAr: "مزهريات", labelEn: "Vases" },
-    { value: "jars", labelAr: "جرار", labelEn: "Jars" },
-    { value: "plates", labelAr: "أطباق", labelEn: "Plates" },
+    ...categories.map(cat => ({
+      value: cat.slug || cat.id.toString(),
+      labelAr: cat.name_ar,
+      labelEn: cat.name_en || cat.name_ar
+    }))
   ];
 
+  const transformProducts = (products: any[]) => {
+    return products.map((product) => ({
+      id: product.id,
+      image: product.images && product.images.length > 0 ? product.images[0] : "/Rachid-uploads/cf5dc12d-0ea8-437f-9528-9a769ef50c7c.png",
+      titleAr: product.name_ar,
+      titleEn: product.name_en,
+      originalPrice: product.price,
+      salePrice: product.sale_price || product.price,
+      category: product.category_id?.toString() || "general",
+      isNew: new Date(product.created_at) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) // Products created in last 7 days
+    }));
+  };
+
   const applyFilters = () => {
-    let filtered = allProducts;
+    let filtered = products;
 
     // Category filter
     if (selectedCategory !== "all") {
-      filtered = filtered.filter(product => product.category === selectedCategory);
+      filtered = filtered.filter(product => 
+        product.category_id?.toString() === selectedCategory
+      );
     }
 
     // Price filter
     filtered = filtered.filter(product => {
-      const price = product.salePrice || product.originalPrice;
+      const price = product.sale_price || product.price;
       return price >= priceRange[0] && price <= priceRange[1];
     });
 
@@ -103,22 +59,36 @@ const Shop = () => {
     filtered = [...filtered].sort((a, b) => {
       switch (sortBy) {
         case "newest":
-          return b.isNew ? 1 : -1;
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
         case "price-low":
-          return (a.salePrice || a.originalPrice) - (b.salePrice || b.originalPrice);
+          return (a.sale_price || a.price) - (b.sale_price || b.price);
         case "price-high":
-          return (b.salePrice || b.originalPrice) - (a.salePrice || a.originalPrice);
+          return (b.sale_price || b.price) - (a.sale_price || a.price);
         default:
           return 0;
       }
     });
 
-    setFilteredProducts(filtered);
+    setFilteredProducts(transformProducts(filtered));
   };
 
-  useState(() => {
-    applyFilters();
-  });
+  useEffect(() => {
+    if (products.length > 0) {
+      applyFilters();
+    }
+  }, [products, selectedCategory, priceRange, sortBy]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <main className="max-w-6xl mx-auto px-4 py-8">
+          <div className="flex items-center justify-center min-h-[400px]">
+            <div className="text-pottery-bronze">جاري تحميل المنتجات...</div>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -143,7 +113,7 @@ const Shop = () => {
                   <SelectValue placeholder="اختر التصنيف" />
                 </SelectTrigger>
                 <SelectContent>
-                  {categories.map(category => (
+                  {categoryOptions.map(category => (
                     <SelectItem key={category.value} value={category.value}>
                       {category.labelAr}
                     </SelectItem>
@@ -200,7 +170,7 @@ const Shop = () => {
         {/* View Mode & Results */}
         <div className="flex justify-between items-center mb-6">
           <p className="text-pottery-bronze">
-            عرض {filteredProducts.length} من أصل {allProducts.length} منتج
+            عرض {filteredProducts.length} من أصل {products.length} منتج
           </p>
           
           <div className="flex items-center gap-2">
