@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import ProductCard from "./ProductCard";
 import { useProducts } from "@/hooks/useProducts";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "react-i18next";
 
 const ProductGrid = () => {
   const { products, getFeaturedProducts, loading } = useProducts();
-  const { language } = useLanguage();
+  const { language, isRTL } = useLanguage();
+  const { t } = useTranslation();
   
   const featuredProducts = getFeaturedProducts().slice(0, 4); // Show only 4 featured products
 
@@ -24,9 +26,9 @@ const ProductGrid = () => {
     return (
       <section className="py-16 bg-pottery-cream/30">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center min-h-[300px]">
-            <div className="text-pottery-bronze">Loading products...</div>
-          </div>
+        <div className="flex items-center justify-center min-h-[300px]">
+            <div className="text-pottery-bronze">{t('common.loading')}</div>
+        </div>
         </div>
       </section>
     );
@@ -38,11 +40,11 @@ const ProductGrid = () => {
         {/* Section header */}
         <div className="flex items-center justify-between mb-12">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-pottery-bronze mb-2">
-              {language === 'ar' ? 'المنتجات المميزة' : language === 'fr' ? 'NOUVEAUTÉS' : 'FEATURED PRODUCTS'}
+            <h2 className="text-3xl md:text-4xl font-bold text-pottery-bronze mb-2" dir={isRTL ? 'rtl' : 'ltr'}>
+              {t('common.featured')}
             </h2>
-            <h3 className="text-xl text-pottery-bronze/80" dir={language === 'ar' ? 'rtl' : 'ltr'}>
-              {language === 'ar' ? 'أحدث المنتجات' : language === 'fr' ? 'Nos derniers produits' : 'Our latest products'}
+            <h3 className="text-xl text-pottery-bronze/80" dir={isRTL ? 'rtl' : 'ltr'}>
+              {t('aboutPage.features.range.desc')}
             </h3>
           </div>
           
@@ -64,8 +66,8 @@ const ProductGrid = () => {
           
           {transformedProducts.length === 0 && (
             <div className="col-span-full text-center py-12">
-              <p className="text-pottery-bronze/60">
-                {language === 'ar' ? 'لا توجد منتجات مميزة حاليا' : language === 'fr' ? 'Aucun produit en vedette pour le moment' : 'No featured products available at the moment'}
+              <p className="text-pottery-bronze/60" dir={isRTL ? 'rtl' : 'ltr'}>
+                {t('blog.empty')}
               </p>
             </div>
           )}
@@ -78,7 +80,7 @@ const ProductGrid = () => {
             size="lg"
             className="border-pottery-gold text-pottery-gold hover:bg-pottery-gold hover:text-pottery-bronze px-8"
           >
-            {language === 'ar' ? 'عرض جميع المنتجات' : language === 'fr' ? 'Voir tous les produits' : 'View all products'}
+            {t('nav.shop')}
           </Button>
         </div>
       </div>

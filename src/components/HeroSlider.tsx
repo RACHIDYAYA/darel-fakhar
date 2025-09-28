@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const slides = [
   {
@@ -25,6 +27,8 @@ const slides = [
 ];
 
 const HeroSlider = () => {
+  const { t } = useTranslation();
+  const { language, isRTL } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const nextSlide = () => {
@@ -73,20 +77,20 @@ const HeroSlider = () => {
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ duration: 0.8, delay: 0.3 }}
                     >
-                      <h1 className="text-5xl md:text-7xl font-extrabold mb-4 leading-tight drop-shadow-lg tracking-tight">
-                        {slide.titleEn}
+                      <h1 className="text-5xl md:text-7xl font-extrabold mb-4 leading-tight drop-shadow-lg tracking-tight" dir={isRTL ? 'rtl' : 'ltr'}>
+                        {t('hero.title')}
                       </h1>
                       <h2
                         className="text-3xl md:text-4xl mb-6 font-semibold text-pottery-gold drop-shadow"
-                        dir="rtl"
+                        dir={isRTL ? 'rtl' : 'ltr'}
                       >
-                        {slide.titleAr}
+                        {t('hero.subtitle')}
                       </h2>
-                      <p className="text-lg md:text-xl mb-8 text-white/90 leading-relaxed">
-                        {slide.descriptionEn}
+                      <p className="text-lg md:text-xl mb-8 text-white/90 leading-relaxed" dir={isRTL ? 'rtl' : 'ltr'}>
+                        {t('aboutPage.lead1')}
                       </p>
                       <Button className="bg-pottery-gold hover:bg-pottery-gold/90 text-pottery-bronze font-bold px-10 py-4 text-lg shadow-lg rounded-full transition-transform hover:scale-105">
-                        ✨ اكتشف المجموعة
+                        ✨ {t('hero.cta')}
                       </Button>
                     </motion.div>
                   </div>

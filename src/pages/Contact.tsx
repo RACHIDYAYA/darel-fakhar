@@ -6,8 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTranslation } from "react-i18next";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Contact = () => {
+  const { t } = useTranslation();
+  const { isRTL } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,7 +23,7 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Here you would typically send the message to your backend
-    alert("تم إرسال رسالتكم بنجاح! سنرد عليكم في أقرب وقت.");
+    alert(t('common.success'));
     setFormData({
       name: "",
       email: "",
@@ -35,9 +39,9 @@ const Contact = () => {
       <main className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-pottery-bronze mb-4">تواصل معنا</h1>
-          <p className="text-lg text-pottery-bronze/80 max-w-2xl mx-auto">
-            نحن هنا للإجابة على جميع استفساراتكم حول منتجاتنا من الفخار المغربي الأصيل
+          <h1 className="text-4xl font-bold text-pottery-bronze mb-4">{t('contact.title')}</h1>
+          <p className="text-lg text-pottery-bronze/80 max-w-2xl mx-auto" dir={isRTL ? 'rtl' : 'ltr'}>
+            {t('aboutPage.lead1')}
           </p>
         </div>
 
@@ -46,7 +50,7 @@ const Contact = () => {
           <div className="space-y-8">
             <Card>
               <CardHeader>
-                <CardTitle className="text-pottery-bronze">معلومات التواصل</CardTitle>
+                <CardTitle className="text-pottery-bronze">{t('contact.contactUs')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-start gap-4">
@@ -54,7 +58,7 @@ const Contact = () => {
                     <Phone className="w-6 h-6 text-pottery-gold" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-pottery-bronze mb-1">الهاتف</h3>
+                    <h3 className="font-semibold text-pottery-bronze mb-1">{t('contact.phone')}</h3>
                     <p className="text-pottery-bronze/80" dir="ltr">+212 656-861536</p>
                     <p className="text-pottery-bronze/80" dir="ltr">+212 616-242996</p>
                   </div>
@@ -65,7 +69,7 @@ const Contact = () => {
                     <Mail className="w-6 h-6 text-pottery-gold" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-pottery-bronze mb-1">البريد الإلكتروني</h3>
+                    <h3 className="font-semibold text-pottery-bronze mb-1">{t('contact.email')}</h3>
                     <p className="text-pottery-bronze/80">info@hassaniyapottery.ma</p>
                     <p className="text-pottery-bronze/80">orders@hassaniyapottery.ma</p>
                   </div>
@@ -76,10 +80,10 @@ const Contact = () => {
                     <MapPin className="w-6 h-6 text-pottery-gold" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-pottery-bronze mb-1">العنوان</h3>
-                    <p className="text-pottery-bronze/80" dir="rtl">
-                      تعاونية الفخار<br />
-                      آسفي - المغرب<br />
+                    <h3 className="font-semibold text-pottery-bronze mb-1">{t('contact.address')}</h3>
+                    <p className="text-pottery-bronze/80" dir={isRTL ? 'rtl' : 'ltr'}>
+                      {t('hero.cooperativeName')}<br />
+                      Safi - Morocco<br />
                       9V43+7Q Safi, Morocco
                     </p>
                   </div>
@@ -90,11 +94,11 @@ const Contact = () => {
                     <Clock className="w-6 h-6 text-pottery-gold" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-pottery-bronze mb-1">ساعات العمل</h3>
-                    <div className="text-pottery-bronze/80 space-y-1">
-                      <p>الاثنين - الجمعة: 9:00 - 18:00</p>
-                      <p>السبت: 9:00 - 13:00</p>
-                      <p>الأحد: مغلق</p>
+                    <h3 className="font-semibold text-pottery-bronze mb-1">{t('contact.hours')}</h3>
+                    <div className="text-pottery-bronze/80 space-y-1" dir={isRTL ? 'rtl' : 'ltr'}>
+                      <p>Monday - Friday: 9:00 - 18:00</p>
+                      <p>Saturday: 9:00 - 13:00</p>
+                      <p>Sunday: Closed</p>
                     </div>
                   </div>
                 </div>
@@ -104,13 +108,11 @@ const Contact = () => {
             {/* About Section */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-pottery-bronze">عن التعاونية</CardTitle>
+                <CardTitle className="text-pottery-bronze">{t('contact.aboutUs')}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-pottery-bronze/80 leading-relaxed" dir="rtl">
-                  خزف وقرمود مغربي أصيل من يد الصانع مباشرة 🧱✨
-                  نحن متخصصون في صناعة الفخار التقليدي المغربي بأيادي حرفية ماهرة. 
-                  التوصيل مجاني - هل تحتاج إلى عرض أسعار أو مساعدة؟ اتصل بنا.
+                <p className="text-pottery-bronze/80 leading-relaxed" dir={isRTL ? 'rtl' : 'ltr'}>
+                  {t('aboutPage.lead2')}
                 </p>
               </CardContent>
             </Card>
@@ -119,24 +121,24 @@ const Contact = () => {
           {/* Contact Form */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-pottery-bronze">إرسال رسالة</CardTitle>
+              <CardTitle className="text-pottery-bronze">{t('contact.contactForm')}</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="name">الاسم الكامل *</Label>
+                    <Label htmlFor="name">{t('contact.name')} *</Label>
                     <Input
                       id="name"
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
                       required
-                      placeholder="أدخل اسمك الكامل"
+                      placeholder={t('contact.name')}
                     />
                   </div>
                   
                   <div>
-                    <Label htmlFor="phone">رقم الهاتف</Label>
+                    <Label htmlFor="phone">{t('contact.phone')}</Label>
                     <Input
                       id="phone"
                       type="tel"
@@ -148,7 +150,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="email">البريد الإلكتروني *</Label>
+                  <Label htmlFor="email">{t('contact.email')} *</Label>
                   <Input
                     id="email"
                     type="email"
@@ -160,24 +162,24 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="subject">الموضوع *</Label>
+                  <Label htmlFor="subject">{t('contact.subject')} *</Label>
                   <Input
                     id="subject"
                     value={formData.subject}
                     onChange={(e) => setFormData({...formData, subject: e.target.value})}
                     required
-                    placeholder="ما هو موضوع رسالتكم؟"
+                    placeholder={t('contact.subject')}
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="message">الرسالة *</Label>
+                  <Label htmlFor="message">{t('contact.message')} *</Label>
                   <Textarea
                     id="message"
                     value={formData.message}
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
                     required
-                    placeholder="اكتبوا رسالتكم هنا..."
+                    placeholder={t('contact.message')}
                     rows={5}
                   />
                 </div>
@@ -188,7 +190,7 @@ const Contact = () => {
                   size="lg"
                 >
                   <Send className="w-5 h-5 mr-2" />
-                  إرسال الرسالة
+                  {t('contact.send')}
                 </Button>
               </form>
             </CardContent>
@@ -199,7 +201,7 @@ const Contact = () => {
         <div className="mt-12">
           <Card>
             <CardHeader>
-              <CardTitle className="text-pottery-bronze">موقعنا</CardTitle>
+              <CardTitle className="text-pottery-bronze">{t('contact.location')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div 
@@ -214,13 +216,13 @@ const Contact = () => {
                 <div className="relative z-10">
                   <MapPin className="w-16 h-16 mx-auto text-pottery-gold mb-4" />
                   <h3 className="text-xl font-bold text-white mb-2">
-                    تعاونية الفخار
+                    {t('hero.cooperativeName')}
                   </h3>
-                  <p className="text-white/90" dir="rtl">
-                    آسفي - المغرب
+                  <p className="text-white/90" dir={isRTL ? 'rtl' : 'ltr'}>
+                    Safi - Morocco
                   </p>
-                  <p className="text-sm text-white/80 mt-2">
-                    يمكنكم زيارتنا لمشاهدة المنتجات عن قرب والتعرف على عملية الصناعة
+                  <p className="text-sm text-white/80 mt-2" dir={isRTL ? 'rtl' : 'ltr'}>
+                    {t('aboutPage.features.experience.desc')}
                   </p>
                   <Button 
                     asChild
@@ -232,7 +234,7 @@ const Contact = () => {
                       rel="noopener noreferrer"
                     >
                       <MapPin className="w-4 h-4 mr-2" />
-                      عرض الموقع على الخريطة
+                      {t('contact.location')}
                     </a>
                   </Button>
                 </div>
