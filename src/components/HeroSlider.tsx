@@ -45,7 +45,7 @@ const HeroSlider = () => {
   }, []);
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden -mx-[50vw] left-1/2 right-1/2">
+    <div className="relative w-screen h-screen overflow-hidden -mx-[50vw] left-1/2 right-1/2 -mt-[120px] pt-[120px]">
       <AnimatePresence>
         {slides.map(
           (slide, index) =>
