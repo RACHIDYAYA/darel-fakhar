@@ -21,7 +21,7 @@ const Header = () => {
       </div>
       
       {/* Main header */}
-      <header className="bg-card border-b border-border sticky top-0 z-50 shadow-elegant">
+      <header className="bg-card/80 backdrop-blur-md border-b border-border sticky top-0 z-50 shadow-elegant">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
