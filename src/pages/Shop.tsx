@@ -131,7 +131,7 @@ const Shop = () => {
                 value={priceRange}
                 onValueChange={setPriceRange}
                 max={500}
-                min={100}
+                min={5}
                 step={10}
                 className="w-full"
               />
@@ -214,7 +214,7 @@ const Shop = () => {
             </p>
             <Button onClick={() => {
               setSelectedCategory("all");
-              setPriceRange([100, 500]);
+              setPriceRange([5, 500]);
               setSortBy("newest");
               applyFilters();
             }}>

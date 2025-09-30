@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import Header from '@/components/Header';
 import AddProductForm from '@/components/AddProductForm';
@@ -19,6 +19,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useProducts } from '@/hooks/useProducts';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Admin = () => {
   const { t } = useTranslation();
@@ -27,12 +28,16 @@ const Admin = () => {
   const { products, updateProduct, deleteProduct, refetch } = useProducts();
   const { categories, updateCategory, deleteCategory, fetchCategories } = useCategories();
   const { posts, updatePost, deletePost, fetchAll: fetchAllPosts } = useAdminPosts();
+
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [tabValue, setTabValue] = useState<'orders' | 'products' | 'categories' | 'blog'>('orders');
   const [addOpen, setAddOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [editing, setEditing] = useState<any | null>(null);
   const [editForm, setEditForm] = useState<any>({});
+
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const prevFocusedRef = useRef<HTMLElement | null>(null);
 
   const handleStatusUpdate = async (orderId: number, newStatus: Order['status']) => {
     const { error } = await updateOrderStatus(orderId, newStatus);
@@ -65,11 +70,40 @@ const Admin = () => {
     return `${price.toFixed(2)} MAD`;
   };
 
+  // lock body scroll + focus trap-ish behavior when modal opened
+  useEffect(() => {
+    if (selectedOrder) {
+      prevFocusedRef.current = document.activeElement as HTMLElement | null;
+      document.body.style.overflow = 'hidden';
+      // focus the modal
+      setTimeout(() => modalRef.current?.focus(), 0);
+    } else {
+      document.body.style.overflow = '';
+      // restore focus
+      prevFocusedRef.current?.focus?.();
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedOrder]);
+
+  // close on Escape
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && selectedOrder) {
+        setSelectedOrder(null);
+      }
+    };
+    if (selectedOrder) {
+      window.addEventListener('keydown', onKey);
+    }
+    return () => window.removeEventListener('keydown', onKey);
+  }, [selectedOrder]);
 
   if (ordersLoading) {
     return (
       <div className="min-h-screen bg-background">
-   
         <div className="flex items-center justify-center min-h-[50vh]">
           <Loader2 className="h-8 w-8 animate-spin" />
         </div>
@@ -79,7 +113,8 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-background">
-    
+      
+
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">{t('admin.title')}</h1>
         <Tabs value={tabValue} onValueChange={(v) => setTabValue(v as 'orders' | 'products' | 'categories' | 'blog')} className="space-y-4">
@@ -90,6 +125,7 @@ const Admin = () => {
             <TabsTrigger value="blog">{t('admin.blog', { defaultValue: 'Blog' })}</TabsTrigger>
           </TabsList>
 
+          {/* ORDERS */}
           <TabsContent value="orders" className="space-y-4">
             <Card>
               <CardHeader>
@@ -157,6 +193,7 @@ const Admin = () => {
             </Card>
           </TabsContent>
 
+          {/* PRODUCTS */}
           <TabsContent value="products" className="space-y-4">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-semibold">{t('admin.products')}</h2>
@@ -175,6 +212,7 @@ const Admin = () => {
                 </DialogContent>
               </Dialog>
             </div>
+
             <Card id="products">
               <CardHeader>
                 <CardTitle>{t('admin.products')}</CardTitle>
@@ -222,16 +260,43 @@ const Admin = () => {
                               category: product.category || '',
                               stock: product.stock || 0,
                               is_featured: !!product.is_featured,
+                              image_url: '', // new field for image update
                             });
                             setEditOpen(true);
                           }}>
                             <Edit className="h-4 w-4 mr-1" /> تعديل
                           </Button>
-                          <DialogContent className="max-w-2xl">
+                          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
                             <DialogHeader>
                               <DialogTitle>تعديل المنتج</DialogTitle>
                             </DialogHeader>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div className="md:col-span-2">
+                                <label className="text-sm font-medium">الصورة الحالية / Current Image</label>
+                                {editing?.images && editing.images.length > 0 ? (
+                                  <div className="mt-2 relative w-full h-48 bg-muted rounded-lg overflow-hidden">
+                                    <img
+                                      src={editing.images[0]}
+                                      alt="Current product"
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                ) : (
+                                  <div className="mt-2 w-full h-48 bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
+                                    لا توجد صورة
+                                  </div>
+                                )}
+                              </div>
+                              <div className="md:col-span-2">
+                                <label className="text-sm font-medium">رابط الصورة الجديدة / New Image URL</label>
+                                <Input 
+                                  value={editForm.image_url || ''} 
+                                  onChange={(e) => setEditForm({ ...editForm, image_url: e.target.value })}
+                                  placeholder="https://example.com/image.jpg"
+                                  className="mt-1"
+                                />
+                                <p className="text-xs text-muted-foreground mt-1">اترك فارغاً للاحتفاظ بالصورة الحالية</p>
+                              </div>
                               <div>
                                 <label className="text-sm">الاسم (AR)</label>
                                 <Input value={editForm.name_ar} onChange={(e) => setEditForm({ ...editForm, name_ar: e.target.value })} />
@@ -285,6 +350,14 @@ const Admin = () => {
                                 <Button onClick={async () => {
                                   if (!editing) return;
                                   const payload = { ...editForm };
+                                  // Remove image_url if empty (keep existing image)
+                                  if (!payload.image_url) {
+                                    delete payload.image_url;
+                                  } else {
+                                    // If new image URL provided, update images array
+                                    payload.images = [payload.image_url];
+                                    delete payload.image_url;
+                                  }
                                   const { error } = await updateProduct(editing.id, payload);
                                   if (error) {
                                     toast({ title: t('common.error'), description: error, variant: 'destructive' });
@@ -322,6 +395,7 @@ const Admin = () => {
             </Card>
           </TabsContent>
 
+          {/* CATEGORIES */}
           <TabsContent value="categories" className="space-y-4">
             <Card>
               <CardHeader>
@@ -387,6 +461,7 @@ const Admin = () => {
             </Card>
           </TabsContent>
 
+          {/* BLOG */}
           <TabsContent value="blog" className="space-y-4">
             <Card>
               <CardHeader>
@@ -453,76 +528,116 @@ const Admin = () => {
           </TabsContent>
         </Tabs>
 
-        {selectedOrder && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-            <Card className="max-w-2xl w-full max-h-[80vh] overflow-y-auto">
-              <CardHeader>
-                <CardTitle>Order #{selectedOrder.id} Details</CardTitle>
-                <Button
-                  variant="outline"
-                  className="absolute top-4 right-4"
-                  onClick={() => setSelectedOrder(null)}
-                >
-                  ×
-                </Button>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <h3 className="font-semibold">Customer Information</h3>
-                  <p>Name: {selectedOrder.customer_name}</p>
-                  <p>Phone: {selectedOrder.customer_phone}</p>
-                  {selectedOrder.customer_email && (
-                    <p>Email: {selectedOrder.customer_email}</p>
-                  )}
-                  <p>Address: {selectedOrder.customer_address}, {selectedOrder.customer_city}</p>
-                  {selectedOrder.notes && (
-                    <p>Notes: {selectedOrder.notes}</p>
-                  )}
-                </div>
+        {/* Animated Modal (Order Details) - FIXED VERSION */}
+        <AnimatePresence>
+          {selectedOrder && (
+            <motion.div
+              key={`order-modal-${selectedOrder.id}`}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {/* overlay */}
+              <motion.div
+                className="absolute inset-0 bg-black/50"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.18 }}
+                onClick={() => setSelectedOrder(null)}
+              />
 
-                <div>
-                  <h3 className="font-semibold">Order Items</h3>
-                  <div className="space-y-2">
-                    {selectedOrder.items.map((item, index) => (
-                      <div key={index} className="flex justify-between">
-                        <span>{item.name} x {item.quantity}</span>
-                        <span>{formatPrice(item.price * item.quantity)}</span>
+              {/* modal */}
+              <motion.div
+                className="relative max-w-2xl w-full bg-background rounded-lg shadow-lg"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby={`order-title-${selectedOrder.id}`}
+                ref={modalRef}
+                tabIndex={-1}
+                onClick={(e) => e.stopPropagation()}
+                initial={{ y: 12, opacity: 0, scale: 0.995 }}
+                animate={{ y: 0, opacity: 1, scale: 1 }}
+                exit={{ y: 12, opacity: 0, scale: 0.995 }}
+                transition={{ duration: 0.22 }}
+              >
+                <Card className="border-0 shadow-none">
+                  <CardHeader className="flex-row items-center justify-between pb-3 space-y-0">
+                    <CardTitle id={`order-title-${selectedOrder.id}`} className="text-lg">
+                      Order #{selectedOrder.id} Details
+                    </CardTitle>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 w-8 p-0 hover:bg-muted"
+                      onClick={() => setSelectedOrder(null)}
+                      aria-label="Close order details"
+                    >
+                      <span className="text-2xl leading-none">×</span>
+                    </Button>
+                  </CardHeader>
+                  <CardContent className="space-y-4 max-h-[calc(80vh-100px)] overflow-y-auto px-6">
+                    <div>
+                      <h3 className="font-semibold mb-2">Customer Information</h3>
+                      <div className="space-y-1 text-sm">
+                        <p><span className="font-medium">Name:</span> {selectedOrder.customer_name}</p>
+                        <p><span className="font-medium">Phone:</span> {selectedOrder.customer_phone}</p>
+                        {selectedOrder.customer_email && (
+                          <p><span className="font-medium">Email:</span> {selectedOrder.customer_email}</p>
+                        )}
+                        <p><span className="font-medium">Address:</span> {selectedOrder.customer_address}, {selectedOrder.customer_city}</p>
+                        {selectedOrder.notes && (
+                          <p><span className="font-medium">Notes:</span> {selectedOrder.notes}</p>
+                        )}
                       </div>
-                    ))}
-                  </div>
-                  <div className="border-t pt-2 mt-2">
-                    <div className="flex justify-between font-semibold">
-                      <span>Total</span>
-                      <span>{formatPrice(selectedOrder.total_amount)}</span>
                     </div>
-                  </div>
-                </div>
 
-                <div>
-                  <h3 className="font-semibold">Order Status</h3>
-                  <Select
-                    value={selectedOrder.status}
-                    onValueChange={(value: Order['status']) => {
-                      handleStatusUpdate(selectedOrder.id, value);
-                      setSelectedOrder({...selectedOrder, status: value});
-                    }}
-                  >
-                    <SelectTrigger className="w-full">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="pending">{t('admin.pending')}</SelectItem>
-                      <SelectItem value="processing">{t('admin.processing')}</SelectItem>
-                      <SelectItem value="shipped">{t('admin.shipped')}</SelectItem>
-                      <SelectItem value="delivered">{t('admin.delivered')}</SelectItem>
-                      <SelectItem value="cancelled">{t('admin.cancelled')}</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
+                    <div>
+                      <h3 className="font-semibold mb-2">Order Items</h3>
+                      <div className="space-y-2">
+                        {selectedOrder.items.map((item, index) => (
+                          <div key={index} className="flex justify-between text-sm py-1">
+                            <span>{item.name} × {item.quantity}</span>
+                            <span className="font-medium">{formatPrice(item.price * item.quantity)}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="border-t pt-2 mt-2">
+                        <div className="flex justify-between font-semibold">
+                          <span>Total</span>
+                          <span>{formatPrice(selectedOrder.total_amount)}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="font-semibold mb-2">Order Status</h3>
+                      <Select
+                        value={selectedOrder.status}
+                        onValueChange={(value: Order['status']) => {
+                          handleStatusUpdate(selectedOrder.id, value);
+                          setSelectedOrder({ ...selectedOrder, status: value });
+                        }}
+                      >
+                        <SelectTrigger className="w-full">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="pending">{t('admin.pending')}</SelectItem>
+                          <SelectItem value="processing">{t('admin.processing')}</SelectItem>
+                          <SelectItem value="shipped">{t('admin.shipped')}</SelectItem>
+                          <SelectItem value="delivered">{t('admin.delivered')}</SelectItem>
+                          <SelectItem value="cancelled">{t('admin.cancelled')}</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
