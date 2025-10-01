@@ -79,7 +79,7 @@ const Header = () => {
             <div className="flex items-center space-x-4">
               <Link to="/" className="flex items-center space-x-2 rtl:space-x-reverse">
                 <img
-                  src="/src/assets/logo.png"
+                  src="https://www.alhassaniya.com/logo.png"
                   alt="Coopérative Al-Hassania"
                   className="h-16 md:h-20 lg:h-24 w-auto transition-all duration-500 drop-shadow-lg"
                 />
