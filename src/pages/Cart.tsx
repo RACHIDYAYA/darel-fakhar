@@ -11,12 +11,14 @@ import { useCart } from "@/contexts/CartContext";
 import { useOrders } from "@/hooks/useOrders";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Cart = () => {
   const { items: cartItems, updateQuantity, removeItem, clearCart, getTotalPrice } = useCart();
   const { createOrder } = useOrders();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   
   const [customerInfo, setCustomerInfo] = useState({
     name: "",
@@ -46,8 +48,8 @@ const Cart = () => {
     
     if (!customerInfo.name || !customerInfo.phone || !customerInfo.address || !customerInfo.city) {
       toast({
-        title: "خطأ",
-        description: "يرجى ملء جميع الحقول المطلوبة",
+        title: t('common.error'),
+        description: t('checkout.requiredFields'),
         variant: "destructive",
       });
       return;
@@ -77,16 +79,16 @@ const Cart = () => {
       clearCart();
       
       toast({
-        title: "تم إرسال الطلب بنجاح!",
-        description: "سنتواصل معكم قريباً لتأكيد الطلب",
+        title: t('cart.orderSuccess'),
+        description: t('cart.orderSuccessDescription'),
       });
 
       navigate('/');
     } catch (error) {
       console.error('Error creating order:', error);
       toast({
-        title: "خطأ في إرسال الطلب",
-        description: "حاول مرة أخرى لاحقاً",
+        title: t('cart.orderError'),
+        description: t('cart.orderErrorDescription'),
         variant: "destructive",
       });
     } finally {
@@ -99,24 +101,24 @@ const Cart = () => {
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-pottery-bronze mb-2">سلة التسوق</h1>
-          <p className="text-pottery-bronze/80">مراجعة طلبكم وإتمام عملية الشراء</p>
+          <h1 className="text-3xl font-bold text-pottery-bronze mb-2">{t('cart.title')}</h1>
+          <p className="text-pottery-bronze/80">{t('cart.reviewOrder')}</p>
         </div>
 
         {cartItems.length === 0 ? (
           <div className="text-center py-16">
             <ShoppingBag className="w-24 h-24 mx-auto text-pottery-cream mb-6" />
             <h2 className="text-2xl font-bold text-pottery-bronze mb-4">
-              السلة فارغة
+              {t('cart.empty')}
             </h2>
             <p className="text-pottery-bronze/60 mb-6">
-              لم تقم بإضافة أي منتجات إلى السلة بعد
+              {t('cart.emptyDescription')}
             </p>
             <Button 
               className="bg-pottery-gold text-pottery-bronze hover:bg-pottery-gold/90"
               onClick={() => window.location.href = "/shop"}
             >
-              تصفح المنتجات
+              {t('cart.browseProducts')}
             </Button>
           </div>
         ) : (
@@ -125,7 +127,7 @@ const Cart = () => {
             <div className="lg:col-span-2">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-pottery-bronze">المنتجات ({cartItems.length})</CardTitle>
+                  <CardTitle className="text-pottery-bronze">{t('cart.products')} ({cartItems.length})</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-6">
@@ -170,7 +172,7 @@ const Cart = () => {
                             
                             <div className="flex items-center gap-4">
                               <span className="font-bold text-pottery-gold">
-                                {(item.product.sale_price || item.product.price) * item.quantity} درهم
+                                {(item.product.sale_price || item.product.price) * item.quantity} {t('common.dh')}
                               </span>
                               <Button
                                 variant="ghost"
@@ -195,29 +197,29 @@ const Cart = () => {
               {/* Order Summary */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-pottery-bronze">ملخص الطلب</CardTitle>
+                  <CardTitle className="text-pottery-bronze">{t('cart.orderSummary')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-pottery-bronze/80">المجموع الفرعي:</span>
-                      <span className="font-medium">{subtotal} درهم</span>
+                      <span className="text-pottery-bronze/80">{t('cart.subtotal')}:</span>
+                      <span className="font-medium">{subtotal} {t('common.dh')}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-pottery-bronze/80">الشحن:</span>
+                      <span className="text-pottery-bronze/80">{t('cart.shipping')}:</span>
                       <span className="font-medium">
-                        {shipping === 0 ? "مجاني" : `${shipping} درهم`}
+                        {shipping === 0 ? t('cart.free') : `${shipping} ${t('common.dh')}`}
                       </span>
                     </div>
                     {shipping === 0 && (
                       <p className="text-sm text-green-600">
-                        🎉 شحن مجاني للطلبات أكثر من 500 درهم
+                        🎉 {t('cart.freeShippingOver')} 500 {t('common.dh')}
                       </p>
                     )}
                     <Separator />
                     <div className="flex justify-between text-lg font-bold">
-                      <span>المجموع الكلي:</span>
-                      <span className="text-pottery-gold">{total} درهم</span>
+                      <span>{t('cart.total')}:</span>
+                      <span className="text-pottery-gold">{total} {t('common.dh')}</span>
                     </div>
                   </div>
                 </CardContent>
@@ -226,74 +228,74 @@ const Cart = () => {
               {/* Customer Information */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-pottery-bronze">معلومات التسليم</CardTitle>
+                  <CardTitle className="text-pottery-bronze">{t('checkout.deliveryInfo')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmitOrder} className="space-y-4">
                     <div>
-                      <Label htmlFor="name">الاسم الكامل *</Label>
+                      <Label htmlFor="name">{t('checkout.name')} *</Label>
                       <Input
                         id="name"
                         value={customerInfo.name}
                         onChange={(e) => setCustomerInfo({...customerInfo, name: e.target.value})}
                         required
-                        placeholder="أدخل اسمك الكامل"
+                        placeholder={t('checkout.namePlaceholder')}
                       />
                     </div>
                     
                     <div>
-                      <Label htmlFor="phone">رقم الهاتف *</Label>
+                      <Label htmlFor="phone">{t('checkout.phone')} *</Label>
                       <Input
                         id="phone"
                         type="tel"
                         value={customerInfo.phone}
                         onChange={(e) => setCustomerInfo({...customerInfo, phone: e.target.value})}
                         required
-                        placeholder="06XXXXXXXX"
+                        placeholder={t('checkout.phonePlaceholder')}
                       />
                     </div>
                     
                     <div>
-                      <Label htmlFor="email">البريد الإلكتروني</Label>
+                      <Label htmlFor="email">{t('checkout.email')}</Label>
                       <Input
                         id="email"
                         type="email"
                         value={customerInfo.email}
                         onChange={(e) => setCustomerInfo({...customerInfo, email: e.target.value})}
-                        placeholder="example@email.com"
+                        placeholder={t('checkout.emailPlaceholder')}
                       />
                     </div>
                     
                     <div>
-                      <Label htmlFor="city">المدينة *</Label>
+                      <Label htmlFor="city">{t('checkout.city')} *</Label>
                       <Input
                         id="city"
                         value={customerInfo.city}
                         onChange={(e) => setCustomerInfo({...customerInfo, city: e.target.value})}
                         required
-                        placeholder="مثال: الرباط، الدار البيضاء..."
+                        placeholder={t('checkout.cityPlaceholder')}
                       />
                     </div>
                     
                     <div>
-                      <Label htmlFor="address">العنوان الكامل *</Label>
+                      <Label htmlFor="address">{t('checkout.fullAddress')} *</Label>
                       <Textarea
                         id="address"
                         value={customerInfo.address}
                         onChange={(e) => setCustomerInfo({...customerInfo, address: e.target.value})}
                         required
-                        placeholder="الحي، الزنقة، رقم المنزل..."
+                        placeholder={t('checkout.addressPlaceholder')}
                         rows={3}
                       />
                     </div>
                     
                     <div>
-                      <Label htmlFor="notes">ملاحظات إضافية</Label>
+                      <Label htmlFor="notes">{t('checkout.notes')}</Label>
                       <Textarea
                         id="notes"
                         value={customerInfo.notes}
                         onChange={(e) => setCustomerInfo({...customerInfo, notes: e.target.value})}
-                        placeholder="أي تفاصيل إضافية للطلب..."
+                        placeholder={t('checkout.notesPlaceholder')}
                         rows={2}
                       />
                     </div>
@@ -304,7 +306,7 @@ const Cart = () => {
                       size="lg"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? "جار إرسال الطلب..." : "تأكيد الطلب"}
+                      {isSubmitting ? t('cart.submittingOrder') : t('checkout.submitOrder')}
                       <ArrowRight className="w-5 h-5 mr-2" />
                     </Button>
                   </form>

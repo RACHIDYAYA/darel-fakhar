@@ -7,10 +7,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { useProducts } from "@/hooks/useProducts";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "react-i18next";
 
 const Shop = () => {
   const { products, categories, loading } = useProducts();
   const { language } = useLanguage();
+  const { t } = useTranslation();
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
   const [priceRange, setPriceRange] = useState([100, 500]);
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -18,7 +20,7 @@ const Shop = () => {
   const [viewMode, setViewMode] = useState("grid");
 
   const categoryOptions = [
-    { value: "all", labelAr: "جميع المنتجات", labelEn: "All Products" },
+    { value: "all", labelAr: t('common.allProducts'), labelEn: t('common.allProducts') },
     ...categories.map(cat => ({
       value: cat.slug || cat.id.toString(),
       labelAr: cat.name_ar,
@@ -83,7 +85,7 @@ const Shop = () => {
       <div className="min-h-screen bg-background">
         <main className="max-w-6xl mx-auto px-4 py-8">
           <div className="flex items-center justify-center min-h-[400px]">
-            <div className="text-pottery-bronze">جاري تحميل المنتجات...</div>
+            <div className="text-pottery-bronze">{t('common.loadingProducts')}</div>
           </div>
         </main>
       </div>
@@ -96,8 +98,8 @@ const Shop = () => {
       <main className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-pottery-bronze mb-2">متجر الفخار</h1>
-          <p className="text-pottery-bronze/80">اكتشف مجموعتنا الكاملة من الفخار المغربي الأصيل</p>
+          <h1 className="text-4xl font-bold text-pottery-bronze mb-2">{t('shop.title')}</h1>
+          <p className="text-pottery-bronze/80">{t('shop.description')}</p>
         </div>
 
         {/* Filters */}
@@ -106,16 +108,16 @@ const Shop = () => {
             {/* Category Filter */}
             <div>
               <label className="block text-sm font-medium text-pottery-bronze mb-2">
-                التصنيف
+                {t('common.category')}
               </label>
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                 <SelectTrigger>
-                  <SelectValue placeholder="اختر التصنيف" />
+                  <SelectValue placeholder={t('common.selectCategory')} />
                 </SelectTrigger>
                 <SelectContent>
                   {categoryOptions.map(category => (
                     <SelectItem key={category.value} value={category.value}>
-                      {category.labelAr}
+                      {language === 'ar' ? category.labelAr : category.labelEn}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -125,7 +127,7 @@ const Shop = () => {
             {/* Price Range */}
             <div>
               <label className="block text-sm font-medium text-pottery-bronze mb-2">
-                السعر: {priceRange[0]} - {priceRange[1]} درهم
+                {t('common.priceRange')}: {priceRange[0]} - {priceRange[1]} {t('common.dh')}
               </label>
               <Slider
                 value={priceRange}
@@ -140,16 +142,16 @@ const Shop = () => {
             {/* Sort */}
             <div>
               <label className="block text-sm font-medium text-pottery-bronze mb-2">
-                ترتيب حسب
+                {t('common.sortBy')}
               </label>
               <Select value={sortBy} onValueChange={setSortBy}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="newest">الأحدث</SelectItem>
-                  <SelectItem value="price-low">السعر: الأقل إلى الأعلى</SelectItem>
-                  <SelectItem value="price-high">السعر: الأعلى إلى الأقل</SelectItem>
+                  <SelectItem value="newest">{t('common.newest')}</SelectItem>
+                  <SelectItem value="price-low">{t('common.priceLow')}</SelectItem>
+                  <SelectItem value="price-high">{t('common.priceHigh')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -161,7 +163,7 @@ const Shop = () => {
                 className="w-full bg-pottery-gold text-pottery-bronze hover:bg-pottery-gold/90"
               >
                 <Filter className="w-4 h-4 mr-2" />
-                تطبيق الفلاتر
+                {t('common.applyFilters')}
               </Button>
             </div>
           </div>
@@ -170,7 +172,7 @@ const Shop = () => {
         {/* View Mode & Results */}
         <div className="flex justify-between items-center mb-6">
           <p className="text-pottery-bronze">
-            عرض {filteredProducts.length} من أصل {products.length} منتج
+            {t('common.showingProducts', { count: filteredProducts.length, total: products.length }).replace('{count}', filteredProducts.length.toString()).replace('{total}', products.length.toString())}
           </p>
           
           <div className="flex items-center gap-2">
@@ -210,7 +212,7 @@ const Shop = () => {
         {filteredProducts.length === 0 && (
           <div className="text-center py-16  ">
             <p className="text-pottery-bronze/60 text-lg grid gap-6 grid-cols-1 md:grid-cols-3">
-              لا توجد منتجات تطابق المعايير المحددة
+              {t('common.noProducts')}
             </p>
             <Button onClick={() => {
               setSelectedCategory("all");
@@ -218,7 +220,7 @@ const Shop = () => {
               setSortBy("newest");
               applyFilters();
             }}>
-              إعادة تعيين الفلاتر
+              {t('common.resetFilters')}
             </Button>
           </div>
         )}

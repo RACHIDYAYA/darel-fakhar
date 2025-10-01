@@ -44,26 +44,47 @@
   "cart": {
     "title": "Shopping Cart",
     "empty": "Your cart is empty",
+    "emptyDescription": "You haven't added any products to your cart yet",
     "continueShopping": "Continue Shopping",
+    "browseProducts": "Browse Products",
     "subtotal": "Subtotal",
     "shipping": "Shipping",
     "total": "Total",
     "checkout": "Checkout",
     "remove": "Remove",
-    "updateQuantity": "Update Quantity"
+    "updateQuantity": "Update Quantity",
+    "products": "Products",
+    "orderSummary": "Order Summary",
+    "freeShippingOver": "Free shipping on orders over",
+    "submittingOrder": "Submitting order...",
+    "orderSuccess": "Order submitted successfully!",
+    "orderSuccessDescription": "We will contact you soon to confirm your order",
+    "orderError": "Error submitting order",
+    "orderErrorDescription": "Please try again later",
+    "reviewOrder": "Review your order and complete purchase",
+    "free": "Free"
   },
   "checkout": {
     "title": "Delivery Information",
     "customerInfo": "Customer Information",
+    "deliveryInfo": "Delivery Information",
     "name": "Full Name",
     "phone": "Phone Number",
     "email": "Email Address",
     "city": "City",
     "address": "Detailed Address",
+    "fullAddress": "Full Address",
     "notes": "Additional Notes",
     "submitOrder": "Submit Order",
     "paymentMethod": "Payment Method",
-    "cashOnDelivery": "Cash on Delivery"
+    "cashOnDelivery": "Cash on Delivery",
+    "namePlaceholder": "Enter your full name",
+    "phonePlaceholder": "06XXXXXXXX",
+    "emailPlaceholder": "example@email.com",
+    "cityPlaceholder": "Example: Rabat, Casablanca...",
+    "addressPlaceholder": "Neighborhood, street, building number...",
+    "notesPlaceholder": "Any additional details for your order...",
+    "requiredFields": "Please fill in all required fields"
   },
   "admin": {
     "title": "Admin Panel",
@@ -96,6 +117,7 @@
   },
   "common": {
     "loading": "Loading...",
+    "loadingProducts": "Loading products...",
     "error": "An error occurred",
     "success": "Success",
     "cancel": "Cancel",
@@ -109,6 +131,7 @@
     "search": "Search",
     "filter": "Filter",
     "sort": "Sort",
+    "sortBy": "Sort By",
     "newest": "Newest",
     "oldest": "Oldest",
     "priceHigh": "Price High to Low",
@@ -116,7 +139,20 @@
     "popular": "Most Popular",
     "featured": "Featured",
     "freeShipping": "Free Shipping",
-    "bannerText": "Authentic ceramics and tiles from Al-Hassania Cooperative 🏺✨ Quality in your hands... Contact us: 0656861536"
+    "bannerText": "Authentic ceramics and tiles from Al-Hassania Cooperative 🏺✨ Quality in your hands... Contact us: 0656861536",
+    "allProducts": "All Products",
+    "category": "Category",
+    "selectCategory": "Select Category",
+    "priceRange": "Price Range",
+    "applyFilters": "Apply Filters",
+    "showingProducts": "Showing {count} of {total} products",
+    "noProducts": "No products match the selected criteria",
+    "resetFilters": "Reset Filters",
+    "dh": "DH"
+  },
+  "shop": {
+    "title": "Pottery Shop",
+    "description": "Discover our complete collection of authentic Moroccan pottery"
   },
   "footer": {
     "title": "Traditional Pottery in Safi",

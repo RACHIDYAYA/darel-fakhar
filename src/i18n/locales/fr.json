@@ -44,26 +44,47 @@
   "cart": {
     "title": "Panier d'Achat",
     "empty": "Votre panier est vide",
+    "emptyDescription": "Vous n'avez pas encore ajouté de produits à votre panier",
     "continueShopping": "Continuer les Achats",
+    "browseProducts": "Parcourir les Produits",
     "subtotal": "Sous-total",
     "shipping": "Expédition",
     "total": "Total",
     "checkout": "Commander",
     "remove": "Supprimer",
-    "updateQuantity": "Mettre à Jour la Quantité"
+    "updateQuantity": "Mettre à Jour la Quantité",
+    "products": "Produits",
+    "orderSummary": "Résumé de la Commande",
+    "freeShippingOver": "Livraison gratuite pour les commandes de plus de",
+    "submittingOrder": "Envoi de la commande...",
+    "orderSuccess": "Commande envoyée avec succès!",
+    "orderSuccessDescription": "Nous vous contacterons bientôt pour confirmer votre commande",
+    "orderError": "Erreur lors de l'envoi de la commande",
+    "orderErrorDescription": "Veuillez réessayer plus tard",
+    "reviewOrder": "Vérifiez votre commande et finalisez l'achat",
+    "free": "Gratuit"
   },
   "checkout": {
     "title": "Informations de Livraison",
     "customerInfo": "Informations Client",
+    "deliveryInfo": "Informations de Livraison",
     "name": "Nom Complet",
     "phone": "Numéro de Téléphone",
     "email": "Adresse Email",
     "city": "Ville",
     "address": "Adresse Détaillée",
+    "fullAddress": "Adresse Complète",
     "notes": "Notes Supplémentaires",
     "submitOrder": "Soumettre la Commande",
     "paymentMethod": "Méthode de Paiement",
-    "cashOnDelivery": "Paiement à la Livraison"
+    "cashOnDelivery": "Paiement à la Livraison",
+    "namePlaceholder": "Entrez votre nom complet",
+    "phonePlaceholder": "06XXXXXXXX",
+    "emailPlaceholder": "exemple@email.com",
+    "cityPlaceholder": "Exemple: Rabat, Casablanca...",
+    "addressPlaceholder": "Quartier, rue, numéro...",
+    "notesPlaceholder": "Détails supplémentaires pour votre commande...",
+    "requiredFields": "Veuillez remplir tous les champs obligatoires"
   },
   "admin": {
     "title": "Panneau d'Administration",
@@ -96,6 +117,7 @@
   },
   "common": {
     "loading": "Chargement...",
+    "loadingProducts": "Chargement des produits...",
     "error": "Une erreur s'est produite",
     "success": "Succès",
     "cancel": "Annuler",
@@ -109,6 +131,7 @@
     "search": "Rechercher",
     "filter": "Filtrer",
     "sort": "Trier",
+    "sortBy": "Trier par",
     "newest": "Plus Récent",
     "oldest": "Plus Ancien",
     "priceHigh": "Prix Décroissant",
@@ -116,7 +139,20 @@
     "popular": "Plus Populaire",
     "featured": "En Vedette",
     "freeShipping": "Livraison Gratuite",
-    "bannerText": "Céramiques et carreaux authentiques de la Coopérative Al-Hassania 🏺✨ La qualité entre vos mains... Contactez-nous: 0656861536"
+    "bannerText": "Céramiques et carreaux authentiques de la Coopérative Al-Hassania 🏺✨ La qualité entre vos mains... Contactez-nous: 0656861536",
+    "allProducts": "Tous les Produits",
+    "category": "Catégorie",
+    "selectCategory": "Sélectionner une Catégorie",
+    "priceRange": "Fourchette de Prix",
+    "applyFilters": "Appliquer les Filtres",
+    "showingProducts": "Affichage de {count} sur {total} produits",
+    "noProducts": "Aucun produit ne correspond aux critères sélectionnés",
+    "resetFilters": "Réinitialiser les Filtres",
+    "dh": "DH"
+  },
+  "shop": {
+    "title": "Boutique de Poterie",
+    "description": "Découvrez notre collection complète de poterie marocaine authentique"
   },
   "footer": {
     "title": "Poterie Traditionnelle à Safi",
