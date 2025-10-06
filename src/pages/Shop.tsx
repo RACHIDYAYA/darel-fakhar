@@ -37,6 +37,7 @@ const Shop = () => {
       originalPrice: product.price,
       salePrice: product.sale_price || product.price,
       category: product.category_id?.toString() || "general",
+      stock: product.stock,
       isNew: new Date(product.created_at) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) // Products created in last 7 days
     }));
   };

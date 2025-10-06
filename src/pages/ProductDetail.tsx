@@ -153,9 +153,9 @@ const ProductDetail = () => {
 
               {/* Stock Status */}
               <div className="mb-6">
-                {product.stock_quantity > 0 ? (
+                {product.stock > 0 ? (
                   <Badge variant="secondary" className="bg-green-100 text-green-800">
-                    متوفر في المخزون ({product.stock_quantity} قطعة)
+                    متوفر في المخزون ({product.stock} قطعة)
                   </Badge>
                 ) : (
                   <Badge variant="destructive">
@@ -197,7 +197,7 @@ const ProductDetail = () => {
                 <Button 
                   size="lg" 
                   className="flex-1 bg-pottery-gold hover:bg-pottery-gold/90 text-pottery-bronze"
-                  disabled={product.stock_quantity === 0}
+                  disabled={product.stock === 0}
                   onClick={handleAddToCart}
                 >
                   <ShoppingCart className="w-5 h-5 mr-2" />
