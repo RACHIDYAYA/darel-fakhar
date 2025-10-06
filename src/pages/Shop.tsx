@@ -8,6 +8,8 @@ import { Slider } from "@/components/ui/slider";
 import { useProducts } from "@/hooks/useProducts";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "react-i18next";
+import SEOHead from "@/components/SEOHead";
+import { createBreadcrumbSchema } from "@/utils/structuredData";
 
 const Shop = () => {
   const { products, categories, loading } = useProducts();
@@ -18,6 +20,11 @@ const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("newest");
   const [viewMode, setViewMode] = useState("grid");
+
+  const breadcrumbData = createBreadcrumbSchema([
+    { name: "Home", url: "https://www.alhassaniya.com/" },
+    { name: "Shop", url: "https://www.alhassaniya.com/shop" }
+  ]);
 
   const categoryOptions = [
     { value: "all", labelAr: t('common.allProducts'), labelEn: t('common.allProducts') },
@@ -95,7 +102,13 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen bg-background">
-  
+      <SEOHead 
+        title="Shop Moroccan Pottery | دار الفخار - Dar El Fakhar"
+        description={`Browse ${products.length}+ authentic Moroccan pottery items. Handcrafted ceramics, tagines, cups, and decorative pieces from Safi artisans. Free shipping on orders over 500 MAD.`}
+        keywords="buy moroccan pottery, shop ceramics online, tagine sale, pottery shop, فخار للبيع, Safi pottery"
+        url="https://www.alhassaniya.com/shop"
+        structuredData={breadcrumbData}
+      />
       <main className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="text-center mb-8">

@@ -61,7 +61,11 @@ const HeroSlider = () => {
                 {/* Background */}
                 <img
                   src={slide.image}
-                  alt={slide.titleEn}
+                  alt={`${slide.titleEn} - ${slide.descriptionEn}`}
+                  width="1920"
+                  height="1080"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  fetchPriority={index === 0 ? "high" : "auto"}
                   className="w-full h-full object-cover"
                 />
 

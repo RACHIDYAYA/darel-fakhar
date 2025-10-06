@@ -8,10 +8,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEOHead from "@/components/SEOHead";
+import { createBreadcrumbSchema } from "@/utils/structuredData";
 
 const Contact = () => {
   const { t } = useTranslation();
   const { isRTL } = useLanguage();
+  
+  const breadcrumbData = createBreadcrumbSchema([
+    { name: "Home", url: "https://www.alhassaniya.com/" },
+    { name: "Contact", url: "https://www.alhassaniya.com/contact" }
+  ]);
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -35,7 +43,13 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
-    
+      <SEOHead 
+        title="Contact Us - Get in Touch | Dar El Fakhar Moroccan Pottery"
+        description="Contact التعاونية الحسنية for wholesale pottery orders, custom designs, or inquiries. Located in Safi, Morocco. Phone: +212 656-861536"
+        keywords="contact moroccan pottery, wholesale pottery safi, pottery orders morocco, dar el fakhar contact"
+        url="https://www.alhassaniya.com/contact"
+        structuredData={breadcrumbData}
+      />
       <main className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="text-center mb-12">

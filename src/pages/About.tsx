@@ -2,9 +2,16 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
 import { ShieldCheck, Package, Layers, Compass } from "lucide-react";
+import SEOHead from "@/components/SEOHead";
+import { organizationSchema, createBreadcrumbSchema } from "@/utils/structuredData";
 
 const About = () => {
   const { t } = useTranslation();
+
+  const breadcrumbData = createBreadcrumbSchema([
+    { name: "Home", url: "https://www.alhassaniya.com/" },
+    { name: "About", url: "https://www.alhassaniya.com/about" }
+  ]);
 
   const features = [
     {
@@ -31,7 +38,13 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-background">
- 
+      <SEOHead 
+        title="About Us - Traditional Moroccan Pottery Cooperative | Dar El Fakhar"
+        description="Learn about التعاونية الحسنية (Hassaniya Cooperative) - master artisans crafting authentic Moroccan pottery in Safi for over 30 years. Quality, tradition, and craftsmanship."
+        keywords="about moroccan pottery, Safi artisans, pottery cooperative, hassaniya cooperative, traditional crafts morocco"
+        url="https://www.alhassaniya.com/about"
+        structuredData={breadcrumbData}
+      />
       <main className="container mx-auto px-4 py-12">
         <section className="mx-auto max-w-4xl">
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-gold bg-clip-text text-transparent">
