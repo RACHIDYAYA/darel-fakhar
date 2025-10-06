@@ -13,6 +13,7 @@ interface ProductCardProps {
   originalPrice?: number;
   salePrice: number;
   currency?: string;
+  stock?: number;
 }
 
 const ProductCard = ({
@@ -22,7 +23,8 @@ const ProductCard = ({
   titleEn,
   originalPrice,
   salePrice,
-  currency = "درهم مغربي"
+  currency = "درهم مغربي",
+  stock = 10
 }: ProductCardProps) => {
   const { addItem } = useCart();
   const navigate = useNavigate();
@@ -44,7 +46,7 @@ const ProductCard = ({
       sale_price: originalPrice,
       category: "pottery", // Default category
       images: [image],
-      stock: 10, // Default stock
+      stock: stock,
       is_active: true,
       is_featured: false,
       created_at: new Date().toISOString(),

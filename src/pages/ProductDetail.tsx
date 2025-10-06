@@ -1,49 +1,82 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Heart, ShoppingCart, Share2, Star, Minus, Plus } from "lucide-react";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-
-const productData = {
-  1: {
-    id: 1,
-    images: [
-      "/Rachid-uploads/cf5dc12d-0ea8-437f-9528-9a769ef50c7c.png",
-      "/Rachid-uploads/2b978a57-b4a7-4615-9a36-249f4c3025d4.png",
-      "/Rachid-uploads/04547d10-8399-43ea-a3b9-ad8250873915.png",
-    ],
-    titleAr: "مجموعة أطقم شاي سيراميك ملونة",
-    titleEn: "Colorful Ceramic Tea Sets Collection",
-    originalPrice: 350,
-    salePrice: 280,
-    descriptionAr: "مجموعة رائعة من أطقم الشاي السيراميك المصنوعة يدوياً بأجود المواد الطبيعية. تتميز بألوانها الزاهية ونقوشها التقليدية المغربية الأصيلة. مناسبة لجميع المناسبات والاستقبالات.",
-    descriptionEn: "Exquisite collection of handcrafted ceramic tea sets made from the finest natural materials. Features vibrant colors and authentic Moroccan traditional patterns. Perfect for all occasions and receptions.",
-    specifications: {
-      material: "سيراميك طبيعي",
-      size: "طقم من 6 قطع",
-      origin: "صناعة مغربية يدوية",
-      care: "يُنظف بالماء الدافئ والصابون",
-    },
-    rating: 4.8,
-    reviews: 24,
-    inStock: true,
-    category: "أطقم الشاي",
-  }
-};
+import { useProducts } from "@/hooks/useProducts";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/hooks/use-toast";
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { language } = useLanguage();
+  const { getProductById, categories } = useProducts();
+  const { addItem } = useCart();
+  const { toast } = useToast();
+  
+  const [product, setProduct] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
 
-  const product = productData[parseInt(id as string) || 1] || productData[1];
+  useEffect(() => {
+    const fetchProduct = async () => {
+      if (!id) return;
+      setLoading(true);
+      const data = await getProductById(parseInt(id));
+      setProduct(data);
+      setLoading(false);
+    };
+    fetchProduct();
+  }, [id]);
 
-  const discount = product.salePrice 
-    ? Math.round(((product.originalPrice - product.salePrice) / product.originalPrice) * 100)
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <main className="container mx-auto px-4 py-8">
+          <div className="flex items-center justify-center min-h-[400px]">
+            <div className="text-pottery-bronze">جاري التحميل...</div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="min-h-screen bg-background">
+        <main className="container mx-auto px-4 py-8">
+          <div className="text-center py-16">
+            <h2 className="text-2xl font-bold text-pottery-bronze mb-4">المنتج غير موجود</h2>
+            <Button onClick={() => navigate('/shop')}>العودة للمتجر</Button>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  const images = product.images && product.images.length > 0 
+    ? product.images 
+    : ["/Rachid-uploads/cf5dc12d-0ea8-437f-9528-9a769ef50c7c.png"];
+
+  const discount = product.sale_price 
+    ? Math.round(((product.price - product.sale_price) / product.price) * 100)
     : 0;
+
+  const categoryName = categories.find(cat => cat.id === product.category_id);
+
+  const handleAddToCart = () => {
+    addItem(product, quantity);
+    toast({
+      title: "تمت الإضافة للسلة",
+      description: `تم إضافة ${quantity} من ${language === 'ar' ? product.name_ar : product.name_en}`,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -54,10 +87,10 @@ const ProductDetail = () => {
           {/* Product Images */}
           <div>
             {/* Main Image */}
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <img
-                src={product.images[selectedImage]}
-                alt={product.titleEn}
+                src={images[selectedImage]}
+                alt={language === 'ar' ? product.name_ar : product.name_en}
                 className="w-full h-96 lg:h-[500px] object-cover rounded-lg shadow-pottery"
               />
               {discount > 0 && (
@@ -69,7 +102,7 @@ const ProductDetail = () => {
 
             {/* Thumbnail Images */}
             <div className="flex gap-2 overflow-x-auto">
-              {product.images.map((image, index) => (
+              {images.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
@@ -81,7 +114,7 @@ const ProductDetail = () => {
                 >
                   <img
                     src={image}
-                    alt={`${product.titleEn} ${index + 1}`}
+                    alt={`${language === 'ar' ? product.name_ar : product.name_en} ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
                 </button>
@@ -92,52 +125,37 @@ const ProductDetail = () => {
           {/* Product Details */}
           <div>
             <div className="mb-6">
-              <Badge variant="secondary" className="mb-2">
-                {product.category}
-              </Badge>
+              {categoryName && (
+                <Badge variant="secondary" className="mb-2">
+                  {language === 'ar' ? categoryName.name_ar : categoryName.name_en}
+                </Badge>
+              )}
               <h1 className="text-3xl font-bold text-pottery-bronze mb-2">
-                {product.titleEn}
+                {language === 'ar' ? product.name_ar : product.name_en}
               </h1>
-              <h2 className="text-xl text-pottery-bronze/80 mb-4" dir="rtl">
-                {product.titleAr}
-              </h2>
-
-              {/* Rating */}
-              <div className="flex items-center gap-2 mb-4">
-                <div className="flex">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${
-                        i < Math.floor(product.rating)
-                          ? "fill-pottery-gold text-pottery-gold"
-                          : "text-pottery-cream"
-                      }`}
-                    />
-                  ))}
-                </div>
-                <span className="text-sm text-pottery-bronze/60">
-                  {product.rating} ({product.reviews} تقييم)
-                </span>
-              </div>
+              {language === 'en' && (
+                <h2 className="text-xl text-pottery-bronze/80 mb-4" dir="rtl">
+                  {product.name_ar}
+                </h2>
+              )}
 
               {/* Price */}
               <div className="flex items-center gap-4 mb-6">
                 <span className="text-3xl font-bold text-pottery-gold">
-                  {product.salePrice || product.originalPrice} درهم
+                  {product.sale_price || product.price} درهم
                 </span>
-                {product.salePrice && (
+                {product.sale_price && (
                   <span className="text-lg text-pottery-bronze/50 line-through">
-                    {product.originalPrice} درهم
+                    {product.price} درهم
                   </span>
                 )}
               </div>
 
               {/* Stock Status */}
               <div className="mb-6">
-                {product.inStock ? (
+                {product.stock > 0 ? (
                   <Badge variant="secondary" className="bg-green-100 text-green-800">
-                    متوفر في المخزون
+                    متوفر في المخزون ({product.stock} قطعة)
                   </Badge>
                 ) : (
                   <Badge variant="destructive">
@@ -179,7 +197,8 @@ const ProductDetail = () => {
                 <Button 
                   size="lg" 
                   className="flex-1 bg-pottery-gold hover:bg-pottery-gold/90 text-pottery-bronze"
-                  disabled={!product.inStock}
+                  disabled={product.stock === 0}
+                  onClick={handleAddToCart}
                 >
                   <ShoppingCart className="w-5 h-5 mr-2" />
                   أضف إلى السلة
@@ -211,25 +230,16 @@ const ProductDetail = () => {
             {/* Product Description */}
             <div className="mb-8">
               <h3 className="text-xl font-bold text-pottery-bronze mb-4">وصف المنتج</h3>
-              <p className="text-pottery-bronze/80 mb-4" dir="rtl">
-                {product.descriptionAr}
-              </p>
-              <p className="text-pottery-bronze/60">
-                {product.descriptionEn}
-              </p>
-            </div>
-
-            {/* Specifications */}
-            <div>
-              <h3 className="text-xl font-bold text-pottery-bronze mb-4">المواصفات</h3>
-              <div className="space-y-2">
-                 {Object.entries(product.specifications).map(([key, value]) => (
-                   <div key={key} className="flex justify-between py-2 border-b border-pottery-cream/50">
-                     <span className="text-pottery-bronze/60 capitalize">{key}:</span>
-                     <span className="text-pottery-bronze font-medium">{String(value)}</span>
-                   </div>
-                 ))}
-              </div>
+              {product.description_ar && (
+                <p className="text-pottery-bronze/80 mb-4" dir="rtl">
+                  {product.description_ar}
+                </p>
+              )}
+              {product.description_en && language === 'en' && (
+                <p className="text-pottery-bronze/60">
+                  {product.description_en}
+                </p>
+              )}
             </div>
           </div>
         </div>

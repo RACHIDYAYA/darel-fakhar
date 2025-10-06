@@ -20,6 +20,7 @@ const ProductGrid = () => {
     titleEn: product.name_en,
     originalPrice: product.price,
     salePrice: product.sale_price || product.price,
+    stock: product.stock,
   }));
 
   if (loading) {

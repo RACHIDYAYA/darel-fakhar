@@ -1,0 +1,253 @@
+{
+  "homepage": {
+    "hero": {
+      "headlines": {
+        "short": {
+          "ar": "فخار الحسنية - أصالة وجودة",
+          "darija": "الفخار ديال الحسنية - أصالة وجودة",
+          "en": "Al-Hassania Pottery - Authenticity & Quality",
+          "fr": "Poterie Al-Hassania - Authenticité et Qualité"
+        },
+        "medium": {
+          "ar": "تعاونية الحسنية - صناعة الفخار المغربي التقليدي بأيدي حرفية ماهرة",
+          "darija": "تعاونية الحسنية - صناعة الفخار المغربي التقليدي بيدين حرفية محترفة",
+          "en": "Al-Hassania Cooperative - Traditional Moroccan Pottery Crafted by Skilled Artisans",
+          "fr": "Coopérative Al-Hassania - Poterie Marocaine Traditionnelle Fabriquée par des Artisans Qualifiés"
+        },
+        "long": {
+          "ar": "تعاونية الحسنية للفخار المغربي - حيث تلتقي الأصالة بالجودة العالية، نصنع تحف فنية من الطين تعكس التراث المغربي العريق وتناسب الأذواق العصرية",
+          "darija": "تعاونية الحسنية للفخار المغربي - فين كتلاقي الأصالة مع الجودة العالية، كنصنعو تحف فنية من الطين كتعكس التراث المغربي وكتناسب الذوق العصري",
+          "en": "Al-Hassania Moroccan Pottery Cooperative - Where Authenticity Meets Premium Quality, We Create Clay Masterpieces Reflecting Morocco's Rich Heritage for Modern Tastes",
+          "fr": "Coopérative de Poterie Marocaine Al-Hassania - Où l'Authenticité Rencontre la Qualité Premium, Nous Créons des Chefs-d'œuvre en Argile Reflétant le Riche Patrimoine Marocain pour les Goûts Modernes"
+        }
+      },
+      "description": {
+        "short": {
+          "ar": "منتجات فخارية مغربية أصيلة مصنوعة يدوياً بحرفية عالية، تجمع بين التراث والجودة. مثالية للمنازل والمطاعم والفنادق. شحن دولي متاح.",
+          "darija": "منتجات الفخار المغربي الأصيل مصنوعة باليد بحرفية عالية، كتجمع بين التراث والجودة. زوينة للديور والمطاعم والفنادق. الشحن الدولي متاح.",
+          "en": "Authentic Moroccan pottery handcrafted with premium quality, blending heritage and excellence. Perfect for homes, restaurants, and hotels. International shipping available.",
+          "fr": "Poterie marocaine authentique fabriquée à la main avec une qualité premium, alliant patrimoine et excellence. Parfaite pour maisons, restaurants et hôtels. Expédition internationale disponible."
+        },
+        "detailed": {
+          "ar": "تعاونية الحسنية متخصصة في صناعة الفخار المغربي التقليدي منذ أكثر من 30 عاماً. نقدم مجموعة واسعة من المنتجات الفخارية المصنوعة يدوياً بأيدي حرفيين مهرة، باستخدام تقنيات تقليدية موروثة عبر الأجيال. منتجاتنا تمزج بين الأصالة والجودة العالية، وهي مثالية للاستخدام المنزلي والتجاري. نوفر خدمة الشحن الدولي والبيع بالجملة بأسعار تنافسية للتجار والموردين في جميع أنحاء العالم.",
+          "darija": "تعاونية الحسنية متخصصة في صناعة الفخار المغربي التقليدي من أكتر من 30 عام. كنقدمو مجموعة واسعة ديال المنتجات الفخارية مصنوعة باليد بأيدي حرفيين محترفين، باستخدام تقنيات تقليدية موروثة من جيل لجيل. المنتجات ديالنا كتجمع بين الأصالة والجودة العالية، وزوينة للاستعمال ديال الدار والتجاري. كنوفرو الشحن الدولي والبيع بالجملة بأسعار تنافسية للتجار والموردين في جميع أنحاء العالم.",
+          "en": "Al-Hassania Cooperative has specialized in traditional Moroccan pottery for over 30 years. We offer a wide range of handcrafted pottery products made by skilled artisans using traditional techniques passed down through generations. Our products blend authenticity with premium quality, perfect for both residential and commercial use. We provide international shipping and wholesale services at competitive prices for traders and suppliers worldwide.",
+          "fr": "La Coopérative Al-Hassania est spécialisée dans la poterie marocaine traditionnelle depuis plus de 30 ans. Nous proposons une large gamme de produits en poterie faits main par des artisans qualifiés utilisant des techniques traditionnelles transmises de génération en génération. Nos produits allient authenticité et qualité premium, parfaits pour un usage résidentiel et commercial. Nous offrons des services d'expédition internationale et de vente en gros à des prix compétitifs pour les commerçants et fournisseurs du monde entier."
+        }
+      },
+      "ctas": [
+        {
+          "ar": "اطلب بالجملة الآن",
+          "darija": "طلب بالجملة دابا",
+          "en": "Order Wholesale Now",
+          "fr": "Commander en Gros Maintenant"
+        },
+        {
+          "ar": "اكتشف منتجاتنا",
+          "darija": "شوف المنتجات ديالنا",
+          "en": "Discover Our Products",
+          "fr": "Découvrez Nos Produits"
+        },
+        {
+          "ar": "احصل على عينة مجانية",
+          "darija": "دير عينة مجانية",
+          "en": "Get Free Sample",
+          "fr": "Obtenir un Échantillon Gratuit"
+        }
+      ]
+    },
+    "trust_signals": [
+      {
+        "ar": "خبرة تمتد لأكثر من 30 عاماً في صناعة الفخار التقليدي المغربي",
+        "darija": "خبرة كتر من 30 عام في صناعة الفخار التقليدي المغربي",
+        "en": "Over 30 years of experience in traditional Moroccan pottery craftsmanship",
+        "fr": "Plus de 30 ans d'expérience dans l'artisanat de la poterie marocaine traditionnelle"
+      },
+      {
+        "ar": "شحن دولي إلى أكثر من 50 دولة حول العالم",
+        "darija": "الشحن الدولي لكتر من 50 بلاد في العالم",
+        "en": "International shipping to over 50 countries worldwide",
+        "fr": "Expédition internationale vers plus de 50 pays dans le monde"
+      },
+      {
+        "ar": "شهادات جودة معتمدة ومطابقة للمعايير الدولية",
+        "darija": "شهادات الجودة معتمدة ومطابقة للمعايير الدولية",
+        "en": "Certified quality standards compliant with international norms",
+        "fr": "Normes de qualité certifiées conformes aux normes internationales"
+      }
+    ]
+  },
+  "wholesale_page": {
+    "hero": {
+      "headlines": {
+        "short": {
+          "ar": "بيع الفخار بالجملة",
+          "darija": "البيع بالجملة ديال الفخار",
+          "en": "Wholesale Pottery Sales",
+          "fr": "Vente en Gros de Poterie"
+        },
+        "medium": {
+          "ar": "أسعار تنافسية للبيع بالجملة - خصومات تصل إلى 40% للطلبات الكبيرة",
+          "darija": "أسعار تنافسية للبيع بالجملة - تخفيضات توصل ل 40% للطلبات الكبيرة",
+          "en": "Competitive Wholesale Prices - Up to 40% Discount on Bulk Orders",
+          "fr": "Prix de Gros Compétitifs - Jusqu'à 40% de Réduction sur les Commandes en Volume"
+        },
+        "long": {
+          "ar": "حلول البيع بالجملة المخصصة لتجار الفخار - أسعار مميزة، جودة عالية، وخدمة توصيل موثوقة لجميع أنحاء العالم",
+          "darija": "حلول البيع بالجملة المخصصة لتجار الفخار - أسعار مزيانة، جودة عالية، وخدمة التوصيل موثوقة لجميع أنحاء العالم",
+          "en": "Tailored Wholesale Solutions for Pottery Traders - Premium Prices, High Quality, and Reliable Delivery Worldwide",
+          "fr": "Solutions de Gros Personnalisées pour les Commerçants de Poterie - Prix Premium, Haute Qualité et Livraison Fiable dans le Monde Entier"
+        }
+      },
+      "description": {
+        "short": {
+          "ar": "نقدم أسعاراً خاصة للبيع بالجملة مع خصومات تصل إلى 40%. الحد الأدنى للطلب {MOQ} قطعة. توصيل خلال {lead_time} يوم.",
+          "darija": "كنقدمو أسعار خاصة للبيع بالجملة مع تخفيضات توصل ل 40%. الحد الأدنى للطلب {MOQ} قطعة. التوصيل في {lead_time} يوم.",
+          "en": "We offer special wholesale prices with discounts up to 40%. Minimum order {MOQ} pieces. Delivery within {lead_time} days.",
+          "fr": "Nous offrons des prix de gros spéciaux avec des remises jusqu'à 40%. Commande minimum {MOQ} pièces. Livraison sous {lead_time} jours."
+        },
+        "detailed": {
+          "ar": "برنامج البيع بالجملة الخاص بتعاونية الحسنية يوفر لك أفضل الأسعار والجودة. نقدم خصومات تبدأ من 15% للطلبات الصغيرة وتصل إلى 40% للطلبات الكبيرة. الحد الأدنى للطلب {MOQ} قطعة فقط. نوفر عينات مجانية للتجار الجادين. التوصيل الدولي متاح بأسعار تنافسية، ومدة التسليم {lead_time} يوم من تاريخ تأكيد الطلب. نقبل الدفع بطرق متعددة بما في ذلك التحويل البنكي والدفع عند الاستلام للطلبات المحلية.",
+          "darija": "برنامج البيع بالجملة ديال تعاونية الحسنية كيوفر ليك أحسن الأسعار والجودة. كنقدمو تخفيضات من 15% للطلبات الصغيرة وتوصل ل 40% للطلبات الكبيرة. الحد الأدنى للطلب {MOQ} قطعة غير. كنوفرو عينات مجانية للتجار الجادين. التوصيل الدولي متاح بأسعار تنافسية، ومدة التسليم {lead_time} يوم من تاريخ تأكيد الطلب. كنقبلو الدفع بطرق متعددة بما في ذلك التحويل البنكي والدفع عند الاستلام للطلبات المحلية.",
+          "en": "Al-Hassania Cooperative's wholesale program offers you the best prices and quality. We provide discounts starting from 15% for small orders up to 40% for large orders. Minimum order quantity is only {MOQ} pieces. We offer free samples for serious traders. International delivery available at competitive prices, with delivery time of {lead_time} days from order confirmation. We accept multiple payment methods including bank transfer and cash on delivery for local orders.",
+          "fr": "Le programme de vente en gros de la Coopérative Al-Hassania vous offre les meilleurs prix et qualité. Nous proposons des remises à partir de 15% pour les petites commandes jusqu'à 40% pour les grandes commandes. La quantité minimale de commande est de seulement {MOQ} pièces. Nous offrons des échantillons gratuits aux commerçants sérieux. Livraison internationale disponible à des prix compétitifs, avec un délai de livraison de {lead_time} jours à partir de la confirmation de commande. Nous acceptons plusieurs méthodes de paiement, y compris le virement bancaire et le paiement à la livraison pour les commandes locales."
+        }
+      },
+      "ctas": [
+        {
+          "ar": "احصل على قائمة الأسعار",
+          "darija": "دير قائمة الأسعار",
+          "en": "Get Price List",
+          "fr": "Obtenir la Liste des Prix"
+        },
+        {
+          "ar": "تواصل مع فريق المبيعات",
+          "darija": "تواصل مع فريق البيع",
+          "en": "Contact Sales Team",
+          "fr": "Contacter l'Équipe de Vente"
+        },
+        {
+          "ar": "اطلب عينة مجانية",
+          "darija": "طلب عينة مجانية",
+          "en": "Request Free Sample",
+          "fr": "Demander un Échantillon Gratuit"
+        }
+      ]
+    },
+    "pricing_table_csv": "min_order_qty,price_per_unit_retail,price_per_unit_bulk,discount_percent,lead_time_days\n50,100,85,15,14\n100,100,75,25,21\n250,100,65,35,30\n500,100,60,40,45",
+    "policies": {
+      "samples": {
+        "ar": "نوفر عينات مجانية للتجار الجادين (تكلفة الشحن فقط على عاتق الطالب). العينات تشمل حتى 3 منتجات مختلفة.",
+        "darija": "كنوفرو عينات مجانية للتجار الجادين (تكلفة الشحن غير على الطالب). العينات كتشمل حتى 3 منتجات مختلفة.",
+        "en": "We provide free samples for serious traders (shipping costs borne by requester). Samples include up to 3 different products.",
+        "fr": "Nous fournissons des échantillons gratuits pour les commerçants sérieux (frais d'expédition à la charge du demandeur). Les échantillons comprennent jusqu'à 3 produits différents."
+      },
+      "shipping": {
+        "ar": "الشحن الدولي متاح لجميع الدول. تكاليف الشحن تحسب حسب الوزن والوجهة. توصيل مجاني للطلبات المحلية فوق 5000 درهم.",
+        "darija": "الشحن الدولي متاح لجميع الدول. تكاليف الشحن كتحسب حسب الوزن والوجهة. التوصيل مجاني للطلبات المحلية فوق 5000 درهم.",
+        "en": "International shipping available to all countries. Shipping costs calculated by weight and destination. Free delivery for local orders over 5000 MAD.",
+        "fr": "Expédition internationale disponible vers tous les pays. Frais d'expédition calculés selon le poids et la destination. Livraison gratuite pour les commandes locales de plus de 5000 MAD."
+      },
+      "payment": {
+        "ar": "نقبل: التحويل البنكي، الدفع عند الاستلام (محلي)، PayPal، Western Union. دفعة مقدمة 30% للطلبات الدولية.",
+        "darija": "كنقبلو: التحويل البنكي، الدفع عند الاستلام (محلي)، PayPal، Western Union. دفعة مقدمة 30% للطلبات الدولية.",
+        "en": "We accept: Bank transfer, Cash on delivery (local), PayPal, Western Union. 30% advance payment for international orders.",
+        "fr": "Nous acceptons: Virement bancaire, Paiement à la livraison (local), PayPal, Western Union. Acompte de 30% pour les commandes internationales."
+      },
+      "moq": {
+        "ar": "الحد الأدنى للطلب: {MOQ} قطعة. يمكن خلط المنتجات المختلفة في نفس الطلب.",
+        "darija": "الحد الأدنى للطلب: {MOQ} قطعة. يمكن خلط المنتجات المختلفة في نفس الطلب.",
+        "en": "Minimum Order Quantity: {MOQ} pieces. Mixed products allowed in same order.",
+        "fr": "Quantité Minimale de Commande: {MOQ} pièces. Produits mixtes autorisés dans la même commande."
+      }
+    },
+    "trust_signals": [
+      {
+        "ar": "شريك موثوق لأكثر من 200 تاجر حول العالم",
+        "darija": "شريك موثوق لكتر من 200 تاجر في العالم",
+        "en": "Trusted partner for over 200 traders worldwide",
+        "fr": "Partenaire de confiance pour plus de 200 commerçants dans le monde"
+      },
+      {
+        "ar": "ضمان الجودة - استرجاع أو استبدال المنتجات المعيبة مجاناً",
+        "darija": "ضمان الجودة - استرجاع أو استبدال المنتجات المعيبة مجاناً",
+        "en": "Quality guarantee - Free return or replacement of defective products",
+        "fr": "Garantie de qualité - Retour ou remplacement gratuit des produits défectueux"
+      },
+      {
+        "ar": "معتمدون من وزارة السياحة والصناعة التقليدية المغربية",
+        "darija": "معتمدين من وزارة السياحة والصناعة التقليدية المغربية",
+        "en": "Certified by Morocco's Ministry of Tourism and Traditional Crafts",
+        "fr": "Certifié par le Ministère du Tourisme et de l'Artisanat du Maroc"
+      }
+    ]
+  },
+  "seo": {
+    "homepage": {
+      "title": {
+        "ar": "تعاونية الحسنية | فخار مغربي تقليدي أصيل",
+        "darija": "تعاونية الحسنية | فخار مغربي تقليدي أصيل",
+        "en": "Al-Hassania | Authentic Traditional Moroccan Pottery",
+        "fr": "Al-Hassania | Poterie Marocaine Traditionnelle"
+      },
+      "meta_description": {
+        "ar": "تعاونية الحسنية للفخار المغربي - منتجات فخارية تقليدية مصنوعة يدوياً بجودة عالية. شحن دولي، أسعار تنافسية، وخبرة 30 عاماً في الصناعة التقليدية.",
+        "darija": "تعاونية الحسنية للفخار المغربي - منتجات فخارية تقليدية مصنوعة باليد بجودة عالية. شحن دولي، أسعار تنافسية، وخبرة 30 عام.",
+        "en": "Al-Hassania Moroccan Pottery Cooperative - Handcrafted traditional pottery with premium quality. International shipping, competitive prices, 30 years of craftsmanship.",
+        "fr": "Coopérative de Poterie Marocaine Al-Hassania - Poterie traditionnelle faite main de qualité premium. Expédition internationale, prix compétitifs, 30 ans d'artisanat."
+      }
+    },
+    "wholesale_page": {
+      "title": {
+        "ar": "بيع الفخار بالجملة | تعاونية الحسنية",
+        "darija": "البيع بالجملة ديال الفخار | تعاونية الحسنية",
+        "en": "Wholesale Pottery | Al-Hassania Cooperative",
+        "fr": "Poterie en Gros | Coopérative Al-Hassania"
+      },
+      "meta_description": {
+        "ar": "أسعار خاصة للبيع بالجملة - خصومات حتى 40%. حد أدنى 50 قطعة. عينات مجانية. شحن دولي. تواصل معنا الآن للحصول على عرض سعر مخصص.",
+        "darija": "أسعار خاصة للبيع بالجملة - تخفيضات حتى 40%. حد أدنى 50 قطعة. عينات مجانية. شحن دولي. تواصل معانا دابا للحصول على عرض سعر.",
+        "en": "Special wholesale prices - Up to 40% discount. Min 50 pieces. Free samples. International shipping. Contact us now for custom quote.",
+        "fr": "Prix de gros spéciaux - Jusqu'à 40% de réduction. Min 50 pièces. Échantillons gratuits. Expédition internationale. Contactez-nous pour un devis."
+      }
+    }
+  },
+  "social_media_posts": [
+    {
+      "ar": "🏺 فخار مغربي أصيل بأيدي حرفية | احصل على عينة مجانية الآن",
+      "darija": "🏺 فخار مغربي أصيل بأيدي حرفية | دير عينة مجانية دابا",
+      "en": "🏺 Authentic Moroccan pottery by artisan hands | Get free sample now",
+      "fr": "🏺 Poterie marocaine authentique par des artisans | Échantillon gratuit"
+    },
+    {
+      "ar": "خصومات حتى 40% على الطلبات الكبيرة 💰 | تعاونية الحسنية",
+      "darija": "تخفيضات حتى 40% على الطلبات الكبيرة 💰 | تعاونية الحسنية",
+      "en": "Up to 40% off bulk orders 💰 | Al-Hassania Cooperative",
+      "fr": "Jusqu'à 40% de réduction sur commandes volume 💰 | Al-Hassania"
+    },
+    {
+      "ar": "✨ 30 عاماً من الحرفية والجودة | شحن دولي متاح",
+      "darija": "✨ 30 عام من الحرفية والجودة | الشحن الدولي متاح",
+      "en": "✨ 30 years of craftsmanship & quality | International shipping",
+      "fr": "✨ 30 ans d'artisanat et qualité | Expédition internationale"
+    },
+    {
+      "ar": "🌍 نصدر لأكثر من 50 دولة | انضم لشركائنا الآن",
+      "darija": "🌍 كنصدرو لكتر من 50 بلاد | انضم لشركائنا دابا",
+      "en": "🌍 Exporting to 50+ countries | Join our partners now",
+      "fr": "🌍 Export vers plus de 50 pays | Rejoignez nos partenaires"
+    },
+    {
+      "ar": "🎨 تراث مغربي عريق × جودة عالمية | البيع بالجملة متاح",
+      "darija": "🎨 تراث مغربي عريق × جودة عالمية | البيع بالجملة متاح",
+      "en": "🎨 Rich Moroccan heritage × Global quality | Wholesale available",
+      "fr": "🎨 Riche patrimoine marocain × Qualité mondiale | Gros disponible"
+    }
+  ],
+  "variables": {
+    "MOQ": "50",
+    "bulk_price": "60-85",
+    "lead_time": "14-45",
+    "discount_range": "15-40"
+  }
+}
