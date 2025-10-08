@@ -117,11 +117,14 @@ const Footer = () => {
                 © {new Date().getFullYear()} تعاونية الحسنية. جميع الحقوق محفوظة.
               </p>
               <div className="flex space-x-6 mt-4 md:mt-0">
-                <Link to="#" className="text-muted-foreground hover:text-pottery-gold transition-colors text-sm">
-                  سياسة الخصوصية
+                <Link to="/privacy-policy" className="text-muted-foreground hover:text-pottery-gold transition-colors text-sm">
+                  {t('footer.privacy', { defaultValue: 'سياسة الخصوصية' })}
                 </Link>
-                <Link to="#" className="text-muted-foreground hover:text-pottery-gold transition-colors text-sm">
-                  شروط الخدمة
+                <Link to="/terms" className="text-muted-foreground hover:text-pottery-gold transition-colors text-sm">
+                  {t('footer.terms', { defaultValue: 'شروط الخدمة' })}
+                </Link>
+                <Link to="/data-deletion" className="text-muted-foreground hover:text-pottery-gold transition-colors text-sm">
+                  {t('footer.dataDeletion', { defaultValue: 'حذف البيانات' })}
                 </Link>
               </div>
             </div>

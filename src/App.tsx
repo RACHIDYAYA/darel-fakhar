@@ -22,6 +22,9 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 import About from "./pages/About";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Terms from "./pages/Terms";
+import DataDeletion from "./pages/DataDeletion";
 import "./i18n";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -61,6 +64,9 @@ const App = () => (
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/logout" element={<Logout />} />
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/terms" element={<Terms />} />
+                  <Route path="/data-deletion" element={<DataDeletion />} />
                   <Route path="/admin" element={<RequireAuth><Admin /></RequireAuth>} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
