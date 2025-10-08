@@ -15,6 +15,20 @@
   <url>
     <loc>https://www.alhassaniya.com/about</loc>
     <lastmod>2025-10-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.alhassaniya.com/blog</loc>
+    <lastmod>2025-10-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.alhassaniya.com/contact</loc>
+    <lastmod>2025-10-06</lastmod>
+  </url>
+  <url>
+    <loc>https://maps.app.goo.gl/ZmD5eqHT7MkroReg6</loc>
+    <lastmod>2025-10-06</lastmod>
+  </url>
+</urlset>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
