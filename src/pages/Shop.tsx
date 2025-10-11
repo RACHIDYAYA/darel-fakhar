@@ -10,6 +10,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "react-i18next";
 import SEOHead from "@/components/SEOHead";
 import { createBreadcrumbSchema } from "@/utils/structuredData";
+import { formatPriceRange } from "@/utils/priceFormat";
 
 const Shop = () => {
   const { products, categories, loading } = useProducts();
@@ -141,7 +142,7 @@ const Shop = () => {
             {/* Price Range */}
             <div>
               <label className="block text-sm font-medium text-pottery-bronze mb-2">
-                {t('common.priceRange')}: {priceRange[0]} - {priceRange[1]} {t('common.dh')}
+                {t('common.priceRange')}: {formatPriceRange(priceRange[0], priceRange[1], language)}
               </label>
               <Slider
                 value={priceRange}

@@ -4,6 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useCart } from "@/contexts/CartContext";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { formatPrice } from "@/utils/priceFormat";
 
 interface ProductCardProps {
   id: number;
@@ -29,6 +31,7 @@ const ProductCard = ({
   const { addItem } = useCart();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { language } = useLanguage();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -110,11 +113,11 @@ const ProductCard = ({
           <div className="flex items-center justify-center gap-2 mb-4">
             {originalPrice && originalPrice > salePrice && (
               <span className="text-sm text-muted-foreground line-through">
-                {originalPrice} {currency}
+                {formatPrice(originalPrice, language)}
               </span>
             )}
             <span className="text-lg font-bold text-pottery-gold">
-              {salePrice} {currency}
+              {formatPrice(salePrice, language)}
             </span>
           </div>
 

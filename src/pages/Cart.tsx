@@ -12,6 +12,8 @@ import { useOrders } from "@/hooks/useOrders";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { formatPrice } from "@/utils/priceFormat";
 
 const Cart = () => {
   const { items: cartItems, updateQuantity, removeItem, clearCart, getTotalPrice } = useCart();
@@ -19,6 +21,7 @@ const Cart = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { language } = useLanguage();
   
   const [customerInfo, setCustomerInfo] = useState({
     name: "",
@@ -172,7 +175,7 @@ const Cart = () => {
                             
                             <div className="flex items-center gap-4">
                               <span className="font-bold text-pottery-gold">
-                                {(item.product.sale_price || item.product.price) * item.quantity} {t('common.dh')}
+                                {formatPrice((item.product.sale_price || item.product.price) * item.quantity, language)}
                               </span>
                               <Button
                                 variant="ghost"
@@ -203,23 +206,23 @@ const Cart = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-pottery-bronze/80">{t('cart.subtotal')}:</span>
-                      <span className="font-medium">{subtotal} {t('common.dh')}</span>
+                      <span className="font-medium">{formatPrice(subtotal, language)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-pottery-bronze/80">{t('cart.shipping')}:</span>
                       <span className="font-medium">
-                        {shipping === 0 ? t('cart.free') : `${shipping} ${t('common.dh')}`}
+                        {shipping === 0 ? t('cart.free') : formatPrice(shipping, language)}
                       </span>
                     </div>
                     {shipping === 0 && (
                       <p className="text-sm text-green-600">
-                        🎉 {t('cart.freeShippingOver')} 500 {t('common.dh')}
+                        🎉 {t('cart.freeShippingOver')} {formatPrice(500, language)}
                       </p>
                     )}
                     <Separator />
                     <div className="flex justify-between text-lg font-bold">
                       <span>{t('cart.total')}:</span>
-                      <span className="text-pottery-gold">{total} {t('common.dh')}</span>
+                      <span className="text-pottery-gold">{formatPrice(total, language)}</span>
                     </div>
                   </div>
                 </CardContent>
