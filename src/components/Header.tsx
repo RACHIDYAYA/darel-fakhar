@@ -20,6 +20,11 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      // Close mobile menu on scroll
+      if (isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+
       if (isHomePage) {
         const currentScrollY = window.scrollY;
         const heroHeight = window.innerHeight - 100;
@@ -49,7 +54,7 @@ const Header = () => {
       setIsScrolled(false);
       setShowBanner(true);
     }
-  }, [isHomePage, lastScrollY]);
+  }, [isHomePage, lastScrollY, isMenuOpen]);
 
   return (
     <>
