@@ -16,7 +16,7 @@ const Shop = () => {
   const { language } = useLanguage();
   const { t } = useTranslation();
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
-  const [priceRange, setPriceRange] = useState([100, 500]);
+  const [priceRange, setPriceRange] = useState([4, 500]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("newest");
   const [viewMode, setViewMode] = useState("grid");
@@ -147,7 +147,7 @@ const Shop = () => {
                 value={priceRange}
                 onValueChange={setPriceRange}
                 max={500}
-                min={5}
+                min={4}
                 step={10}
                 className="w-full"
               />
@@ -230,7 +230,7 @@ const Shop = () => {
             </p>
             <Button onClick={() => {
               setSelectedCategory("all");
-              setPriceRange([5, 500]);
+              setPriceRange([4, 500]);
               setSortBy("newest");
               applyFilters();
             }}>
