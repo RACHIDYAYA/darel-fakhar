@@ -12,11 +12,41 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showBanner, setShowBanner] = useState(true);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const { t } = useTranslation();
   const { getTotalItems } = useCart();
   const { user, hasRole } = useAuth();
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
+  // Handle touch events for swipe gesture
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientY);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientY);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isDownSwipe = distance < -minSwipeDistance;
+    const isUpSwipe = distance > minSwipeDistance;
+    
+    // Swipe down to open menu, swipe up to close
+    if (isDownSwipe && !isMenuOpen) {
+      setIsMenuOpen(true);
+    } else if (isUpSwipe && isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,15 +99,20 @@ const Header = () => {
 
 
       {/* Main header - Navbar with larger logo */}
-      <header className={`border-b sticky top-0 z-50 transition-all duration-500 ease-in-out -mt-3 ${
-        !showBanner 
-          ? 'bg-card shadow-elegant border-border'
-          : (isHomePage ? (
-              isScrolled 
-                ? 'bg-card/95 backdrop-blur-md shadow-elegant border-border' 
-                : 'bg-transparent border-transparent'
-            ) : 'bg-card shadow-elegant border-border')
-      }`}>
+      <header 
+        className={`border-b sticky top-0 z-50 transition-all duration-500 ease-in-out -mt-3 ${
+          !showBanner 
+            ? 'bg-card shadow-elegant border-border'
+            : (isHomePage ? (
+                isScrolled 
+                  ? 'bg-card/95 backdrop-blur-md shadow-elegant border-border' 
+                  : 'bg-transparent border-transparent'
+              ) : 'bg-card shadow-elegant border-border')
+        }`}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20 md:h-24">
            {/* Logo - Larger size */}
@@ -187,7 +222,12 @@ const Header = () => {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="md:hidden py-4 border-t border-pottery-gold/30 bg-gradient-to-b from-pottery-gold/10 to-transparent animate-in slide-in-from-top duration-300">
+            <div 
+              className="md:hidden py-4 border-t border-pottery-gold/30 bg-gradient-to-b from-pottery-gold/10 to-transparent animate-in slide-in-from-top duration-300"
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
+            >
               <nav className="flex flex-col space-y-3">
                 <Link to="/" className="text-pottery-gold hover:text-pottery-bronze transition-all duration-300 font-medium py-2 hover:translate-x-1 rtl:hover:-translate-x-1 hover:bg-pottery-gold/10 px-3 rounded-md">
                   {t('nav.home')}
