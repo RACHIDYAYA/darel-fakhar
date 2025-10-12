@@ -58,15 +58,17 @@ const HeroSlider = () => {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 1 }}
               >
-                {/* Background */}
+                {/* Background - Optimized for LCP */}
                 <img
                   src={slide.image}
-                  alt={`${slide.titleEn} - ${slide.descriptionEn}`}
+                  alt={language === 'ar' ? slide.titleAr : slide.titleEn}
                   width="1920"
                   height="1080"
                   loading={index === 0 ? "eager" : "lazy"}
                   fetchPriority={index === 0 ? "high" : "auto"}
+                  decoding={index === 0 ? "sync" : "async"}
                   className="w-full h-full object-cover"
+                  style={{ contentVisibility: index === currentSlide ? 'visible' : 'hidden' }}
                 />
 
                 {/* Dark gradient overlay */}
@@ -93,7 +95,10 @@ const HeroSlider = () => {
                       <p className="text-lg md:text-xl mb-8 text-white/90 leading-relaxed" dir={isRTL ? 'rtl' : 'ltr'}>
                         {t('aboutPage.lead1')}
                       </p>
-                      <Button className="bg-pottery-gold hover:bg-pottery-gold/90 text-pottery-bronze font-bold px-10 py-4 text-lg shadow-lg rounded-full transition-transform hover:scale-105">
+                      <Button 
+                        className="bg-pottery-gold hover:bg-pottery-gold/90 text-pottery-bronze font-bold px-10 py-4 text-lg shadow-lg rounded-full transition-transform hover:scale-105 min-h-[48px] min-w-[48px]"
+                        aria-label={t('hero.cta')}
+                      >
                         ✨ {t('hero.cta')}
                       </Button>
                     </motion.div>
@@ -104,22 +109,24 @@ const HeroSlider = () => {
         )}
       </AnimatePresence>
 
-      {/* Navigation arrows */}
+      {/* Navigation arrows - Accessible touch targets */}
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white rounded-full shadow-lg backdrop-blur-sm"
+        className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white rounded-full shadow-lg backdrop-blur-sm min-h-[48px] min-w-[48px]"
         onClick={prevSlide}
+        aria-label={isRTL ? t('hero.next') : t('hero.previous')}
       >
-        <ChevronLeft className="h-7 w-7" />
+        <ChevronLeft className="h-7 w-7" aria-hidden="true" />
       </Button>
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white rounded-full shadow-lg backdrop-blur-sm"
+        className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white rounded-full shadow-lg backdrop-blur-sm min-h-[48px] min-w-[48px]"
         onClick={nextSlide}
+        aria-label={isRTL ? t('hero.previous') : t('hero.next')}
       >
-        <ChevronRight className="h-7 w-7" />
+        <ChevronRight className="h-7 w-7" aria-hidden="true" />
       </Button>
 
       {/* Progress indicators */}

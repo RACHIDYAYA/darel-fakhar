@@ -26,7 +26,9 @@
     "title": "Coopérative de Poterie Al-Hassania",
     "subtitle": "Poterie Traditionnelle Artisanale du Cœur du Maroc",
     "cta": "Acheter Maintenant",
-    "cooperativeName": "Coopérative Al-Hassania"
+    "cooperativeName": "Coopérative Al-Hassania",
+    "next": "Suivant",
+    "previous": "Précédent"
   },
   "product": {
     "price": "Prix",
@@ -129,6 +131,9 @@
     "next": "Suivant",
     "previous": "Précédent",
     "search": "Rechercher",
+    "items": "articles",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
     "filter": "Filtrer",
     "sort": "Trier",
     "sortBy": "Trier par",

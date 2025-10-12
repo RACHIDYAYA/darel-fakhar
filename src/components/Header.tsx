@@ -138,23 +138,33 @@ const Header = () => {
               }`}>
                 <LanguageSwitcher />
               </div>
-              <Button variant="ghost" size="icon" className={`hover:text-pottery-gold transition-all duration-300 ${
-                !showBanner ? 'text-foreground' : (isHomePage ? (isScrolled ? 'text-foreground' : 'text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]') : 'text-foreground')
-              }`}>
-                <Search className="h-5 w-5" />
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className={`hover:text-pottery-gold transition-all duration-300 min-h-[48px] min-w-[48px] ${
+                  !showBanner ? 'text-foreground' : (isHomePage ? (isScrolled ? 'text-foreground' : 'text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]') : 'text-foreground')
+                }`}
+                aria-label={t('common.search')}
+              >
+                <Search className="h-5 w-5" aria-hidden="true" />
               </Button>
-              <Button variant="ghost" size="icon" className={`hover:text-pottery-gold relative transition-all duration-300 ${
-                !showBanner ? 'text-foreground' : (isHomePage ? (isScrolled ? 'text-foreground' : 'text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]') : 'text-foreground')
-              }`}>
-                <Link to="/cart">
-                  <ShoppingCart className="h-5 w-5" />
+              <Link to="/cart">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className={`hover:text-pottery-gold relative transition-all duration-300 min-h-[48px] min-w-[48px] ${
+                    !showBanner ? 'text-foreground' : (isHomePage ? (isScrolled ? 'text-foreground' : 'text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]') : 'text-foreground')
+                  }`}
+                  aria-label={`${t('nav.cart')} - ${getTotalItems()} ${t('common.items')}`}
+                >
+                  <ShoppingCart className="h-5 w-5" aria-hidden="true" />
                   {getTotalItems() > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-pottery-gold text-pottery-gold-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold shadow-md">
+                    <span className="absolute -top-1 -right-1 bg-pottery-gold text-pottery-bronze text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold shadow-md" aria-hidden="true">
                       {getTotalItems()}
                     </span>
                   )}
-                </Link>
-              </Button>
+                </Button>
+              </Link>
 
               {/* Auth buttons (desktop) */}
               {!user ? (
@@ -172,16 +182,18 @@ const Header = () => {
                 </Button>
               )}
 
-              {/* Mobile menu button */}
+              {/* Mobile menu button - Accessible */}
               <Button
                 variant="ghost"
                 size="icon"
-                className={`md:hidden transition-all duration-300 ${
+                className={`md:hidden transition-all duration-300 min-h-[48px] min-w-[48px] ${
                   !showBanner ? 'text-foreground' : (isHomePage ? (isScrolled ? 'text-foreground' : 'text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]') : 'text-foreground')
                 }`}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label={isMenuOpen ? t('common.closeMenu') : t('common.openMenu')}
+                aria-expanded={isMenuOpen}
               >
-                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                {isMenuOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
               </Button>
             </div>
           </div>
