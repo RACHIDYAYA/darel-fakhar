@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { CartProvider } from "@/contexts/CartContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import RequireAuth from "@/components/RequireAuth";
@@ -46,10 +47,11 @@ const App = () => (
   
   <QueryClientProvider client={queryClient}>
     <LanguageProvider>
-      <AuthProvider>
-        <CartProvider>
-          <TooltipProvider>
-            <BrowserRouter>
+      <CurrencyProvider>
+        <AuthProvider>
+          <CartProvider>
+            <TooltipProvider>
+              <BrowserRouter>
             <Header></Header>
               <Layout>
                 <Routes>
@@ -72,12 +74,13 @@ const App = () => (
                 </Routes>
               </Layout>
                  <Footer />
-            </BrowserRouter>
-          </TooltipProvider>
-          <Toaster />
-          <Sonner />
-        </CartProvider>
-      </AuthProvider>
+              </BrowserRouter>
+            </TooltipProvider>
+            <Toaster />
+            <Sonner />
+          </CartProvider>
+        </AuthProvider>
+      </CurrencyProvider>
     </LanguageProvider>
   </QueryClientProvider>
 );

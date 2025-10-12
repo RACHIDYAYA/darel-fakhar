@@ -1,12 +1,14 @@
 /**
- * Format price based on locale and language
- * @param price - The price amount
+ * Format price based on locale, language, and currency
+ * @param price - The price amount (in MAD by default)
  * @param language - Current language (ar, en, fr)
+ * @param currency - Currency code (MAD, USD, EUR, etc.)
  * @param options - Additional formatting options
  */
 export const formatPrice = (
   price: number,
   language: string = 'ar',
+  currency: string = 'MAD',
   options?: {
     showCurrency?: boolean;
     useShortForm?: boolean;
@@ -37,44 +39,60 @@ export const formatPrice = (
     });
   }
   
-  // Add currency based on language
+  // Add currency based on currency code
   if (!showCurrency) {
     return formattedNumber;
   }
   
-  const currency = getCurrencyText(language, useShortForm);
+  const currencyText = getCurrencyText(currency, language, useShortForm);
   
-  // For Arabic, currency comes after the number
-  if (language === 'ar') {
-    return `${formattedNumber} ${currency}`;
+  // Special handling for currencies that go before the number
+  if (currency === 'USD' || currency === 'GBP' || currency === 'EUR') {
+    if (language === 'ar') {
+      return `${formattedNumber} ${currencyText}`;
+    }
+    return `${currencyText}${formattedNumber}`;
   }
   
-  // For English and French, currency can come before or after
-  // Using "DH" format for both (after number)
-  return `${formattedNumber} ${currency}`;
+  // For other currencies (including MAD), currency comes after
+  return `${formattedNumber} ${currencyText}`;
 };
 
 /**
- * Get currency text based on language
+ * Get currency text based on currency code and language
  */
 export const getCurrencyText = (
+  currencyCode: string = 'MAD',
   language: string = 'ar',
   useShortForm: boolean = false
 ): string => {
+  // Currency symbols/names
+  const currencyNames: Record<string, { short: string; ar: string; full: string }> = {
+    'MAD': { short: 'DH', ar: 'درهم', full: 'MAD' },
+    'USD': { short: '$', ar: 'دولار', full: 'USD' },
+    'EUR': { short: '€', ar: 'يورو', full: 'EUR' },
+    'GBP': { short: '£', ar: 'جنيه', full: 'GBP' },
+    'SAR': { short: 'SR', ar: 'ريال', full: 'SAR' },
+    'AED': { short: 'AED', ar: 'درهم إماراتي', full: 'AED' },
+    'CAD': { short: 'C$', ar: 'دولار كندي', full: 'CAD' },
+    'QAR': { short: 'QR', ar: 'ريال قطري', full: 'QAR' },
+    'KWD': { short: 'KD', ar: 'دينار كويتي', full: 'KWD' },
+    'EGP': { short: 'E£', ar: 'جنيه مصري', full: 'EGP' },
+    'DZD': { short: 'DA', ar: 'دينار جزائري', full: 'DZD' },
+    'TND': { short: 'DT', ar: 'دينار تونسي', full: 'TND' },
+  };
+
+  const currencyInfo = currencyNames[currencyCode] || currencyNames['MAD'];
+  
   if (useShortForm) {
-    return 'DH';
+    return currencyInfo.short;
   }
   
-  switch (language) {
-    case 'ar':
-      return 'درهم';
-    case 'fr':
-      return 'DH';
-    case 'en':
-      return 'DH';
-    default:
-      return 'DH';
+  if (language === 'ar') {
+    return currencyInfo.ar;
   }
+  
+  return currencyInfo.short;
 };
 
 /**
@@ -83,14 +101,11 @@ export const getCurrencyText = (
 export const formatPriceRange = (
   minPrice: number,
   maxPrice: number,
-  language: string = 'ar'
+  language: string = 'ar',
+  currency: string = 'MAD'
 ): string => {
-  const min = formatPrice(minPrice, language, { useShortForm: true });
-  const max = formatPrice(maxPrice, language, { useShortForm: true });
-  
-  if (language === 'ar') {
-    return `${min} - ${max}`;
-  }
+  const min = formatPrice(minPrice, language, currency, { useShortForm: true });
+  const max = formatPrice(maxPrice, language, currency, { useShortForm: true });
   
   return `${min} - ${max}`;
 };
