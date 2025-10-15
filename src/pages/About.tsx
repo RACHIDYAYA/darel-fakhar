@@ -41,7 +41,7 @@ const About = () => {
       <SEOHead 
         title="About Us - Traditional Moroccan Pottery Cooperative | Dar El Fakhar"
         description="Learn about التعاونية الحسنية (Hassaniya Cooperative) - master artisans crafting authentic Moroccan pottery in Safi for over 30 years. Quality, tradition, and craftsmanship."
-        keywords="about moroccan pottery, Safi artisans, pottery cooperative, hassaniya cooperative, traditional crafts morocco"
+        keywords="about moroccan pottery, Safi artisans, pottery cooperative, hassaniya cooperative, traditional crafts morocco, moroccan pottery studio, handmade ceramics Safi, artisan pottery Morocco, wholesale pottery Morocco"
         url="https://www.alhassaniya.com/about"
         structuredData={breadcrumbData}
       />

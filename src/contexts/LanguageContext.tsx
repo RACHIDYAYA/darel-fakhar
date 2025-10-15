@@ -30,9 +30,20 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     setLanguageState(lang);
     localStorage.setItem('preferred-language', lang);
     
-    // Update document direction
+    // Update document direction and language
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = lang;
+    
+    // Update meta tags for SEO
+    const metaLang = document.querySelector('meta[property="og:locale"]');
+    if (metaLang) {
+      const localeMap: Record<string, string> = {
+        ar: 'ar_MA',
+        en: 'en_US',
+        fr: 'fr_FR'
+      };
+      metaLang.setAttribute('content', localeMap[lang] || 'en_US');
+    }
   };
 
   useEffect(() => {

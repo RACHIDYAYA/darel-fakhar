@@ -17,7 +17,7 @@ const Index = () => {
       <SEOHead 
         title="دار الفخار - Dar El Fakhar | Authentic Moroccan Pottery & Ceramics"
         description="Discover authentic handcrafted Moroccan pottery from التعاونية الحسنية. Traditional ceramics with gold accents, tagines, cups, and decorative pieces. Shop now!"
-        keywords="Moroccan pottery, فخار مغربي, Safi ceramics, traditional pottery, handcrafted ceramics, tagine, dar el fakhar, hassaniya cooperative"
+        keywords="Moroccan pottery, فخار مغربي, Safi ceramics, traditional pottery, handcrafted ceramics, tagine, dar el fakhar, hassaniya cooperative, artisan pottery Morocco, buy Moroccan pottery online, handmade ceramics, moroccan handicrafts, pottery studio Safi"
         structuredData={structuredData}
       />
       <main>

@@ -46,7 +46,7 @@ const Contact = () => {
       <SEOHead 
         title="Contact Us - Get in Touch | Dar El Fakhar Moroccan Pottery"
         description="Contact التعاونية الحسنية for wholesale pottery orders, custom designs, or inquiries. Located in Safi, Morocco. Phone: +212 656-861536"
-        keywords="contact moroccan pottery, wholesale pottery safi, pottery orders morocco, dar el fakhar contact"
+        keywords="contact moroccan pottery, wholesale pottery safi, pottery orders morocco, dar el fakhar contact, buy moroccan ceramics, pottery supplier morocco, custom pottery orders"
         url="https://www.alhassaniya.com/contact"
         structuredData={breadcrumbData}
       />
