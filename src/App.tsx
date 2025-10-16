@@ -26,6 +26,7 @@ import About from "./pages/About";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 import DataDeletion from "./pages/DataDeletion";
+import GalleryUpload from "./pages/GalleryUpload";
 import "./i18n";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -66,6 +67,7 @@ const App = () => (
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/logout" element={<Logout />} />
+                  <Route path="/gallery-upload" element={<GalleryUpload />} />
                   <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                   <Route path="/terms" element={<Terms />} />
                   <Route path="/data-deletion" element={<DataDeletion />} />
